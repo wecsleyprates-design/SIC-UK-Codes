@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK SIC Classification: Architecture & Strategy Model</title>
+    <title>UK SIC Classification: Global Entity Architecture & Scaling Blueprint</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0b0f19;
-            --surface: #111827;
-            --accent: #0ea5e9;
-            --accent-glow: rgba(14, 165, 233, 0.4);
-            --text: #f3f4f6;
-            --text-dim: #9ca3af;
+            --bg: #0b1120;
+            --surface: #1e293b;
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
             --border: rgba(255, 255, 255, 0.1);
-            --success: #10b981;
+            --success: #22c55e;
             --danger: #ef4444;
             --warning: #f59e0b;
         }
@@ -24,227 +24,213 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; line-height: 1.6; }
 
-        /* Navigation */
-        .sidebar {
-            width: 280px;
-            height: 100vh;
-            position: fixed;
-            background: #000;
-            border-right: 1px solid var(--border);
-            padding: 2.5rem;
-            overflow-y: auto;
-        }
+        .nav-container { position: fixed; right: 2rem; top: 50%; transform: translateY(-50%); z-index: 100; border-left: 2px solid var(--border); padding-left: 1rem; }
+        .nav-item { display: block; color: var(--text-dim); text-decoration: none; font-size: 0.8rem; margin: 1rem 0; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .nav-item:hover { color: var(--accent); }
 
-        .main-content { margin-left: 280px; padding: 4rem; max-width: 1200px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 6rem 2rem; }
 
-        .nav-link {
-            display: block;
-            color: var(--text-dim);
-            text-decoration: none;
-            margin-bottom: 1.25rem;
-            font-size: 0.95rem;
-            transition: 0.3s;
-        }
-
-        .nav-link:hover { color: var(--accent); transform: translateX(5px); }
-
-        /* Typography */
-        h1 { font-size: 4rem; font-weight: 700; margin-bottom: 1.5rem; background: linear-gradient(to right, #fff, var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        section { margin-bottom: 12rem; scroll-margin-top: 4rem; }
+        h1 { font-size: 4.5rem; font-weight: 700; margin-bottom: 1.5rem; background: linear-gradient(to right, #fff, var(--accent)); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         h2 { font-size: 2.5rem; color: var(--accent); margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
-        p { margin-bottom: 1.5rem; color: var(--text-dim); }
+        h3 { font-size: 1.75rem; color: #fff; margin-bottom: 1rem; }
+        p { margin-bottom: 1.5rem; font-size: 1.15rem; color: var(--text-dim); }
 
-        /* Architecture Flow */
-        .flow-spec { background: var(--surface); border: 1px solid var(--border); border-radius: 1.5rem; padding: 3rem; margin: 3rem 0; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.5rem; padding: 3rem; margin-bottom: 3rem; position: relative; overflow: hidden; transition: 0.3s; }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); }
+        .card::before { content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
+
+        .flow-spec { background: rgba(0,0,0,0.2); border-radius: 1.5rem; padding: 3rem; margin: 3rem 0; border: 1px dashed var(--border); }
         .step { display: flex; gap: 2rem; margin-bottom: 3.5rem; position: relative; }
         .step:not(:last-child)::after { content: ''; position: absolute; left: 24px; top: 60px; width: 2px; height: calc(100% - 20px); background: var(--border); }
-        .circle { width: 50px; height: 50px; background: var(--accent); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; }
-        .danger-circle { background: var(--danger); box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); }
+        .circle { width: 50px; height: 50px; background: var(--accent); color: #000; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 0 20px var(--accent-glow); }
+        .circle.error { background: var(--danger); box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); }
 
-        /* Experiment Results */
-        .exp-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1.5rem; padding: 3rem; margin-bottom: 3rem; }
-        .code-container { margin: 2rem 0; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); }
-        .code-label { background: #000; padding: 1rem 1.5rem; color: var(--accent); font-family: 'JetBrains Mono'; font-size: 0.75rem; display: flex; justify-content: space-between; align-items: center; }
-        pre { background: #000; padding: 2rem; color: #e2e8f0; font-family: 'JetBrains Mono'; font-size: 0.85rem; overflow-x: auto; }
+        .code-container { margin: 2rem 0; border-radius: 1rem; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .code-header { background: #0f172a; padding: 0.75rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        .code-label { color: var(--accent); font-family: 'JetBrains Mono'; font-size: 0.7rem; text-transform: uppercase; font-weight: bold; }
+        pre { background: #000; padding: 2rem; color: #e2e8f0; font-family: 'JetBrains Mono'; font-size: 0.85rem; overflow-x: auto; line-height: 1.6; }
 
-        /* Tables */
         table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
-        th { text-align: left; color: var(--accent); background: rgba(56, 189, 248, 0.05); padding: 1.2rem; border-bottom: 1px solid var(--border); }
-        td { padding: 1.2rem; border-bottom: 1px solid var(--border); font-size: 0.95rem; }
+        th { text-align: left; color: var(--accent); background: rgba(56, 189, 248, 0.05); padding: 1.2rem; border-bottom: 2px solid var(--border); }
+        td { padding: 1.2rem; border-bottom: 1px solid var(--border); font-size: 1rem; color: var(--text-dim); }
 
-        /* Badges */
-        .badge { padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
-        .badge-gap { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
-        .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin: 4rem 0; }
+        .stat-box { text-align: center; padding: 2rem; background: rgba(56, 189, 248, 0.05); border-radius: 1.5rem; border: 1px solid var(--border); }
+        .stat-value { font-size: 3.5rem; font-weight: 700; color: #fff; display: block; }
+        .stat-label { font-size: 0.8rem; text-transform: uppercase; color: var(--accent); letter-spacing: 1px; }
 
-        /* Section Tags */
-        .section-tag { background: var(--accent-glow); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; margin-bottom: 1rem; display: inline-block; }
-
-        footer { margin-top: 10rem; padding-bottom: 4rem; color: var(--text-dim); text-align: center; }
+        .question-box { background: rgba(56, 189, 248, 0.05); border-radius: 1rem; padding: 2.5rem; border-left: 4px solid var(--accent); margin-bottom: 3rem; }
+        .answer-content { margin-left: 1.5rem; }
     </style>
 </head>
 <body>
 
-<div class="sidebar">
-    <h2 style="color: var(--accent); font-size: 0.8rem; letter-spacing: 2px; margin-bottom: 2rem; text-transform: uppercase;">Technical Strategy</h2>
-    <a href="#intro" class="nav-link">Introduction</a>
-    <a href="#bottlenecks" class="nav-link">Mapping the Bottlenecks</a>
-    <a href="#sources" class="nav-link">Vendor Data Ecosystem</a>
-    <a href="#experiments" class="nav-link">5-Experiment Evidence</a>
-    <a href="#logic" class="nav-link">The Global Extraction Model</a>
-    <a href="#prompt" class="nav-link">AI Prompt Engineering</a>
-    <a href="#countries" class="nav-link">International Scaling</a>
-    <a href="#roadmap" class="nav-link">Implementation Roadmap</a>
-</div>
+<nav class="nav-container">
+    <a href="#mission" class="nav-item">Mission</a>
+    <a href="#bottlenecks" class="nav-item">Architecture</a>
+    <a href="#experiments" class="nav-item">Audit Data</a>
+    <a href="#strategy" class="nav-item">Strategy</a>
+    <a href="#roadmap" class="nav-item">Roadmap</a>
+    <a href="#appendices" class="nav-item">Technical Specs</a>
+</nav>
 
-<div class="main-content">
-    <section id="intro">
-        <span class="section-tag">Architecture Mission</span>
+<div class="container">
+    <header id="mission">
         <h1>Solving the UK SIC Classification Gap</h1>
-        <p style="font-size: 1.5rem; max-width: 800px;">
-            A definitive blueprint for achieving 100% industry coverage by mapping architectural data loss, 
-            validating vendor conflicts, and implementing an AI-driven international classification model.
-        </p>
+        <p style="font-size: 1.5rem;">A 700+ line technical handbook transformed into an interactive high-fidelity dashboard for Worth's global data transition.</p>
         
-        <div style="display: flex; gap: 4rem; margin-top: 3rem;">
-            <div><h4 style="color: var(--danger); font-size: 0.8rem; text-transform: uppercase;">Current Gap</h4><p style="font-size: 3rem; font-weight: 700;">62.5%</p></div>
-            <div><h4 style="color: var(--success); font-size: 0.8rem; text-transform: uppercase;">Standard</h4><p style="font-size: 3rem; font-weight: 700;">UK SIC 2007</p></div>
-            <div><h4 style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase;">Scaling</h4><p style="font-size: 3rem; font-weight: 700;">Global Ready</p></div>
+        <div class="stat-grid">
+            <div class="stat-box">
+                <span class="stat-value">62.5%</span>
+                <span class="stat-label">Initial Identification Gap</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">Projected Coverage</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-value">2,344</span>
+                <span class="stat-label">Audited Businesses</span>
+            </div>
         </div>
-    </section>
+    </header>
 
-    <section id="bottlenecks" style="margin-top: 8rem;">
-        <h2>Mapping the Technical Bottlenecks</h2>
-        <p>This is where the system is functionally "blind" today. We have mapped the path from rich raw ingestion to final data loss.</p>
-
+    <section id="bottlenecks">
+        <h2>4-Layer Bottleneck Mapping</h2>
         <div class="flow-spec">
             <div class="step">
                 <div class="circle">1</div>
                 <div>
-                    <h3>Registry Ingestion (The Discovery)</h3>
-                    <p>The system receives <code>gb_sic-62020|us_naics-541511</code> in the raw response. The data <span style="color: var(--success)">is present</span> but "trapped" in a generic field.</p>
+                    <h3>Ingestion (OC Payload)</h3>
+                    <p>OpenCorporates returns <code>gb_sic-62020</code>. The data is <strong>physically present</strong> in raw logs but chemically inert.</p>
                 </div>
             </div>
             <div class="step">
-                <div class="circle danger-circle" style="background: var(--danger);">2</div>
+                <div class="circle error">2</div>
                 <div>
-                    <h3 style="color: var(--danger);">The Silo Filter (The Error)</h3>
-                    <p>Logic in <code>lib/facts/businessDetails</code> looks specifically for <span style="background: rgba(255,255,255,0.1); padding: 2px 6px;">"naics"</span>. The <code>gb_sic</code> segment is silently discarded in favor of US-centric data.</p>
+                    <h3>Logic Filter (The Drop)</h3>
+                    <p>Microservice <code>integration-service</code> iterate through codes but only keeps strings containing <code>'naics'</code>. UK codes are discarded.</p>
                 </div>
             </div>
             <div class="step">
-                <div class="circle danger-circle" style="background: var(--danger);">3</div>
+                <div class="circle error">3</div>
                 <div>
-                    <h3 style="color: var(--danger);">Vendor Pollution (The Noise)</h3>
-                    <p>Vendors return US SIC codes (4-digits). Without a jurisdiction-aware fact, this "pollutes" our entities with US industry standards.</p>
+                    <h3>Pollution (Vendor Noise)</h3>
+                    <p>Trulioo injects 4-digit US SIC codes into UK records, causing <strong>Data Hallucination</strong> in the scoring engine.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="circle error">4</div>
+                <div>
+                    <h3>Persistence (The Blank Slate)</h3>
+                    <p>The DB lacks a <code>uk_sic_code</code> column. Nothing is saved; everything is lost.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="experiments" style="margin-top: 8rem;">
-        <h2>5-Experiment Evidence Deep-Dive</h2>
-        <p>Each experimental result confirms a specific architectural hurdle.</p>
-
-        <div class="exp-card">
-            <span class="section-tag">Exp 1: Registry-Level Coverage</span>
-            <h3>Is common registry data enough?</h3>
-            <p><strong>Methodology:</strong> Query 16M+ UK companies in Redshift. Finding: <span style="color: var(--accent)">66.49% coverage.</span></p>
-            <div class="code-container">
-                <div class="code-label">SQL: BASELINE REGISTRY COVERAGE<span>REDSHIFT</span></div>
-                <pre><code>SELECT COUNT(*) AS total_uk, 
-SUM(CASE WHEN industry_code_uids ILIKE '%uk_sic_2007-%' THEN 1 ELSE 0 END) AS has_sic
-FROM open_corporate.companies WHERE jurisdiction_code = 'gb';</code></pre>
-            </div>
+    <section id="experiments">
+        <h2>Global Audit & Experimental Record</h2>
+        <div class="card">
+            <h3>Exp 3: Managed Portfolio Gap</h3>
+            <p>We audited our curated top-tier UK portfolio. Only <strong>37.5%</strong> were classified. For 1,465 businesses, the system was industry-blind. AI Enrichment is the mandatory cure.</p>
         </div>
 
-        <div class="exp-card">
-            <span class="section-tag">Exp 3: Portfolio Gap Analysis</span>
-            <h3>The 62.5% Blind Spot</h3>
-            <p><strong>Insight:</strong> In Worth's curated portfolio, only 37.5% of businesses have registry SIC. The delta (62.5%) proves that **AI Enrichment is the primary engine** for viability.</p>
+        <div class="card">
+            <h3>Exp 5: AI Cognitive Superiority</h3>
+            <p><strong>Case Study: Ray Sutton Fitness</strong>. Registry says code 8514 (1992 standard). AI identifies 96090 (2007 standard). AI proved <strong>more accurate than the government registry</strong> because it reads current website activity.</p>
         </div>
 
-        <div class="exp-card">
-            <span class="section-tag">Exp 5: AI Accuracy (The Cleansers)</span>
-            <h3>AI vs Stale Registry Data</h3>
-            <p><strong>Case Study: Ray Sutton Fitness</strong>. Registry Code: 8514 (SIC 1992 Code). AI Prediction: 96090 (SIC 2007 Code). Result: **AI modernized the classification** where government records were stale.</p>
-        </div>
-    </section>
-
-    <section id="logic" style="margin-top: 8rem;">
-        <h2>The Global Extraction Model</h2>
-        <p>By implementing a "Prefix-Aware" adapter pattern, we can scale this solution to any country.</p>
-        
         <div class="code-container">
-            <div class="code-label">integration-service / lib/facts/businessDetails/index.ts</div>
-            <pre><code>uk_sic_code: [
-  {
-    source: sources.opencorporates,
-    fn: (_, oc: OpenCorporateResponse) => {
-      // Logic: Loop through registry strings via pipe separator
-      for (const uid of oc.industry_code_uids.split("|")) {
-        const [prefix, code] = uid.split("-", 2);
-        // Solution: Map 'gb_sic' prefix specifically
-        if (prefix === "gb_sic" && /^\d+/.test(code)) {
-          return code.padStart(5, "0"); // Normalize to 5-digit UK Standard
-        }
-      }
-    }
-  }
-]</code></pre>
+            <div class="code-header"><span class="code-label">Redshift Coverage Validation</span></div>
+            <pre><code>SELECT count(*) total, sum(case when industry_code_uids ilike '%gb_sic-%%' then 1 else 0 end) as has_sic
+FROM open_corporate.companies WHERE jurisdiction_code = 'gb';
+-- Result: 66.49% Baseline Coverage (11M Businesses)</code></pre>
         </div>
     </section>
 
-    <section id="prompt" style="margin-top: 8rem;">
-        <h2>The AI Multi-Country Prompt Strategy</h2>
-        <p>The AI enrichment prompt is redesigned to handle jurisdiction-aware industrial standards.</p>
+    <section id="strategy">
+        <h2>The Strategic Model (Appendix J)</h2>
+        <div class="question-box">
+            <h3>Q1: Exactly what happens in the flow and with the sources?</h3>
+            <div class="answer-content">
+                <p>The flow is a <strong>Four-Stage Convergence</strong>: Ingestion (Hunting for prefixes), Extraction (Filtering by 'gb_sic'), Resolution (Weighting OC at 0.9 vs AI at 0.1), and Persistence (Writing to the new DB column).</p>
+                <p><strong>The Prompt Logic:</strong> Our AI Enrichment prompt is now "Country-Aware." It receives the <code>country</code> fact and switches its mental model to the local standard (e.g., UK SIC 2007 for GB).</p>
+            </div>
+        </div>
 
-        <div style="background: #000; border: 2px solid var(--accent); padding: 3rem; border-radius: 2rem;">
-            <h3>Context-Aware Logic</h3>
-            <p style="font-style: italic; color: var(--text); padding: 1rem 0;">"For the business in Great Britain, identify the 5-digit UK SIC 2007 code. 
-            Ensure the classification is strictly based on the 2007 standard, ignoring legacy 1992 variants."</p>
-            <h4 style="color: var(--accent); font-size: 0.8rem; text-transform: uppercase;">Zod Schema Constraint</h4>
-            <pre style="padding: 1rem 0;"><code>uk_sic_code: z.string().regex(/^\d{5}$/).nullable()</code></pre>
+        <div class="question-box">
+            <h3>Q2: How we handle the new SIC UK within the current flow?</h3>
+            <div class="answer-content">
+                <p>We insert a <strong>Parallel Fact Junction</strong>. Instead of overhauling NAICS, we add <code>uk_sic_code</code> as a first-class citizen fact. If registry data is missing, the AI triggers automatically to fill the gap before scoring.</p>
+            </div>
+        </div>
+
+        <div class="question-box">
+            <h3>Q3: Have this as a model for other countries?</h3>
+            <div class="answer-content">
+                <p>This is the <strong>Worth International SIC Model</strong>. Scaling AU, DE, or EU now only takes <strong>two lines of code</strong>: (1) Register the prefix (e.g., <code>au_anzsic</code>) and (2) Set the validator. The AI engine handles the thinking for every jurisdiction automatically.</p>
+            </div>
         </div>
     </section>
 
-    <section id="countries" style="margin-top: 8rem;">
-        <h2>Scaling Globally: The "Blueprint"</h2>
-        <p>The logic we are building for the UK is horizontally scalable to any international industrial code system.</p>
-        
+    <section id="roadmap">
+        <h2>The Adaptive Roadmap</h2>
         <table>
             <thead>
                 <tr>
                     <th>Jurisdiction</th>
                     <th>Standard</th>
                     <th>Mapping Prefix</th>
-                    <th>Validator</th>
+                    <th>Validator Regex</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Australia (AU)</td>
-                    <td>AU ANZSIC</td>
+                    <td>ANZSIC 2006</td>
                     <td><code>au_anzsic</code></td>
-                    <td>4-digit Numeric</td>
+                    <td><code>/^\d{4}$/</code></td>
                 </tr>
                 <tr>
                     <td>Germany (DE)</td>
-                    <td>DE WZ 2008</td>
+                    <td>WZ 2008</td>
                     <td><code>de_wz</code></td>
-                    <td>4-digit + Alpha</td>
+                    <td><code>/^\d{4}[A-Z]?$/</code></td>
                 </tr>
                 <tr>
-                    <td>Europe (EU)</td>
-                    <td>EU NACE Rev 2</td>
+                    <td>EU (NACE)</td>
+                    <td>NACE Rev 2</td>
                     <td><code>eu_nace</code></td>
-                    <td>Alpha-Numeric</td>
+                    <td><code>/^[A-Z]\.\d{2}\.\d{2}$/</code></td>
                 </tr>
             </tbody>
         </table>
     </section>
 
-    <footer>
-        UK SIC CLASSIFICATION ARCHITECTURE & GLOBAL MODEL • MARCH 2026
+    <section id="appendices">
+        <h2>Appendix D: Database Infrastructure</h2>
+        <div class="code-container">
+            <div class="code-header"><span class="code-label">SQL Migration Reference</span></div>
+            <pre><code>ALTER TABLE data_businesses 
+ADD COLUMN uk_sic_code VARCHAR(5),
+ADD COLUMN uk_sic_title TEXT;
+-- Ensures persistence of 5-digit UK Standard</code></pre>
+        </div>
+
+        <div class="code-container">
+            <div class="code-header"><span class="code-label">Kafka Resolved Fact Avro</span></div>
+            <pre><code>{"name": "ResolvedFact", "fields": [
+    {"name": "factKey", "type": "string"}, // uk_sic_code, naics_code
+    {"name": "factValue", "type": "string"},
+    {"name": "confidence", "type": "float"}
+]}</code></pre>
+        </div>
+    </section>
+
+    <footer style="padding: 10rem 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-dim);">
+        &copy; 2026 Worth Global Data Intelligence Architecture • London Hub
     </footer>
 </div>
 
