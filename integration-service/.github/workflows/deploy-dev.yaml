@@ -1,0 +1,53 @@
+name: Deploy to Development
+
+run-name: "Deploy to Dev: ${{ inputs.branch }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to deploy (e.g., main, feature/my-feature)'
+        required: true
+        type: string
+        default: 'main'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  validate-branch:
+    name: Validate Branch
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.branch.outputs.branch }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate branch exists
+        id: branch
+        run: |
+          BRANCH="${{ inputs.branch }}"
+
+          # Check if branch exists (locally or remotely)
+          if ! git rev-parse --verify "origin/$BRANCH" >/dev/null 2>&1; then
+            echo "❌ Branch '$BRANCH' not found"
+            echo "Available branches (last 10):"
+            git branch -r --sort=-committerdate | head -10
+            exit 1
+          fi
+
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "✅ Using branch: $BRANCH"
+
+  deploy:
+    name: Deploy to Development
+    needs: validate-branch
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: development
+      ref_to_build: ${{ needs.validate-branch.outputs.branch }}
+    secrets: inherit

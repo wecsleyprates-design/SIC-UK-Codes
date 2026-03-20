@@ -1,0 +1,111 @@
+name: Create Tag
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: "Version increment type"
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - custom
+        default: "patch"
+      custom_tag:
+        description: "Custom tag name (only used when version_type is 'custom')"
+        required: false
+        type: string
+        default: ""
+      commit_id:
+        description: "Specific commit ID (optional)"
+        required: false
+        type: string
+        default: ""
+permissions:
+  contents: write
+jobs:
+  create_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout Specific Commit
+        if: inputs.commit_id != ''
+        run: git checkout ${{ inputs.commit_id }}
+
+      - name: Validate Custom Tag Input
+        if: inputs.version_type == 'custom' && inputs.custom_tag == ''
+        run: |
+          echo "❌ Error: Custom tag name is required when version_type is 'custom'"
+          exit 1
+
+      - name: Validate Custom Tag Input
+        if: inputs.version_type == 'custom'
+        run: |
+          if [ -z "${{ inputs.custom_tag }}" ]; then
+            echo "❌ Error: Custom tag name is required when version_type is 'custom'"
+            exit 1
+          fi
+
+          # Trim whitespace from tag name
+          trimmed_tag=$(echo "${{ inputs.custom_tag }}" | xargs)
+
+          # Define regex patterns for valid tag formats
+          # Pattern 1: v[number].[number].[number]
+          pattern1="^v[0-9]+\.[0-9]+\.[0-9]+$"
+          # Pattern 2: v[number].[number].[number]-[letter]-v[1|2]
+          pattern2="^v[0-9]+\.[0-9]+\.[0-9]+-[a-zA-Z]+-v[12]\.[0-9]+$"
+
+          # Validate tag format
+          if [[ ! $trimmed_tag =~ $pattern1 ]] && [[ ! $trimmed_tag =~ $pattern2 ]]; then
+            echo "❌ Error: Invalid tag format '${trimmed_tag}'"
+            echo "Valid formats:"
+            echo "  - v[number].[number].[number] (e.g., v1.2.3)"
+            echo "  - v[number].[number].[number]-[letter]-v[1|2].[number] (e.g., v1.2.3-fast-v1.0, v2.1.0-tiger-v2.5)"
+            exit 1
+          fi
+
+          echo "✅ Tag format validation passed: '${trimmed_tag}'"
+          echo "VALIDATED_TAG=${trimmed_tag}" >> $GITHUB_ENV
+
+      - name: Create Custom Tag
+        if: inputs.version_type == 'custom'
+        run: |
+          # Check if tag already exists
+          if git tag | grep -q "^${VALIDATED_TAG}$"; then
+            echo "❌ Error: Tag '${VALIDATED_TAG}' already exists"
+            exit 1
+          fi
+
+          # Create and push the custom tag
+          git tag "${VALIDATED_TAG}"
+          git push origin "${VALIDATED_TAG}"
+          echo "✅ Custom tag '${VALIDATED_TAG}' created successfully"
+          echo "new_tag=${VALIDATED_TAG}" >> $GITHUB_OUTPUT
+
+      - name: Bump Version and Push Tag
+        id: tag_version
+        if: inputs.version_type != 'custom'
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: ${{ inputs.version_type }}
+          WITH_V: true
+          PRERELEASE: false
+          RELEASE_BRANCHES: ".*"
+          BRANCH_IGNORE: ""
+        continue-on-error: true
+
+      - name: Tag Creation Status
+        if: inputs.version_type != 'custom'
+        run: |
+          if [ "${{ steps.tag_version.outcome }}" == "success" ]; then
+            echo "✅ New tag ${{ steps.tag_version.outputs.new_tag }} created successfully."
+          else
+            echo "❌ Failed to create tag. Ensure the tag doesn't exist and follows increment rules."
+            exit 1
+          fi

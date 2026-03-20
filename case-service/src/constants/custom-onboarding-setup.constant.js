@@ -1,0 +1,24 @@
+export const CUSTOM_ONBOARDING_SETUP = {
+	MODIFY_PAGES_FIELDS_SETUP: "modify_pages_fields_setup",
+	ONBOARDING_SETUP: "onboarding_setup",
+	WHITE_LABEL_SETUP: "white_label_setup",
+	LIGHTNING_VERIFICATION_SETUP: "lightning_verification_setup",
+	EQUIFAX_CREDIT_SCORE_SETUP: "equifax_credit_score_setup",
+	POST_SUBMISSION_EDITING_SETUP: "post_submission_editing_setup",
+	INTERNATIONAL_BUSINESS_SETUP: "international_business_setup"
+};
+
+export const CUSTOM_ONBOARDING_SETUP_ID = {
+	ONBOARDING_SETUP: 1,
+	WHITE_LABEL_SETUP: 2,
+	MODIFY_PAGES_FIELDS_SETUP: 3,
+	LIGHTNING_VERIFICATION_SETUP: 4,
+	EQUIFAX_CREDIT_SCORE_SETUP: 5,
+	POST_SUBMISSION_EDITING_SETUP: 6,
+	INTERNATIONAL_BUSINESS_SETUP: 7
+};
+
+export const CUSTOM_ONBOARDING_TYPES = {
+	NORMAL_ONBOARDING: "normal_onboarding",
+	LIGHTNING_ONBOARDING: "lightning_onboarding"
+};

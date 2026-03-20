@@ -1,0 +1,1 @@
+UPDATE core_case_statuses SET code = 'MANUALLY_REJECTED', label = 'MANUALLY REJECTED' WHERE code = 'REJECTED';

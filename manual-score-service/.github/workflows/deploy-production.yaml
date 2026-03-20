@@ -1,0 +1,617 @@
+name: Deploy to Production
+
+run-name: "Deploy to Production: ${{ inputs.tag }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to deploy (e.g., v1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+  issues: write
+
+jobs:
+  validate-tag:
+    name: Validate Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Validate tag exists
+        run: |
+          if ! git rev-parse "${{ inputs.tag }}" >/dev/null 2>&1; then
+            echo "❌ Tag '${{ inputs.tag }}' not found"
+            echo ""
+            echo "Available tags (last 10):"
+            git tag --sort=-version:refname | head -10
+            exit 1
+          fi
+          echo "✅ Tag '${{ inputs.tag }}' exists"
+
+  create-approval-issue:
+    name: Create Approval Issue
+    runs-on: ubuntu-latest
+    needs: validate-tag
+    outputs:
+      issue_number: ${{ steps.create-issue.outputs.issue_number }}
+      issue_url: ${{ steps.create-issue.outputs.issue_url }}
+    steps:
+      - name: Create approval issue
+        id: create-issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚀 Production Deployment Approval: ${{ inputs.tag }}`,
+              body: `## Production Deployment Approval Required
+            
+            **Service:** manual-score-service  
+            **Version:** \`${{ inputs.tag }}\`  
+            **Requested by:** @${{ github.actor }}  
+            **Workflow Run:** [View Deployment](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+            
+            ---
+            
+            ### ⚠️ Action Required
+            
+            **To APPROVE this deployment**, comment with any of:
+            - \`approve\` or \`approved\`
+            - \`lgtm\`
+            - \`yes\`
+            
+            **To DENY this deployment**, comment with:
+            - \`deny\` or \`denied\`
+            - \`no\`
+            
+            **Authorized approvers:** @WilliamDanielQuinones @koolox @benjamin3878 @sethen @deeeeejay @jessicachinn @matthewrobinsondotme
+            
+            ⏱️ This approval request will timeout in 3 days if no action is taken.`,
+              labels: ['deployment', 'production', 'approval-required'],
+              assignees: ['WilliamDanielQuinones', 'koolox', 'benjamin3878', 'sethen', 'deeeeejay', 'jessicachinn', 'matthewrobinsondotme']
+            });
+            
+            core.setOutput('issue_number', issue.data.number);
+            core.setOutput('issue_url', issue.data.html_url);
+            
+            console.log(`Created approval issue #${issue.data.number}`);
+            console.log(`Issue URL: ${issue.data.html_url}`);
+            
+            return issue.data.number;
+
+  notify-approval-request:
+    name: Notify Approval Request
+    runs-on: ubuntu-latest
+    needs: [validate-tag, create-approval-issue]
+    steps:
+      - name: Send Slack notification
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYMENT_WEBHOOK }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            curl -X POST $SLACK_WEBHOOK \
+              -H 'Content-Type: application/json' \
+              -d '{
+                "text": "🚀 Production Deployment Approval Required",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🚀 Production Deployment Approval Required"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Service:*\n`manual-score-service`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Version:*\n`${{ inputs.tag }}`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Requested by:*\n${{ github.actor }}"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Status:*\n⏳ Awaiting approval"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "Comment on the GitHub issue to approve or deny:\n\n• To approve: `approved`, `approve`, `lgtm`, or `yes`\n• To deny: `denied`, `deny`, or `no`\n\n⏱️ Timeout: 3 days"
+                    }
+                  },
+                  {
+                    "type": "actions",
+                    "elements": [
+                      {
+                        "type": "button",
+                        "text": {
+                          "type": "plain_text",
+                          "text": "Review & Approve Issue"
+                        },
+                        "url": "${{ needs.create-approval-issue.outputs.issue_url }}",
+                        "style": "primary"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "context",
+                    "elements": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "Authorized approvers: @WilliamDanielQuinones @koolox @benjamin3878 @sethen @deeeeejay @jessicachinn @matthewrobinsondotme"
+                      }
+                    ]
+                  }
+                ]
+              }'
+            echo "Slack notification sent"
+          else
+            echo "⚠️  Slack webhook not configured"
+          fi
+
+  wait-for-approval:
+    name: Wait for Approval
+    runs-on: ubuntu-latest
+    needs: [validate-tag, create-approval-issue, notify-approval-request]
+    timeout-minutes: 4320  # 3 days
+    outputs:
+      approved: ${{ steps.check-approval.outputs.approved }}
+      approver: ${{ steps.check-approval.outputs.approver }}
+      rejection_reason: ${{ steps.check-approval.outputs.rejection_reason }}
+    steps:
+      - name: Wait for approval decision
+        id: check-approval
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issueNumber = ${{ needs.create-approval-issue.outputs.issue_number }};
+            const maxAttempts = 8640; // 3 days (8640 attempts * 30 seconds = 3 days)
+            const delayMs = 30000; // 30 seconds between checks
+            
+            // ⚠️ AUTHORIZED APPROVERS
+            const authorizedApprovers = [
+              'WilliamDanielQuinones',
+              'koolox',
+              'benjamin3878',
+              'sethen',
+              'deeeeejay',
+              'jessicachinn',
+              'matthewrobinsondotme'
+            ];
+            
+            // Approval and denial patterns - matches words with optional punctuation
+            const approvalPattern = /\b(approve|approved|lgtm|yes)\b/i;
+            const denialPattern = /\b(deny|denied|no)\b/i;
+            
+            console.log(`⏳ Waiting for approval on issue #${issueNumber}...`);
+            console.log(`✅ Authorized approvers: ${authorizedApprovers.join(', ')}`);
+            console.log(`⏱️  Timeout: 3 days (${maxAttempts} checks at ${delayMs/1000}s intervals)`);
+            
+            try {
+              for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                if (attempt % 120 === 0) {  // Log progress every hour (120 * 30s = 1 hour)
+                  const hoursWaited = Math.floor(attempt / 120);
+                  console.log(`⏳ Still waiting... (${hoursWaited} hour${hoursWaited !== 1 ? 's' : ''} elapsed)`);
+                }
+                
+                // Get all comments on the issue
+                const comments = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber
+                });
+                
+                // Check for approval or rejection (iterate in reverse to get most recent first)
+                for (const comment of comments.data.reverse()) {
+                  const body = comment.body.trim();
+                  const commenter = comment.user.login;
+                  
+                  // Check if commenter is authorized
+                  if (!authorizedApprovers.includes(commenter)) {
+                    // Check if unauthorized user attempted to approve/deny
+                    if (approvalPattern.test(body) || denialPattern.test(body)) {
+                      console.log(`⚠️  ${commenter} attempted to approve/deny but is not authorized`);
+                      
+                      // Notify unauthorized attempt (only once per user)
+                      const existingWarnings = comments.data.filter(c => 
+                        c.body.includes(`@${commenter}`) && c.body.includes('not authorized')
+                      );
+                      
+                      if (existingWarnings.length === 0) {
+                        await github.rest.issues.createComment({
+                          owner: context.repo.owner,
+                          repo: context.repo.repo,
+                          issue_number: issueNumber,
+                          body: `⚠️ @${commenter} - You are not authorized to approve/reject this deployment.\n\nAuthorized approvers: ${authorizedApprovers.map(u => `@${u}`).join(', ')}`
+                        });
+                      }
+                    }
+                    continue;
+                  }
+                  
+                  // Check for approval
+                  if (approvalPattern.test(body)) {
+                    console.log(`✅ Deployment APPROVED by ${commenter}`);
+                    console.log(`Approval comment: "${body.substring(0, 100)}${body.length > 100 ? '...' : ''}"`);
+                    
+                    // Close the issue
+                    await github.rest.issues.update({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issueNumber,
+                      state: 'closed',
+                      labels: ['deployment', 'production', 'approved']
+                    });
+                    
+                    // Add final comment
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issueNumber,
+                      body: `✅ **Deployment APPROVED** by @${commenter}\n\nProceeding with production deployment of \`${{ inputs.tag }}\`...`
+                    });
+                    
+                    core.setOutput('approved', 'true');
+                    core.setOutput('approver', commenter);
+                    core.setOutput('rejection_reason', '');
+                    return true;
+                  }
+                  
+                  // Check for denial
+                  if (denialPattern.test(body)) {
+                    console.log(`❌ Deployment REJECTED by ${commenter}`);
+                    console.log(`Denial comment: "${body.substring(0, 100)}${body.length > 100 ? '...' : ''}"`);
+                    
+                    // Close the issue
+                    await github.rest.issues.update({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issueNumber,
+                      state: 'closed',
+                      labels: ['deployment', 'production', 'rejected']
+                    });
+                    
+                    // Add final comment
+                    await github.rest.issues.createComment({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: issueNumber,
+                      body: `❌ **Deployment REJECTED** by @${commenter}\n\nDeployment of \`${{ inputs.tag }}\` has been cancelled.`
+                    });
+                    
+                    core.setOutput('approved', 'false');
+                    core.setOutput('approver', commenter);
+                    core.setOutput('rejection_reason', 'denied');
+                    core.setFailed('Deployment was rejected by authorized approver');
+                    return false;
+                  }
+                }
+                
+                // Wait before next attempt
+                if (attempt < maxAttempts) {
+                  await new Promise(resolve => setTimeout(resolve, delayMs));
+                }
+              }
+              
+              // Timeout reached (3 days)
+              console.log('⏱️  TIMEOUT: No approval received within 3 days');
+              
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                state: 'closed',
+                labels: ['deployment', 'production', 'timeout']
+              });
+              
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body: '⏱️ **Approval TIMEOUT**\n\nNo response received within 3 days. Deployment has been automatically cancelled.\n\nTo retry, please trigger a new deployment workflow.'
+              });
+              
+              core.setOutput('approved', 'false');
+              core.setOutput('approver', '');
+              core.setOutput('rejection_reason', 'timeout');
+              core.setFailed('Approval timeout - no response within 3 days');
+              
+            } catch (error) {
+              // Handle unexpected errors (API failures, network issues, etc.)
+              console.error('❌ Unexpected error during approval wait:', error);
+              
+              core.setOutput('approved', 'false');
+              core.setOutput('approver', '');
+              core.setOutput('rejection_reason', 'error');
+              
+              // Try to update the issue if possible
+              try {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  body: `❌ **Deployment workflow encountered an error**\n\nAn unexpected error occurred while waiting for approval. Please check the workflow logs and retry the deployment.\n\nError: ${error.message}`
+                });
+                
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  state: 'closed',
+                  labels: ['deployment', 'production', 'error']
+                });
+              } catch (issueError) {
+                console.error('Failed to update issue:', issueError);
+              }
+              
+              core.setFailed(`Approval workflow error: ${error.message}`);
+            }
+
+  deploy:
+    name: Deploy to Production
+    needs: [validate-tag, wait-for-approval]
+    if: needs.wait-for-approval.outputs.approved == 'true'
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: production
+      ref_to_build: ${{ inputs.tag }}
+    secrets: inherit
+
+  notify-result:
+    name: Notify Deployment Result
+    runs-on: ubuntu-latest
+    needs: [validate-tag, create-approval-issue, wait-for-approval, deploy]
+    if: always()
+    steps:
+      - name: Notify Slack - Success
+        if: needs.deploy.result == 'success'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYMENT_WEBHOOK }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            PR_URL="${{ needs.deploy.outputs.pr_url }}"
+            
+            # Build the PR link section
+            if [ -n "$PR_URL" ]; then
+              PR_LINK="<$PR_URL|View Deployment PR>"
+            else
+              PR_LINK="Deployment PR created"
+            fi
+            
+            curl -X POST $SLACK_WEBHOOK \
+              -H 'Content-Type: application/json' \
+              -d "{
+                \"text\": \"✅ Production Deployment Complete\",
+                \"blocks\": [
+                  {
+                    \"type\": \"header\",
+                    \"text\": {
+                      \"type\": \"plain_text\",
+                      \"text\": \"✅ Production Deployment Complete\"
+                    }
+                  },
+                  {
+                    \"type\": \"section\",
+                    \"fields\": [
+                      {
+                        \"type\": \"mrkdwn\",
+                        \"text\": \"*Service:*\n\`manual-score-service\`\"
+                      },
+                      {
+                        \"type\": \"mrkdwn\",
+                        \"text\": \"*Version:*\n\`${{ inputs.tag }}\`\"
+                      },
+                      {
+                        \"type\": \"mrkdwn\",
+                        \"text\": \"*Approved by:*\n@${{ needs.wait-for-approval.outputs.approver }}\"
+                      },
+                      {
+                        \"type\": \"mrkdwn\",
+                        \"text\": \"*Status:*\n✅ GitOps PR created\"
+                      }
+                    ]
+                  },
+                  {
+                    \"type\": \"section\",
+                    \"text\": {
+                      \"type\": \"mrkdwn\",
+                      \"text\": \"$PR_LINK | <${{ needs.create-approval-issue.outputs.issue_url }}| View approval issue>\"
+                    }
+                  }
+                ]
+              }"
+          fi
+      
+      - name: Notify Slack - Denied
+        if: needs.wait-for-approval.outputs.rejection_reason == 'denied'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYMENT_WEBHOOK }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            curl -X POST $SLACK_WEBHOOK \
+              -H 'Content-Type: application/json' \
+              -d '{
+                "text": "❌ Production Deployment Denied",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "❌ Production Deployment Denied"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Service:*\n`manual-score-service`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Version:*\n`${{ inputs.tag }}`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Denied by:*\n@${{ needs.wait-for-approval.outputs.approver }}"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Status:*\n❌ Deployment cancelled"
+                      }
+                    ]
+                  }
+                ]
+              }'
+          fi
+      
+      - name: Notify Slack - Timeout
+        if: needs.wait-for-approval.outputs.rejection_reason == 'timeout'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYMENT_WEBHOOK }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            curl -X POST $SLACK_WEBHOOK \
+              -H 'Content-Type: application/json' \
+              -d '{
+                "text": "⏱️ Production Deployment Timeout",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "⏱️ Production Deployment Timeout"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Service:*\n`manual-score-service`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Version:*\n`${{ inputs.tag }}`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Status:*\n⏱️ No approval received within 3 days"
+                      }
+                    ]
+                  }
+                ]
+              }'
+          fi
+      
+      - name: Notify Slack - Workflow Error
+        if: needs.wait-for-approval.outputs.rejection_reason == 'error'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYMENT_WEBHOOK }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            curl -X POST $SLACK_WEBHOOK \
+              -H 'Content-Type: application/json' \
+              -d '{
+                "text": "❌ Production Deployment Error",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "❌ Production Deployment Workflow Error"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Service:*\n`manual-score-service`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Version:*\n`${{ inputs.tag }}`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Status:*\n❌ Workflow encountered an error"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "An unexpected error occurred during the approval workflow. Check the <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|workflow logs> for details."
+                    }
+                  }
+                ]
+              }'
+          fi
+      
+      - name: Notify Slack - Deployment Failed
+        if: needs.deploy.result == 'failure' && needs.wait-for-approval.outputs.approved == 'true'
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_DEPLOYMENT_WEBHOOK }}
+        run: |
+          if [ -n "$SLACK_WEBHOOK" ]; then
+            curl -X POST $SLACK_WEBHOOK \
+              -H 'Content-Type: application/json' \
+              -d '{
+                "text": "❌ Production Deployment Failed",
+                "blocks": [
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "❌ Production Deployment Failed"
+                    }
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Service:*\n`manual-score-service`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Version:*\n`${{ inputs.tag }}`"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "*Status:*\n❌ Deployment failed after approval"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": "The deployment was approved but failed during execution. Check the <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|workflow logs> for details."
+                    }
+                  }
+                ]
+              }'
+          fi
+

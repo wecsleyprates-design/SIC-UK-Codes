@@ -1,0 +1,4 @@
+export const MATCH_THRESHOLD = {
+	FULL_MATCH: 90,
+	PARTIAL_MATCH: 70
+};

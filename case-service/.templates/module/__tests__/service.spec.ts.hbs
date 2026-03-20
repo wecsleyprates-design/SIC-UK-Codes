@@ -1,0 +1,41 @@
+import { {{camelCase name}} } from "../{{kebabCase name}}";
+
+// This is a dummy test. Please edit this test to suit your needs
+// You can add more functions to this service
+// You can also remove this controller if you do not need it
+
+require("kafkajs");
+
+// Mock as per function requirements
+jest.mock("jsonwebtoken");
+jest.mock("#helpers/index");
+jest.mock("#common/index");
+jest.mock("#lib/index");
+jest.mock("#utils/index");
+jest.mock("uuid");
+jest.mock("#configs/index");
+jest.mock("kafkajs");
+
+jest.mock("#configs/index", () => ({
+	envConfig: {
+		KAFKA_BROKERS: "mocked_brokers",
+		KAFKA_SSL_ENABLED: false,
+		KAFKA_CLIENT_ID: "mocked_client_id"
+		//   ... other mocked configuration properties
+	}
+}));
+
+
+describe("{{titleCase name}}", () => {
+	afterEach(() => {
+		jest.resetAllMocks();
+	});
+
+	describe("doSomething", () => {
+        it("should do something successfully", async () => {
+            const businessID = "businessID";
+            const business = await {{camelCase name}}.dummyFunction("params", "body", "user", "query");
+            expect(business).toBeDefined();
+        });
+    });
+})

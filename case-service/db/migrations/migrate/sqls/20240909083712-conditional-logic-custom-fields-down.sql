@@ -1,0 +1,2 @@
+ALTER TABLE onboarding_schema.data_custom_fields
+DROP COLUMN  conditional_logic;

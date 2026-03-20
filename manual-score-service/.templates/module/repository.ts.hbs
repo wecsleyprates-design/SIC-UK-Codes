@@ -1,0 +1,27 @@
+import { sqlQuery, sqlTransaction } from "#helpers/database";
+import { UUID } from "crypto";
+import { logger } from "#helpers/index";
+import { dummyType } from "./types";
+
+
+class {{pascalCase name}}Repository {
+    // This is a dummy function. Please edit this function to suit your needs
+    // You can add more functions to this repository
+    // You can also remove this function if you do not need it
+
+    async update(customerId: UUID, settings: dummyType): Promise<dummyType> {
+        const query = `
+                    UPDATE public.data_customer_integration_settings
+                    SET settings = $1::jsonb
+                    WHERE customer_id = $2 RETURNING settings;;
+                `;
+
+        const value = [JSON.stringify(settings), customerId];
+
+        const response = await sqlQuery({ sql: query, values: value });
+
+        return response[0]?.rows?.[0];
+    }
+};
+
+export const {{camelCase name}}Repository = new {{pascalCase name}}Repository();

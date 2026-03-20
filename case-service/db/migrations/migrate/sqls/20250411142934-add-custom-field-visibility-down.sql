@@ -1,0 +1,2 @@
+alter table onboarding_schema.data_custom_fields drop column applicant_access;
+drop type onboarding_schema.column_access;

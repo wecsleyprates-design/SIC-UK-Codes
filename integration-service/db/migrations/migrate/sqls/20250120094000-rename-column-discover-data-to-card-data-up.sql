@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS integration_data.data_processing_history RENAME COLUMN discover_data TO card_data;

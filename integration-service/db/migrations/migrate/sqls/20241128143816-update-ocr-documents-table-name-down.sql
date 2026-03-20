@@ -1,0 +1,2 @@
+ALTER TABLE integration_data.uploaded_ocr_documents 
+RENAME TO uploaded_statements;

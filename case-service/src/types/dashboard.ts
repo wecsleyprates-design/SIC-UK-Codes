@@ -1,0 +1,1 @@
+export type ApplicationReceivedApprovedStatsItem ={ label: string, received: number, approved: number, trends: { received: number, approved: number } };

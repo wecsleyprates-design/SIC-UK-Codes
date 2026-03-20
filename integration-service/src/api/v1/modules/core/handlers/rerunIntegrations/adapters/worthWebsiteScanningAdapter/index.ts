@@ -1,0 +1,1 @@
+export { worthWebsiteScanningAdapter } from "./worthWebsiteScanningAdapter";

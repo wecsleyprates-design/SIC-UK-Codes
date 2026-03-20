@@ -1,0 +1,1 @@
+ALTER TABLE IF EXISTS public.data_businesses ALTER COLUMN official_website TYPE VARCHAR(50);

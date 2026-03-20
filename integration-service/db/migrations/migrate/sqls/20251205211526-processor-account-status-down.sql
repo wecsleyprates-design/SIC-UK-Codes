@@ -1,0 +1,3 @@
+alter table integration_data.payment_processor_accounts drop column status;
+alter table integration_data.payment_processor_accounts drop column manual_sync_at;
+alter table integration_data.payment_processor_accounts drop column webhook_received_at;

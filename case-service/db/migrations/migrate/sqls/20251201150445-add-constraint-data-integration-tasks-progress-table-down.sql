@@ -1,0 +1,1 @@
+ALTER TABLE data_integration_tasks_progress DROP CONSTRAINT IF EXISTS data_integration_tasks_progress_case_id_key;

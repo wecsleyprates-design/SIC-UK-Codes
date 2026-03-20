@@ -1,0 +1,85 @@
+# When a PR is merged into release/* or hotfix/*, this workflow:
+# 1. Creates a hotfix tag (e.g. v1.1.0-hotfix.1) from the merge commit
+# 2. Opens a backport PR to main for the same changes
+name: Tag Hotfix
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - 'release/**'
+      - 'hotfix/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
+      - name: Create hotfix tag
+        run: |
+          set -e
+          BRANCH="${{ github.event.pull_request.base.ref }}"
+          BASE_TAG=$(echo "$BRANCH" | sed -n 's/.*v\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p' | sed 's/^/v/')
+          if [ -z "$BASE_TAG" ]; then
+            BASE_TAG=$(echo "$BRANCH" | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+' | head -n1)
+          fi
+          if [ -z "$BASE_TAG" ]; then
+            echo "Could not extract version from branch name: $BRANCH"
+            exit 1
+          fi
+
+          git config user.email "github-actions@joinworth.com"
+          git config user.name "github-actions[bot]"
+
+          # Retry loop to avoid race when multiple hotfix PRs merge at once
+          MAX_RETRIES=20
+          NEW_TAG=""
+          for attempt in $(seq 1 $MAX_RETRIES); do
+            git fetch origin --tags 2>/dev/null || true
+            HOTFIX_COUNT=$(git tag -l "${BASE_TAG}-hotfix.*" | wc -l)
+            NEXT=$((HOTFIX_COUNT + 1))
+            CANDIDATE="${BASE_TAG}-hotfix.${NEXT}"
+            if git tag -a "$CANDIDATE" -m "Hotfix: ${{ github.event.pull_request.title }}" 2>/dev/null; then
+              if git push origin "$CANDIDATE" 2>/dev/null; then
+                NEW_TAG="$CANDIDATE"
+                break
+              fi
+              git tag -d "$CANDIDATE" 2>/dev/null || true
+            fi
+            if [ $attempt -eq $MAX_RETRIES ]; then
+              echo "❌ Failed to create unique hotfix tag after $MAX_RETRIES attempts"
+              exit 1
+            fi
+            sleep 2
+          done
+          echo "Created tag: $NEW_TAG"
+
+      - name: Create PR to main
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          set -e
+          BRANCH="${{ github.event.pull_request.base.ref }}"
+          BASE_BACKPORT="backport/${BRANCH}"
+          BACKPORT_BRANCH="$BASE_BACKPORT"
+          if git ls-remote --exit-code --heads origin "$BACKPORT_BRANCH" >/dev/null 2>&1 || \
+             git rev-parse --verify "$BACKPORT_BRANCH" >/dev/null 2>&1; then
+            BACKPORT_BRANCH="${BASE_BACKPORT}-$(date +%Y%m%d%H%M%S)"
+          fi
+          git checkout -b "$BACKPORT_BRANCH"
+          git push origin "$BACKPORT_BRANCH"
+
+          gh pr create \
+            --title "Backport: ${{ github.event.pull_request.title }}" \
+            --body "Automated backport of hotfix to main. Original PR: #${{ github.event.pull_request.number }}" \
+            --head "$BACKPORT_BRANCH" \
+            --base "main"

@@ -1,0 +1,267 @@
+name: Cherry Pick to Release Branches
+
+on:
+  pull_request:
+    types:
+      - labeled
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR Number to Cherry Pick"
+        required: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  validate-label:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'pull_request' && github.event.action == 'labeled' && contains(github.event.label.name, 'cherry-pick to release/') && github.event.pull_request.merged == true) ||
+        (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
+    outputs:
+      release_branches: ${{ steps.get-release-branches.outputs.branches }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get Release Branches
+        id: get-release-branches
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          PR_NUMBER=${{ github.event_name == 'workflow_dispatch' && github.event.inputs.pr_number || github.event.pull_request.number }}
+
+          if [[ "${{ github.event.action }}" == "labeled" ]]; then
+            LABEL="${{ github.event.label.name }}"
+            CHERRY_PICK_LABELS=$(echo "$LABEL" | grep -E "cherry-pick to release/" || true)
+          elif [[ "${{ github.event.action }}" == "closed" ]]; then
+            LABELS=$(gh pr view $PR_NUMBER --json labels --jq '[.labels[].name | select(startswith("cherry-pick to release/"))] | join("\n")')
+            CHERRY_PICK_LABELS=$(echo "$LABELS" | grep -E "cherry-pick to release/" || true)
+          elif [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            LABELS=$(gh pr view $PR_NUMBER --json labels --jq '[.labels[].name | select(startswith("cherry-pick to release/"))] | join("\n")')
+            CHERRY_PICK_LABELS=$(echo "$LABELS" | grep -E "cherry-pick to release/" || true)
+          fi
+
+          VALID_BRANCHES=()
+
+          for label in $CHERRY_PICK_LABELS; do
+            BRANCH=$(echo "$label" | sed 's/cherry-pick to //')
+
+            if [[ "$BRANCH" =~ ^release/ ]]; then
+              if git ls-remote --exit-code --heads origin "$BRANCH"; then
+                VALID_BRANCHES+=("$BRANCH")
+              else
+                gh pr comment $PR_NUMBER --body "## 🔍 Cherry-Pick Validation In Progress
+                ⚠️ Branch \`$BRANCH\` on which cherry-pick commit is requested does not exist. Please add valid labels or make sure requested branch exists."
+              fi
+            fi
+          done
+
+          BRANCHES_JSON=$(printf '%s\n' "${VALID_BRANCHES[@]}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "branches=$BRANCHES_JSON" >> $GITHUB_OUTPUT
+
+  cherry-pick-to-branches:
+    needs: validate-label
+    if: needs.validate-label.outputs.release_branches != '[]'
+    strategy:
+      matrix:
+        release_branch: ${{ fromJson(needs.validate-label.outputs.release_branches) }}
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate Label for Specific Branch
+        id: validate-label
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            PR_NUMBER=${{ github.event.inputs.pr_number }}
+          else
+            PR_NUMBER=${{ github.event.pull_request.number }}
+          fi
+          RELEASE_BRANCH="${{ matrix.release_branch }}"
+          echo "release_branch=$RELEASE_BRANCH" >> $GITHUB_OUTPUT
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
+      - name: Determine Merge Commit
+        id: get-merge-commit
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          PR_NUMBER=${{ steps.validate-label.outputs.pr_number }}
+          PR_INFO=$(gh pr view $PR_NUMBER --json mergeCommit)
+          MERGE_COMMIT=$(echo "$PR_INFO" | jq -r '.mergeCommit.oid')
+          if [[ -z "$MERGE_COMMIT" || "$MERGE_COMMIT" == "null" ]]; then
+            echo "No merge commit found. Ensure the PR is merged."
+            exit 1
+          fi
+          echo "merge_commit=$MERGE_COMMIT" >> $GITHUB_OUTPUT
+
+      - name: Add Cherry-Pick In Progress Comment
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          PR_NUMBER=${{ steps.validate-label.outputs.pr_number }}
+          SHORT_COMMIT=$(echo "${{ steps.get-merge-commit.outputs.merge_commit }}" | cut -c1-7)
+          RELEASE_BRANCH="${{ steps.validate-label.outputs.release_branch }}"
+
+          COMMENT="## 🚀 Cherry-Pick In Progress
+          Commit [\`$SHORT_COMMIT\`](https://github.com/${{ github.repository }}/commit/${{ steps.get-merge-commit.outputs.merge_commit }}) is currently being cherry-picked to the following branch:
+          [\`$RELEASE_BRANCH\`](https://github.com/${{ github.repository }}/tree/$RELEASE_BRANCH)."
+
+          gh pr comment "$PR_NUMBER" --body "$COMMENT"
+
+      - name: Perform Cherry Pick
+        id: cherry-pick
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+          echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}" > token.txt
+          gh auth login --with-token < token.txt
+
+          RELEASE_BRANCH="${{ steps.validate-label.outputs.release_branch }}"
+          MERGE_COMMIT="${{ steps.get-merge-commit.outputs.merge_commit }}"
+          SHORT_COMMIT=$(echo $MERGE_COMMIT | cut -c1-7)
+          PR_NUMBER="${{ steps.validate-label.outputs.pr_number }}"
+          PR_TITLE=$(gh pr view $PR_NUMBER --json title --jq '.title')
+
+          CHERRY_PICK_BRANCH="cherry_pick_release_$(echo $RELEASE_BRANCH | tr '/' '_')_${MERGE_COMMIT:0:7}"
+
+          # Try to cherry-pick
+          if git checkout $RELEASE_BRANCH && git checkout -b $CHERRY_PICK_BRANCH; then
+            if git cherry-pick -x -m 1 "$MERGE_COMMIT"; then
+              git push -u origin $CHERRY_PICK_BRANCH
+
+              CHERRY_PICK_PR=$(gh pr create \
+                --base "$RELEASE_BRANCH" \
+                --head "$CHERRY_PICK_BRANCH" \
+                --title "$PR_TITLE [Cherry-pick to $RELEASE_BRANCH] #REGULAR (Original PR: #$PR_NUMBER)" \
+                --body "This is an automated pull request to cherry-pick [\`$SHORT_COMMIT\`](https://github.com/${{ github.repository }}/commit/$MERGE_COMMIT) to [\`$RELEASE_BRANCH\`](https://github.com/${{ github.repository }}/tree/$RELEASE_BRANCH).
+                Original PR: #$PR_NUMBER")
+
+              echo "cherry_pick_pr=$CHERRY_PICK_PR" >> $GITHUB_OUTPUT
+              echo "release_branch=$RELEASE_BRANCH" >> $GITHUB_OUTPUT
+              echo "merge_commit=$MERGE_COMMIT" >> $GITHUB_OUTPUT
+            else
+                git cherry-pick --abort
+                git commit --allow-empty -m "Cherry-pick failed for $SHORT_COMMIT. Needs manual resolution."
+                git push -u origin $CHERRY_PICK_BRANCH
+
+                CHERRY_PICK_PR=$(gh pr create \
+                --base "$RELEASE_BRANCH" \
+                --head "$CHERRY_PICK_BRANCH" \
+                --title "$PR_TITLE [Cherry-pick to $RELEASE_BRANCH] #REGULAR (Original PR: #$PR_NUMBER)" \
+                --body "This is an automated pull request to cherry-pick [\`$SHORT_COMMIT\`](https://github.com/${{ github.repository }}/commit/$MERGE_COMMIT) to [\`$RELEASE_BRANCH\`](https://github.com/${{ github.repository }}/tree/$RELEASE_BRANCH).
+                Original PR: #$PR_NUMBER")
+
+                COMMENT="## ❌ Cherry-pick Failed
+                Cherry-pick to $RELEASE_BRANCH failed.
+                Branch created for cherry-pick: $CHERRY_PICK_BRANCH.
+                PR created for cherry-pick: $CHERRY_PICK_PR
+
+                ### ⚠️ Manual Resolution Required
+                The cherry-pick failed due to conflicts. Please follow the steps below to resolve them manually:
+
+                1. git checkout $CHERRY_PICK_BRANCH
+                2. git cherry-pick -x -m 1 $MERGE_COMMIT
+                3. git status
+                4. Resolve conflicts in the conflicting files (files with conflict markers).
+                5. git add <resolved_files>
+                6. git cherry-pick --continue
+                7. git push origin $CHERRY_PICK_BRANCH
+                8. Open a pull request to merge the branch into $RELEASE_BRANCH."
+
+                gh pr comment "$PR_NUMBER" --body "$COMMENT"
+
+                exit 1
+            fi
+          fi
+
+      - name: Add cherry-pick-release label
+        run: |
+          PR_NUMBER=${{ steps.cherry-pick.outputs.cherry_pick_pr }}
+          PR_NUMBER=$(echo "$PR_NUMBER" | grep -o '[0-9]\+$')
+          echo "Adding label to PR #$PR_NUMBER"
+          gh label create "cherry-pick-release" \
+            --description "Cherry-picked changes to release branch" \
+            --color "0052cc" || true
+          gh pr edit "$PR_NUMBER" --add-label "cherry-pick-release"
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - name: Add Completion Comment
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          PR_NUMBER="${{ steps.validate-label.outputs.pr_number }}"
+          RELEASE_BRANCH="${{ steps.cherry-pick.outputs.release_branch }}"
+          MERGE_COMMIT="${{ steps.cherry-pick.outputs.merge_commit }}"
+          SHORT_COMMIT=$(echo "${{ steps.get-merge-commit.outputs.merge_commit }}" | cut -c1-7)
+          CHERRY_PICK_PR="${{ steps.cherry-pick.outputs.cherry_pick_pr }}"
+          gh pr comment $PR_NUMBER --body "## ✅ Cherry-pick Pull Requests Created
+          Cherry-pick bot created pull requests targeting the following branch for commit [\`$SHORT_COMMIT\`](https://github.com/${{ github.repository }}/commit/${{ steps.get-merge-commit.outputs.merge_commit }}):
+          | Branch | PR Link |
+          |--------|---------|
+          | $RELEASE_BRANCH | [View PR]($CHERRY_PICK_PR) |"
+
+      - name: Determine PR Owner and Labeler
+        id: pr-details
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          PR_NUMBER=${{ steps.validate-label.outputs.pr_number }}
+          PR_OWNER=$(gh pr view $PR_NUMBER --json author --jq '.author.login')
+          LABELER=$(gh api repos/${{ github.repository }}/issues/$PR_NUMBER/events | jq -r '[.[] | select(.event=="labeled")] | last | .actor.login')
+          echo "PR Owner: $PR_OWNER"
+          echo "Labeler: $LABELER"
+          echo "pr_owner=$PR_OWNER" >> $GITHUB_ENV
+          echo "labeler=$LABELER" >> $GITHUB_ENV
+
+      - name: Auto Approve & Merge Cherry-Pick PRs (if same user)
+        if: env.pr_owner == env.labeler
+        run: |
+          PR_NUMBER=${{ steps.cherry-pick.outputs.cherry_pick_pr }}
+
+          echo "${{ secrets.PERSONAL_ACCESS_TOKEN_AUTOAPPROVEBOT }}" > token.txt
+          gh auth login --with-token < token.txt
+
+          gh pr review --approve "$PR_NUMBER"
+          gh pr merge --squash "$PR_NUMBER"
+
+          ORGINAL_PR_NUMBER=${{ steps.validate-label.outputs.pr_number }}
+          SHORT_COMMIT=$(echo "${{ steps.get-merge-commit.outputs.merge_commit }}" | cut -c1-7)
+          RELEASE_BRANCH="${{ steps.validate-label.outputs.release_branch }}"
+
+          if [ "$(gh pr view "$PR_NUMBER" --json mergedAt --jq '.mergedAt')" != "null" ]; then
+            COMMENT="## ✅ Cherry-pick completed successfully!
+            Commit [\`$SHORT_COMMIT\`](https://github.com/${{ github.repository }}/commit/${{ steps.get-merge-commit.outputs.merge_commit }}) has been cherry-picked to the [\`$RELEASE_BRANCH\`](https://github.com/${{ github.repository }}/tree/$RELEASE_BRANCH)."
+            gh pr comment "$ORGINAL_PR_NUMBER" --body "$COMMENT"
+          else
+            FAILED_COMMENT="## ❌ Cherry-pick PR Merge Failed!
+            The cherry-pick PR $PR_NUMBER was not merged successfully.
+            Please check the PR status and resolve any conflicts before retrying."
+            gh pr comment "$ORGINAL_PR_NUMBER"  --body "$FAILED_COMMENT"
+          fi
+
+      - name: Assign Original PR Owner as Reviewer (if different user labeled)
+        if: env.pr_owner != env.labeler
+        env:
+          GH_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        run: |
+          PR_NUMBER=${{ steps.cherry-pick.outputs.cherry_pick_pr }}
+          gh pr edit $PR_NUMBER --add-reviewer "$pr_owner"
+          ORGINAL_PR_NUMBER=${{ steps.validate-label.outputs.pr_number }}
+          COMMENT="## 🔍 Reviewer Assigned
+          The original PR owner **@${{ env.pr_owner }}** has been assigned as a reviewer for the cherry-pick PR $PR_NUMBER to ensure correctness."
+          gh pr comment "$ORGINAL_PR_NUMBER" --body "$COMMENT"

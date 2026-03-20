@@ -1,0 +1,3 @@
+DROP INDEX IF EXISTS idx_data_integration_tasks_progress_case_id;
+
+DROP TABLE IF EXISTS data_integration_tasks_progress;

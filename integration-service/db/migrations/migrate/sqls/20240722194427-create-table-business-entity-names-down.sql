@@ -1,0 +1,1 @@
+DROP TABLE integration_data.business_entity_names;

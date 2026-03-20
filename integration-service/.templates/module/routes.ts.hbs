@@ -1,0 +1,15 @@
+import { Router } from "express";
+import { methodNotAllowed, validateDataPermission, validateRole, validateSchema, validateUser } from "#middlewares/index";
+import { controller as api } from "./controller";
+import { schema } from "./schema";
+import { ROLES } from "#constants";
+
+const router = Router();
+
+// This is a dummy route. Please edit this route to suit your needs
+// You can add more routes to this file
+// You can also remove this route if you do not need it
+
+router.route("/customers/:customerID/example-route").post(validateUser, validateRole(ROLES.ADMIN, ROLES.CUSTOMER, ROLES.APPLICANT), validateSchema(schema.dummySchema), api.dummyFunction).all(methodNotAllowed);
+
+module.exports = router;

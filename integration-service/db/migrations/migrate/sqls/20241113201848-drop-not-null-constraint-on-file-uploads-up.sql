@@ -1,0 +1,1 @@
+alter table files.uploads alter column display_name drop not null;

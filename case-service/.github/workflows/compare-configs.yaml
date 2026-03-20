@@ -1,0 +1,359 @@
+name: Compare Environment Variables with Doppler
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  DOPPLER_PROJECT: case-service
+  DOPPLER_CONFIGS: development,qa,staging,production
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
+jobs:
+  compare-env-vars:
+    runs-on: ubuntu-latest
+    env:
+      OPTIONAL_ENV_KEYS: CONFIG_LOG_LEVEL,CONFIG_EMAIL_HOST,CONFIG_EMAIL_PASSWORD,CONFIG_EMAIL_PORT,CONFIG_FRONTEND_BASE_URL,CONFIG_JWT_REFRESH_SECRET_KEY,CONFIG_LD_TEST_FLAGS_FILE,CONFIG_HEALTH_CHECK_MODE,CONFIG_SERVICE_MODE,CONFIG_REDIS_KEY_PREFIX,CONFIG_APPLICANT_FRONTEND_BASE_URL,CONFIG_BUSINESS,CONFIG_CASES,CONFIG_CUSTOMER_ADMIN_FRONTEND_BASE_URL,CONFIG_INTEGRATIONS,CONFIG_KAFKA_CLIENT_ID,CONFIG_KAFKA_GROUP_ID,CONFIG_NOTIFICATIONS,CONFIG_REPORTS,CONFIG_SCORES,CONFIG_USERS_NEW,CONFIG_WEBHOOKS,CONFIG_WORTH_ADMIN_FRONTEND_BASE_URL
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+
+      # Get OIDC token manually (like your working example)
+      - name: Get OIDC token
+        id: get_token
+        run: |
+          TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+                       "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https://github.com/$GITHUB_REPOSITORY_OWNER")
+          echo "OIDC_TOKEN=$(echo $TOKEN | jq -r '.value')" >> $GITHUB_ENV
+
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Login with OIDC token
+        run: doppler oidc login --scope=. --identity=${{ secrets.DOPPLER_ALL_PROJECTS_OIDC_ID }} --token=$OIDC_TOKEN
+
+      # Fetch secrets from all environments using doppler run
+      - name: Fetch All Environment Secrets
+        run: |
+          # Function to fetch secrets using doppler run
+          fetch_secrets() {
+            local config=$1
+            local var_name=$2
+            echo "Fetching secrets for $config..."
+            
+            # Use doppler run to get environment variables, then convert to JSON
+            secrets_json=$(doppler run -p "$DOPPLER_PROJECT" -c "$config" -- node -e "
+              const secrets = {};
+              Object.keys(process.env).forEach(key => {
+                secrets[key] = process.env[key];
+              });
+              console.log(JSON.stringify(secrets));
+            ")
+            
+            echo "$var_name=$(echo "$secrets_json" | tr -d '\n')" >> $GITHUB_ENV
+          }
+          
+          # Fetch secrets for each environment
+          fetch_secrets "development" "DEV_SECRETS"
+          fetch_secrets "qa" "QA_SECRETS" 
+          fetch_secrets "staging" "STAGING_SECRETS"
+          fetch_secrets "production" "PROD_SECRETS"
+
+      - name: Compare Environment Variables
+        id: compare
+        run: |
+          # Create the comparison script
+          cat > compare_env.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          
+          try {
+            // Read env.config.js or env.config.ts file
+            let envConfigKeys = [];
+            let configFileName = "env.config.js/ts"; // default
+            const envConfigJsPath = path.resolve(__dirname, "src/configs/env.config.js");
+            const envConfigTsPath = path.resolve(__dirname, "src/configs/env.config.ts");
+
+            let envConfigPath = null;
+            if (fs.existsSync(envConfigJsPath)) {
+              envConfigPath = envConfigJsPath;
+              configFileName = "env.config.js";
+            } else if (fs.existsSync(envConfigTsPath)) {
+              envConfigPath = envConfigTsPath;
+              configFileName = "env.config.ts";
+            }
+
+            if (envConfigPath) {
+              const configContent = fs.readFileSync(envConfigPath, "utf8");
+              // Regex to match all CONFIG_* keys (unicode-safe)
+              const configKeyRegex = /CONFIG_[A-Z0-9_]+/gu;
+              const matchedKeys = configContent.match(configKeyRegex) || [];
+              envConfigKeys = [...new Set(matchedKeys)].sort();
+            }
+            
+            // Read .env.example file
+            let envExampleKeys = [];
+            const envExamplePath = path.resolve(__dirname, ".env.example");
+            if (fs.existsSync(envExamplePath)) {
+              const envExampleContent = fs.readFileSync(envExamplePath, 'utf8');
+              envExampleKeys = envExampleContent
+                .split('\n')
+                .filter(line => line.trim() && !line.startsWith('#'))
+                .map(line => line.split('=')[0].trim())
+                .filter(key => key);
+            }
+
+            // Load optional keys from GitHub secret
+            const optionalKeys = process.env.OPTIONAL_ENV_KEYS
+              ? process.env.OPTIONAL_ENV_KEYS.split(',').map(k => k.trim()).filter(Boolean)
+              : [];
+            console.log(`Loaded ${optionalKeys.length} optional keys from secret`);
+            
+            // Parse secrets from environment variables
+            const parseSecrets = (secretsJson) => {
+              try {
+                return secretsJson ? JSON.parse(secretsJson) : {};
+              } catch (error) {
+                console.error('Error parsing secrets:', error.message);
+                return {};
+              }
+            };
+            
+            // Get secrets from environment variables
+            const configSecrets = {
+              'development': parseSecrets(process.env.DEV_SECRETS),
+              'qa': parseSecrets(process.env.QA_SECRETS),
+              'staging': parseSecrets(process.env.STAGING_SECRETS),
+              'production': parseSecrets(process.env.PROD_SECRETS)
+            };
+            
+            // Filter out configs that have no secrets (weren't fetched)
+            const activeConfigs = Object.entries(configSecrets)
+              .filter(([config, secrets]) => Object.keys(secrets).length > 0)
+              .map(([config]) => config);
+            
+            if (activeConfigs.length === 0 && envConfigKeys.length === 0) {
+              console.log('No environment variables found to compare');
+              process.exit(1);
+            }
+            
+            // Only use keys from env.config.js
+            const allKeys = new Set(envConfigKeys);
+            
+            // Generate comparison table headers - include dynamic config filename as second column
+            const headers = ['Keys', configFileName, '.env.example', ...activeConfigs.map(c => c.charAt(0).toUpperCase() + c.slice(1))];
+            const headerRow = `| ${headers.join(' | ')} |`;
+            const separatorRow = `|${headers.map(() => '-----').join('|')}|`;
+            
+            // Generate comparison table rows and track missing keys
+            let tableRows = [];
+            let missingRequiredKeys = [];
+            let allMissingKeys = []; // For display in table
+            const sortedKeys = Array.from(allKeys).sort();
+            
+            for (const key of sortedKeys) {
+              const row = [key];
+              let isMissingAnywhere = false;
+              
+              // Check env.config.js (always present since we're filtering by these keys)
+              row.push('✅');
+              
+              // Check .env.example
+              const inEnvExample = envExampleKeys.includes(key);
+              row.push(inEnvExample ? '✅' : '❌');
+              if (!inEnvExample) isMissingAnywhere = true;
+              
+              // Check each active config
+              for (const config of activeConfigs) {
+                const inConfig = configSecrets[config].hasOwnProperty(key);
+                row.push(inConfig ? '✅' : '❌');
+                if (!inConfig) isMissingAnywhere = true;
+              }
+              
+              // If missing anywhere, add to table
+              if (isMissingAnywhere) {
+                tableRows.push(`| ${row.join(' | ')} |`);
+                allMissingKeys.push(key);
+                
+                // Only add to required missing if it's not optional
+                if (!optionalKeys.includes(key)) {
+                  missingRequiredKeys.push(key);
+                }
+              }
+            }
+            
+            let fullComment;
+            
+            if (missingRequiredKeys.length === 0) {
+              // No missing required keys - show success message
+              const optionalMissingCount = allMissingKeys.length;
+              let successMessage = [
+                '## ✅ Environment Variables Comparison - All Required Keys Present!',
+                `**Project:** ${process.env.DOPPLER_PROJECT}`,
+                `**Configs:** ${activeConfigs.join(', ')}`,
+                '',
+                `🎉 **Great news!** All required environment variables from \`${configFileName}\` are present.`
+              ];
+              
+              if (optionalMissingCount > 0) {
+                successMessage.push('');
+                successMessage.push(`ℹ️ **Note:** ${optionalMissingCount} optional key(s) are missing, but this is acceptable:`);
+                successMessage.push('```');
+                successMessage.push(allMissingKeys.filter(key => optionalKeys.includes(key)).join('\n'));
+                successMessage.push('```');
+                
+                if (tableRows.length > 0) {
+                  successMessage.push('');
+                  successMessage.push('**Detailed comparison:**');
+                  successMessage.push(headerRow);
+                  successMessage.push(separatorRow);
+                  successMessage.push(...tableRows);
+                }
+              }
+              
+              successMessage.push('');
+              successMessage.push(`**Summary:**`);
+              successMessage.push(`- Total keys in ${configFileName}: ${envConfigKeys.length}`);
+              successMessage.push(`- Missing required keys: 0`);
+              successMessage.push(`- Missing optional keys: ${optionalMissingCount}`);
+              
+              fullComment = successMessage.join('\n');
+            } else {
+              // Show missing required keys with detailed table
+              fullComment = [
+                '## ⚠️ Required Environment Variables Missing',
+                `**Project:** ${process.env.DOPPLER_PROJECT}`,
+                `**Configs:** ${activeConfigs.join(', ')}`,
+                '',
+                `The following **${missingRequiredKeys.length}** required key(s) are missing:`,
+                '',
+                '```',
+                missingRequiredKeys.join('\n'),
+                '```',
+                ''
+              ];
+              
+              const optionalMissingKeys = allMissingKeys.filter(key => optionalKeys.includes(key));
+              if (optionalMissingKeys.length > 0) {
+                fullComment.push(`Additionally, **${optionalMissingKeys.length}** optional key(s) are missing (acceptable):`);
+                fullComment.push('```');
+                fullComment.push(optionalMissingKeys.join('\n'));
+                fullComment.push('```');
+                fullComment.push('');
+              }
+              
+              fullComment.push('**Detailed comparison:**');
+              fullComment.push(headerRow);
+              fullComment.push(separatorRow);
+              fullComment.push(...tableRows);
+              fullComment.push('');
+              fullComment.push(`**Summary:**`);
+              fullComment.push(`- Total keys in ${configFileName}: ${envConfigKeys.length}`);
+              fullComment.push(`- Missing required keys: ${missingRequiredKeys.length}`);
+              fullComment.push(`- Missing optional keys: ${optionalMissingKeys.length}`);
+              
+              fullComment = fullComment.join('\n');
+            }
+            
+            // Save comment to file
+            fs.writeFileSync('pr-comment.md', fullComment);
+            
+            // Log the status but don't exit yet - let PR comment step run first
+            if (missingRequiredKeys.length > 0) {
+              console.error(`❌ Missing required keys: ${missingRequiredKeys.join(', ')}`);
+              // Set output for next step to know if it should fail
+              console.log(`::set-output name=has_missing_required::true`);
+              console.log(`::set-output name=missing_required_keys::${missingRequiredKeys.join(', ')}`);
+            } else {
+              console.log(`✅ All required keys are present`);
+              console.log(`::set-output name=has_missing_required::false`);
+            }
+          } catch (error) {
+            console.error('Error during comparison:', error);
+            const errorComment = `## ❌ Environment Variables Comparison Failed
+            
+            An error occurred while comparing environment variables: ${error.message}
+            
+            Please check the workflow logs for more details.`;
+            
+            fs.writeFileSync('pr-comment.md', errorComment);
+            console.log(`::set-output name=has_missing_required::true`);
+            console.log(`::set-output name=missing_required_keys::Error occurred during comparison`);
+          }
+          EOF
+          
+          # Run the comparison
+          DOPPLER_PROJECT="$DOPPLER_PROJECT" node compare_env.js
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            if (!fs.existsSync('pr-comment.md')) {
+              console.log('No comment file found, skipping PR comment');
+              return;
+            }
+            
+            const comment = fs.readFileSync('pr-comment.md', 'utf8');
+            
+            try {
+              // Check if there's already a comment from this action
+              const comments = await github.rest.issues.listComments({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+              });
+              
+              const botComment = comments.data.find(comment => 
+                comment.user.type === 'Bot' && 
+                (comment.body.includes('Environment Variables Comparison') || 
+                 comment.body.includes('Environment Variables Missing') ||
+                 comment.body.includes('Required Environment Variables Missing'))
+              );
+              
+              if (botComment) {
+                // Update existing comment
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: botComment.id,
+                  body: comment
+                });
+                console.log('Updated existing PR comment');
+              } else {
+                // Create new comment
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: comment
+                });
+                console.log('Created new PR comment');
+              }
+            } catch (error) {
+              console.error('Error posting PR comment:', error);
+            }
+
+      - name: Fail if required keys are missing
+        if: steps.compare.outputs.has_missing_required == 'true'
+        run: |
+          echo "❌ Workflow failed because required environment variables are missing:"
+          echo "${{ steps.compare.outputs.missing_required_keys }}"
+          echo ""
+          echo "Please check the PR comment above for detailed information about which keys are missing."
+          exit 1
+
+      - name: Clean up files
+        run: |
+          rm -f pr-comment.md compare_env.js

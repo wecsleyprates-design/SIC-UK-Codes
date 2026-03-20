@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS "public"."rel_business_industry_naics";

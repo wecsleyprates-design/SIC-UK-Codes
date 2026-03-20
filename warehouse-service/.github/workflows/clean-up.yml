@@ -1,0 +1,35 @@
+name: Clean Up
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # GMT
+  workflow_dispatch:
+
+jobs:
+  delete-runs:
+    name: Delete old workflow runs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repository: ${{ github.repository }}
+          retain_days: 30
+          keep_minimum_runs: 0
+
+  close-stale-prs:
+    name: Close Stale PRs
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v4
+        with:
+          repo-token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          stale-pr-message: "Warning: stale PR at a risk of getting closed in 2 days"
+          close-pr-message: "Pull Request closed due to lack of inactivity after 7 days"
+          days-before-pr-stale: 5
+          days-before-pr-close: 2
+          exempt-draft-pr: true

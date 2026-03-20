@@ -1,0 +1,72 @@
+{
+	"name": "Case Service Dev Container",
+	"dockerComposeFile": "../../../docker-compose.yml",
+	"service": "case",
+	"mounts": ["source=${localWorkspaceFolder},target=/app,type=bind,consistency=cached"],
+	"workspaceFolder": "/app",
+	"shutdownAction": "none",
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"workbench.startupEditor": "none",
+				"files.autoSave": "afterDelay",
+				"security.workspace.trust.untrustedFiles": "open",
+				"workbench.iconTheme": "vscode-icons",
+				"workbench.colorTheme": "GitHub Dark",
+				"git.autofetch": true,
+				"git.confirmSync": false,
+				"debug.javascript.autoAttachFilter": "disabled",
+				"[javascript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.formatOnSave": true
+				},
+				"[typescript]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.formatOnSave": true
+				},
+				"[json]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.formatOnSave": true
+				},
+				"[typescriptreact]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.formatOnSave": true
+				},
+				"[html]": {
+					"editor.defaultFormatter": "esbenp.prettier-vscode",
+					"editor.formatOnSave": true
+				},
+				"diffEditor.ignoreTrimWhitespace": false,
+				"makefile.configureOnOpen": true
+			},
+			"extensions": [
+				"aaron-bond.better-comments",
+				"bradlc.vscode-tailwindcss",
+				"davidanson.vscode-markdownlint",
+				"dbaeumer.vscode-eslint",
+				"docker.docker",
+				"esbenp.prettier-vscode",
+				"github.codespaces",
+				"github.copilot",
+				"github.copilot-chat",
+				"github.remotehub",
+				"gruntfuggly.todo-tree",
+				"ms-azuretools.vscode-containers",
+				"ms-python.debugpy",
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-vscode-remote.remote-containers",
+				"ms-vscode-remote.remote-ssh",
+				"ms-vscode-remote.remote-ssh-edit",
+				"ms-vscode.azure-repos",
+				"ms-vscode.makefile-tools",
+				"ms-vscode.remote-explorer",
+				"ms-vscode.remote-repositories",
+				"ms-vscode.remote-server",
+				"rvest.vs-code-prettier-eslint",
+				"signageos.signageos-vscode-sops",
+				"usernamehw.errorlens"
+			]
+		}
+	}
+}

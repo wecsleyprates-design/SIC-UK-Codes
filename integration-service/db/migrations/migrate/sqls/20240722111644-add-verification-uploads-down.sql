@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS integration_data.business_entity_verification_uploads;

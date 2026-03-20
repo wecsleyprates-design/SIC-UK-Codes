@@ -1,0 +1,1 @@
+DELETE FROM onboarding_schema.core_jurisdictions WHERE jurisdiction_code IN ('PR', 'AU', 'NZ');

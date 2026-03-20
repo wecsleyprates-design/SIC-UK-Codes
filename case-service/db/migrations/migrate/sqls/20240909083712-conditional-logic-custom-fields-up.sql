@@ -1,0 +1,2 @@
+ALTER TABLE onboarding_schema.data_custom_fields
+ADD COLUMN conditional_logic JSONB NULL;

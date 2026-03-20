@@ -1,0 +1,1 @@
+ALTER TABLE data_invites ALTER COLUMN customer_id SET NOT NULL;

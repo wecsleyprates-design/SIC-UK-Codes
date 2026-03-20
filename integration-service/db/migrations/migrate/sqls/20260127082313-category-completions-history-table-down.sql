@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS integration_data.data_category_completions_history;

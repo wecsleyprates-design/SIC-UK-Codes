@@ -1,0 +1,63 @@
+{
+	"compilerOptions": {
+		"target": "esnext" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+		"module": "CommonJS" /* Specify what module code is generated. */,
+		"lib": ["esnext"] /* Specify library files to be included in the compilation. */,
+		"moduleResolution": "Node" /* Specify how TypeScript looks up a file from a given module specifier. */,
+		"rootDir": "." /* Specify the root folder within your source files. */,
+
+		"types": [
+			"node",
+			"jest"
+		] /* Specify type package names to be included without being referenced in a source file. */,
+		"baseUrl": ".",
+		"allowJs": true /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */,
+		"checkJs": false /* Enable error reporting in type-checked JavaScript files. */,
+		"declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
+		"declarationMap": false /* Create sourcemaps for d.ts files. */,
+		"emitDeclarationOnly": false /* Only output d.ts files and not JavaScript files. */,
+		"sourceMap": true /* Create source map files for emitted JavaScript files. */,
+		"allowSyntheticDefaultImports": true /* Allow 'import x from y' when a module doesn't have a default export. */,
+		"esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+		"forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+
+		"strict": true /* Enable all strict type-checking options. */,
+		"noImplicitAny": false /* Enable error reporting for expressions and declarations with an implied 'any' type. */,
+		"strictNullChecks": true /* When type checking, take into account 'null' and 'undefined'. */,
+		"strictFunctionTypes": true /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */,
+		"strictBindCallApply": true /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */,
+		"skipLibCheck": true,
+		"outDir": "./dist" /* Specify an output folder for all emitted files. */,
+		"paths": {
+			"#api": ["./src/api"],
+			"#api/*": ["./src/api/*"],
+			"#common": ["./src/common"],
+			"#common/*": ["./src/common/*"],
+			"#configs": ["./src/configs"],
+			"#configs/*": ["./src/configs/*"],
+			"#constants": ["./src/constants"],
+			"#constants/*": ["./src/constants/*"],
+			"#core": ["./src/core"],
+			"#core/*": ["./src/core/*"],
+			"#errors": ["./src/errors"],
+			"#errors/*": ["./src/errors/*"],
+			"#helpers": ["./src/helpers"],
+			"#helpers/*": ["./src/helpers/*"],
+			"#lib": ["./lib"],
+			"#lib/*": ["./lib/*"],
+			"#messaging": ["./src/messaging"],
+			"#messaging/*": ["./src/messaging/*"],
+			"#middlewares": ["./src/middlewares"],
+			"#middlewares/*": ["./src/middlewares/*"],
+			"#types": ["./src/types"],
+			"#types/*": ["./src/types/*"],
+			"#utils": ["./src/utils"],
+			"#utils/*": ["./src/utils/*"],
+			"#workers": ["./src/workers"],
+			"#workers/*": ["./src/workers/*"]
+		}
+	},
+	"include": ["src/*.ts", "src/**/*.ts", "src/**/*.js", "lib/**/*.ts", "lib/**/*.js"],
+	"exclude": ["node_modules", "<node_internals>/**", "dist"],
+	"files": ["src/types/express.d.ts"]
+}

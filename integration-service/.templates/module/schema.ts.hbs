@@ -1,0 +1,26 @@
+import { joiExtended as Joi } from "#helpers/index";
+
+
+export const schema = {
+	// This is a dummy schema. Please edit this schema to suit your needs
+	// You can add more schemas to this file
+	// You can also remove this schema if you do not need it
+	
+    dummySchema: {
+		params: Joi.object({
+			customerID: Joi.string().uuid().required()
+		}),
+		body: Joi.object({
+			id: Joi.string().required(),
+            table_name: Joi.string().required(),
+			column_name: Joi.string().required(),
+			decrypt: Joi.boolean().optional()
+		}),
+		query: Joi.object({
+			page: Joi.number().optional(),
+			limit: Joi.number().optional(),
+			sort: Joi.string().optional(),
+			order: Joi.string().optional(),
+		}),
+	},
+};

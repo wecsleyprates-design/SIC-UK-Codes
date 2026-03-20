@@ -1,0 +1,1 @@
+DROP INDEX IF EXISTS integration_data.idx_transactions_transaction_id;

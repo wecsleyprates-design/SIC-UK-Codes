@@ -1,0 +1,2 @@
+ALTER TABLE integration_data.business_entity_verification_uploads
+DROP COLUMN IF EXISTS extracted_data;

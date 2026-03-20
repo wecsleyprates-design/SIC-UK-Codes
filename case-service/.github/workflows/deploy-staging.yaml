@@ -1,0 +1,45 @@
+name: Deploy to Staging
+
+run-name: "Deploy to Staging: ${{ inputs.tag }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to deploy (e.g., v1.0.0)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  validate-tag:
+    name: Validate Tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate tag exists
+        run: |
+          if ! git rev-parse "${{ inputs.tag }}" >/dev/null 2>&1; then
+            echo "❌ Tag '${{ inputs.tag }}' not found"
+            echo ""
+            echo "Available tags (last 10):"
+            git tag --sort=-version:refname | head -10
+            exit 1
+          fi
+          echo "✅ Tag '${{ inputs.tag }}' exists"
+
+  deploy:
+    name: Deploy to Staging
+    needs: validate-tag
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: staging
+      ref_to_build: ${{ inputs.tag }}
+    secrets: inherit

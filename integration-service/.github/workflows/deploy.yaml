@@ -1,0 +1,383 @@
+name: Deploy to Environment
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+        description: 'Environment to deploy to (development, qa, staging, production)'
+      ref_to_build:
+        required: true
+        type: string
+        description: 'Git ref (tag, branch, or SHA) to build and deploy'
+    outputs:
+      pr_url:
+        description: "URL of the created deployment PR"
+        value: ${{ jobs.deploy.outputs.pr_url }}
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  verify:
+    name: Verify Service Health
+    runs-on: ${{ (inputs.environment == 'development' || startsWith(inputs.environment, 'qa')) && fromJSON('["self-hosted", "joinworth-org-runner", "eks"]') || inputs.environment == 'staging' && fromJSON('["self-hosted", "joinworth-org-staging-runner", "eks"]') || fromJSON('["self-hosted", "joinworth-org-production-runner", "eks"]') }}
+    env:
+      DOPPLER_PROJECT: integration-service
+      DOPPLER_CONFIG: ${{ inputs.environment == 'development' && 'development' || startsWith(inputs.environment, 'qa') && 'qa' || inputs.environment == 'staging' && 'staging' || 'production' }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref_to_build }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Get OIDC token
+        id: get_token
+        run: |
+          TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+                       "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https://github.com/$GITHUB_REPOSITORY_OWNER")
+          echo "OIDC_TOKEN=$(echo $TOKEN | jq -r '.value')" >> $GITHUB_ENV
+
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Login with OIDC token
+        run: doppler oidc login --scope=. --identity=${{ secrets.DOPPLER_ALL_PROJECTS_OIDC_ID }} --token=$OIDC_TOKEN
+
+      - name: Fetch Environment Variables from Doppler
+        run: |
+          doppler run -p "$DOPPLER_PROJECT" -c "$DOPPLER_CONFIG" -- env > .env
+
+      - name: Override Port Configuration
+        run: |
+          echo "CONFIG_APP_PORT=3001" >> .env
+
+      - name: Enable Health Check Mode
+        run: |
+          # Health check mode verifies all connections (DB, Kafka, Redis) without
+          # actually consuming Kafka messages or processing Bull queue jobs.
+          # This prevents data loss when the app is killed after health check passes.
+          echo "CONFIG_HEALTH_CHECK_MODE=true" >> .env
+
+      - name: Install build dependencies
+        run: |
+          # Install build tools needed for native module compilation
+          sudo apt-get update && sudo apt-get install -y \
+            python3 \
+            make \
+            g++ \
+            build-essential \
+            || echo "Build tools may already be installed"
+
+      - name: Install dependencies
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{secrets.PERSONAL_ACCESS_TOKEN_READ_PACKAGE}}" > .npmrc
+          npm ci --ignore-scripts
+
+      - name: Rebuild native modules
+        run: |
+          # Rebuild native modules that require compilation (like @confluentinc/kafka-javascript)
+          npm rebuild @confluentinc/kafka-javascript || npm rebuild
+
+      - name: Run App & Verify Health
+        env:
+          DD_SERVICE: integration-service
+          DD_ENV: test
+        run: |
+          timeout 300 bash -c '
+            npm run start:prod &
+            APP_PID=$!
+            while kill -0 $APP_PID 2>/dev/null; do
+              if curl -f -H "Host: localhost" http://localhost:3001/health 2>/dev/null; then
+                echo "✅ Health check passed"
+                kill $APP_PID
+                exit 0
+              fi
+              sleep 1
+            done
+            echo "❌ App failed to start properly"
+            exit 1
+          '
+
+  check-image-tag:
+    name: Check Image Tag in ECR
+    runs-on: ubuntu-latest
+    environment: ${{ startsWith(inputs.environment, 'qa') && 'development' || inputs.environment }}
+    needs: verify
+
+    outputs:
+      IMAGE_TAG: ${{ steps.capture-image-tag.outputs.IMAGE_TAG }}
+      IMAGE_EXISTS: ${{ steps.check-ecr.outputs.IMAGE_EXISTS }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.ref_to_build }}
+
+      - name: Get Git Branch
+        run: echo "BRANCH=`git rev-parse --abbrev-ref HEAD | sed -r 's/HEAD/tag/g'`" >> $GITHUB_ENV
+
+      - name: Get Git Commit SHA (short)
+        run: echo "SHA_SHORT=`git rev-parse --short HEAD`" >> $GITHUB_ENV
+
+      - name: Check Branch and Commit
+        run: echo running on branch ${{ env.BRANCH }} with commit ${{ env.SHA_SHORT }}
+
+      - name: Capture Image Tag
+        id: capture-image-tag
+        run: |
+          # Check if ref is a tag (starts with v)
+          if [[ "${{ inputs.ref_to_build }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            TAG="${{ inputs.ref_to_build }}_${{ env.SHA_SHORT }}"
+          else
+            # For branches or other refs
+            SAFE_BRANCH=$(echo "${{ env.BRANCH }}" | sed 's/\//-/g')
+            TAG="${SAFE_BRANCH}_${{ env.SHA_SHORT }}"
+          fi
+          echo "The image tag is $TAG"
+          echo "IMAGE_TAG=$TAG" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
+          aws-region: us-east-1
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Check if image exists in ECR
+        id: check-ecr
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+          ECR_MIGRATION_REPOSITORY: ${{ vars.ECR_MIGRATION_REPOSITORY }}
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        run: |
+          SERVICE_IMAGE_EXISTS=false
+          MIGRATION_IMAGE_EXISTS=false
+
+          # Check service image repository
+          if aws ecr describe-images --repository-name $ECR_REPOSITORY --image-ids imageTag=$IMAGE_TAG --region us-east-1 > /dev/null 2>&1; then
+            echo "✅ Image found in primary repository: $ECR_REPOSITORY:$IMAGE_TAG"
+            SERVICE_IMAGE_EXISTS=true
+          else
+            echo "❌ Image not found in primary repository: $ECR_REPOSITORY:$IMAGE_TAG"
+          fi
+
+          # Check migration image repository
+          if aws ecr describe-images --repository-name $ECR_MIGRATION_REPOSITORY --image-ids imageTag=$IMAGE_TAG --region us-east-1 > /dev/null 2>&1; then
+            echo "✅ Image found in migration repository: $ECR_MIGRATION_REPOSITORY:$IMAGE_TAG"
+            MIGRATION_IMAGE_EXISTS=true
+          else
+            echo "❌ Image not found in migration repository: $ECR_MIGRATION_REPOSITORY:$IMAGE_TAG"
+          fi
+
+          # Set IMAGE_EXISTS to true only if both exist
+          if [ "$SERVICE_IMAGE_EXISTS" = "true" ] && [ "$MIGRATION_IMAGE_EXISTS" = "true" ]; then
+            echo "✅ Image exists in BOTH repositories"
+            echo "IMAGE_EXISTS=true" >> $GITHUB_OUTPUT
+          else
+            echo "❌ Image does not exist in both repositories"
+            echo "IMAGE_EXISTS=false" >> $GITHUB_OUTPUT
+          fi
+
+  build:
+    name: Build and Push
+    runs-on: ubuntu-latest
+    environment: ${{ startsWith(inputs.environment, 'qa') && 'development' || inputs.environment }}
+    needs: check-image-tag
+    if: needs.check-image-tag.outputs.IMAGE_EXISTS == 'false'
+
+    outputs:
+      IMAGE_TAG: ${{ needs.check-image-tag.outputs.IMAGE_TAG }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref_to_build }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
+          aws-region: us-east-1
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push migration image to AWS ECR
+        id: build-migration-job-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_MIGRATION_REPOSITORY: ${{ vars.ECR_MIGRATION_REPOSITORY}}
+          IMAGE_TAG: ${{ needs.check-image-tag.outputs.IMAGE_TAG }}
+          NPM_TOKEN: ${{secrets.PERSONAL_ACCESS_TOKEN_READ_PACKAGE}}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_MIGRATION_REPOSITORY:$IMAGE_TAG --build-arg NPM_TOKEN=$NPM_TOKEN -f ./Dockerfile-migrations .
+          echo "Pushing image to ECR..."
+          docker push $ECR_REGISTRY/$ECR_MIGRATION_REPOSITORY:$IMAGE_TAG
+          echo "name=image::$ECR_REGISTRY/$ECR_MIGRATION_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Build, tag, and push service image to AWS ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY}}
+          IMAGE_TAG: ${{ needs.check-image-tag.outputs.IMAGE_TAG }}
+          NPM_TOKEN: ${{secrets.PERSONAL_ACCESS_TOKEN_READ_PACKAGE}}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg NPM_TOKEN=$NPM_TOKEN -f ./Dockerfile .
+          echo "Pushing image to ECR..."
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+  deploy:
+    name: Create PR on deploy repo
+    runs-on: ubuntu-latest
+    needs: [check-image-tag, build]
+    if: always() && needs.check-image-tag.result == 'success'
+    outputs:
+      pr_url: ${{ steps.create-pr.outputs.pr_url }}
+    env:
+      GITHUB_USER: "patjoinworth"
+      GITHUB_USER_EMAIL: "github.pat@joinworth.com"
+      IMAGE_TAG: ${{ needs.check-image-tag.outputs.IMAGE_TAG }}
+      DEPLOY_REPO: "integration-service-deploy"
+    steps:
+      - name: Set environment-specific variables
+        id: env-vars
+        run: |
+          case "${{ inputs.environment }}" in
+            development)
+              echo "TARGET_FILE=dev/kustomization.yaml" >> $GITHUB_OUTPUT
+              echo "ENV_NAME=development" >> $GITHUB_OUTPUT
+              ;;
+            qa1|qa2|qa3|qa4|qa5)
+              echo "TARGET_FILE=${{ inputs.environment }}/kustomization.yaml" >> $GITHUB_OUTPUT
+              echo "ENV_NAME=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+              ;;
+            staging)
+              echo "TARGET_FILE=staging/kustomization.yaml" >> $GITHUB_OUTPUT
+              echo "ENV_NAME=staging" >> $GITHUB_OUTPUT
+              ;;
+            production)
+              echo "TARGET_FILE=prod/kustomization.yaml" >> $GITHUB_OUTPUT
+              echo "ENV_NAME=prod" >> $GITHUB_OUTPUT
+              ;;
+          esac
+
+      - name: Set commit message and branch name
+        run: |
+          echo "COMMIT_MSG_UPDATE=Auto update tag ${{ steps.env-vars.outputs.ENV_NAME }}: ${{ env.IMAGE_TAG }}" >> $GITHUB_ENV
+          echo "TARGET_BRANCH=${{ steps.env-vars.outputs.ENV_NAME }}-tag-update-${{ env.IMAGE_TAG }}" >> $GITHUB_ENV
+          echo "TARGET_FILE=${{ steps.env-vars.outputs.TARGET_FILE }}" >> $GITHUB_ENV
+
+      - name: Create new branch
+        run: |
+          git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/joinworth/${{ env.DEPLOY_REPO }}.git
+          echo "Cloned ${{ env.DEPLOY_REPO }} repository successfully."
+          cd ${{ env.DEPLOY_REPO }}
+          echo "Creating branch ${{ env.TARGET_BRANCH }} . . ."
+          git checkout -b ${{ env.TARGET_BRANCH }}
+          git config --global user.email $GITHUB_USER_EMAIL
+          git config --global user.name $GITHUB_USER
+          git push origin ${{ env.TARGET_BRANCH }}
+
+      - name: checkout deploy repo
+        uses: actions/checkout@v4
+        with:
+          repository: joinworth/${{ env.DEPLOY_REPO }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: ${{ env.DEPLOY_REPO }}
+          ref: ${{ env.TARGET_BRANCH }}
+
+      - name: check image version
+        run: |
+          yq eval '.images[0].newTag' "$DEPLOY_REPO/$TARGET_FILE" || true
+          echo "### $TARGET_FILE: "
+          cat "$DEPLOY_REPO/$TARGET_FILE"
+
+      - name: Change image
+        run: |
+          yq eval --inplace ".images[0].newTag=\"${{ env.IMAGE_TAG }}\"" "$DEPLOY_REPO/$TARGET_FILE"
+          yq eval --inplace ".images[1].newTag=\"${{ env.IMAGE_TAG }}\"" "$DEPLOY_REPO/$TARGET_FILE"
+          echo "### Updated $TARGET_FILE: "
+          cat "$DEPLOY_REPO/$TARGET_FILE"
+
+      - name: Update DD_VERSION in deployment and CronJob patches
+        run: |
+          export TAG="${{ needs.check-image-tag.outputs.IMAGE_TAG }}"
+          yq eval --inplace "(.patches[] | select(.target.kind == \"Deployment\") | .patch) |= (from_yaml | (.[] |= (select(.path | test(\"env/3/value\")) | .value = strenv(TAG))) | to_yaml)" "$DEPLOY_REPO/$TARGET_FILE"
+          yq eval --inplace "(.patches[] | select(.target.kind == \"CronJob\") | .patch) |= (from_yaml | (.[] |= (select(.path | test(\"env/3/value\")) | .value = strenv(TAG))) | to_yaml)" "$DEPLOY_REPO/$TARGET_FILE"
+          echo "### Updated DD_VERSION in $TARGET_FILE: "
+          cat "$DEPLOY_REPO/$TARGET_FILE"
+
+      - name: commit changes and create PR
+        id: create-pr
+        run: |
+          git config --global user.email $GITHUB_USER_EMAIL
+          git config --global user.name $GITHUB_USER
+          cd $DEPLOY_REPO
+          git add .
+          git commit -m "$COMMIT_MSG_UPDATE"
+          git push
+
+          echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}" > token.txt
+          gh auth login --with-token < token.txt
+          gh pr create \
+            --body "Tag update for deployment - Created by Github Action
+                    Triggered by: ${{ github.actor }}
+                    Ref: ${{ inputs.ref_to_build }}" \
+            --title "$COMMIT_MSG_UPDATE by ${{ github.actor }}" \
+            --head "$TARGET_BRANCH" \
+            --base "main"
+
+          echo "Waiting for PR to be fully created..."
+          sleep 5
+
+          PR_URL=$(gh pr view --json url -q ".url")
+          echo "Pull Request created: $PR_URL"
+          echo "pr_url=$PR_URL" >> $GITHUB_OUTPUT
+
+          # Auto-approve and merge for all environments
+          if [[ "${{ inputs.environment }}" == "development" || "${{ inputs.environment }}" == qa* || "${{ inputs.environment }}" == "staging" || "${{ inputs.environment }}" == "production" ]]; then
+            echo "${{ secrets.PERSONAL_ACCESS_TOKEN_AUTOAPPROVEBOT }}" > token.txt
+            gh auth login --with-token < token.txt
+            gh pr review --approve "$PR_URL"
+            sleep 5
+
+            MAX_RETRIES=5
+            RETRY_COUNT=0
+            while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+              if gh pr merge --squash --auto "$PR_URL"; then
+                echo "✅ PR merged successfully"
+                break
+              else
+                echo "Merge failed, retrying... (Attempt $((RETRY_COUNT + 1))/$MAX_RETRIES)"
+                sleep 5
+                RETRY_COUNT=$((RETRY_COUNT + 1))
+              fi
+            done
+            if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+              echo "❌ Failed to merge PR after $MAX_RETRIES attempts"
+              exit 1
+            fi
+          fi

@@ -1,0 +1,1 @@
+DELETE FROM onboarding_schema.core_field_properties WHERE id = 12;

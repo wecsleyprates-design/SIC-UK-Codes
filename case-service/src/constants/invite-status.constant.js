@@ -1,0 +1,26 @@
+export const INVITE_STATUS = {
+	INVITED: 1,
+	EXPIRED: 2,
+	ACCEPTED: 3,
+	COMPLETED: 4,
+	REJECTED: 5,
+	REVOKED: 6
+};
+
+export const INVITE_STATUS_ENUM = {
+	INVITED: "INVITED",
+	EXPIRED: "EXPIRED",
+	ACCEPTED: "ACCEPTED",
+	COMPLETED: "COMPLETED",
+	REJECTED: "REJECTED",
+	REVOKED: "REVOKED"
+};
+
+export const INVITE_STATUSES = {
+	INVITED: "invited",
+	EXPIRED: "expired",
+	ACCEPTED: "accepted",
+	COMPLETED: "completed",
+	REJECTED: "rejected",
+	REVOKED: "revoked"
+};

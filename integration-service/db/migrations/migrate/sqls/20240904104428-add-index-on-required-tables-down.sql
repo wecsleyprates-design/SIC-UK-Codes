@@ -1,0 +1,16 @@
+-- Reverse order of indexes
+DROP INDEX IF EXISTS idx_cases_score_trigger_id;
+DROP INDEX IF EXISTS idx_business_id;
+DROP INDEX IF EXISTS idx_business_task_events_business_integrations_task;
+DROP INDEX IF EXISTS idx_connection_id;
+DROP INDEX IF EXISTS idx_business_score_trigger_id;
+DROP INDEX IF EXISTS idx_reviews_business_integrations_task;
+DROP INDEX IF EXISTS idx_public_records_business_integrations_task;
+DROP INDEX IF EXISTS idx_identity_verification_business_integrations_task;
+DROP INDEX IF EXISTS idx_bureau_credit_score_business_integrations_task;
+DROP INDEX IF EXISTS idx_banking_balances_business_integrations_task;
+DROP INDEX IF EXISTS idx_tax_filings_business_integrations_task;
+DROP INDEX IF EXISTS idx_accounting_cashflow_business_integrations_task;
+DROP INDEX IF EXISTS idx_accounting_incomestatement_business_integrations_task;
+DROP INDEX IF EXISTS idx_accounting_balancesheet_business_integrations_task;
+DROP INDEX IF EXISTS idx_transactions_business_integrations_task;

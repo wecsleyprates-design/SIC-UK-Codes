@@ -1,0 +1,94 @@
+{
+	"root": true,
+	"ignorePatterns": ["scripts/**"],
+	"extends": ["eslint-config-vipul-base"],
+	"rules": {
+		// Overrides
+		"no-tabs": "off",
+		"camelcase": [
+			"error",
+			{
+				"properties": "never",
+				"ignoreDestructuring": true,
+				"allow": []
+			}
+		],
+		"no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_",
+				"caughtErrorsIgnorePattern": "^_"
+			}
+		]
+	},
+
+	// Rules limited to specific locations
+	"overrides": [
+		{
+			"files": ["**/*.test.js", "**/*.spec.ts", "**/*.test.ts"],
+			"excludedFiles": ["dist"],
+			"env": {
+				"jest": true
+			}
+		},
+		{
+			"files": ["**/*.ts", "**/*.tsx"],
+			"env": { "browser": true, "es6": true, "node": true },
+			"extends": ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "eslint-config-vipul-base", "standard-with-typescript", "prettier"],
+			"globals": { "Atomics": "readonly", "SharedArrayBuffer": "readonly" },
+			"parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"ecmaFeatures": { "jsx": true },
+				"ecmaVersion": 2018,
+				"sourceType": "module",
+				"project": "./tsconfig.eslint.json"
+			},
+			"plugins": ["@typescript-eslint"],
+			"rules": {
+				"new-cap": ["error", { "capIsNewExceptions": ["Router"] }],
+				"no-use-before-define": "off",
+				"@typescript-eslint/no-unsafe-argument": "off",
+				"no-console": ["error", { "allow": ["warn", "error"] }],
+				"@typescript-eslint/explicit-function-return-type": "off",
+				"@typescript-eslint/strict-boolean-expressions": "off",
+				"@typescript-eslint/no-use-before-define": [
+					"warn",
+					{
+						"enums": false,
+						"typedefs": false,
+						"ignoreTypeReferences": true
+					}
+				],
+				"no-tabs": "warn",
+				"camelcase": [
+					"error",
+					{
+						"properties": "never",
+						"ignoreDestructuring": true,
+						"allow": []
+					}
+				],
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						"argsIgnorePattern": "^(_.*|next)$",
+						"varsIgnorePattern": "^_",
+						"caughtErrorsIgnorePattern": "^_"
+					}
+				],
+				"no-unused-vars": [
+					"error",
+					{
+						"argsIgnorePattern": "^(_.*|next)$",
+						"varsIgnorePattern": "^_",
+						"caughtErrorsIgnorePattern": "^_"
+					}
+				],
+				"no-shadow": "off",
+				"@typescript-eslint/no-shadow": "error",
+				"no-useless-call": "off"
+			}
+		}
+	]
+}

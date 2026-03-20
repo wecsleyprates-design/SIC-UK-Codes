@@ -1,0 +1,5 @@
+export enum CASE_TYPE {
+	ONBOARDING = 1,
+	APPLICATION_EDIT = 2,
+	RISK = 3
+}

@@ -1,0 +1,1 @@
+DELETE FROM core_case_statuses WHERE code = 'SUBMITTED';

@@ -1,0 +1,1 @@
+ALTER TABLE integration_data.business_entity_verification DROP CONSTRAINT IF EXISTS business_entity_verification_external_id_key;

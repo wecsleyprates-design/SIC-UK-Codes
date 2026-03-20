@@ -1,0 +1,36 @@
+{
+	"root": true,
+	"extends": "eslint-config-vipul-base",
+	"ignorePatterns": ["/dist/"],
+	"rules": {
+		// Overrides
+		"no-tabs": "off",
+		"camelcase": [
+			"error",
+			{
+				"properties": "never",
+				"ignoreDestructuring": true,
+				"allow": []
+			}
+		],
+		// "multiline-comment-style": ["error", "starred-block"],
+		"no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "^_",
+				"varsIgnorePattern": "^_",
+				"caughtErrorsIgnorePattern": "^_"
+			}
+		]
+	},
+
+	// Rules limited to specific locations
+	"overrides": [
+		{
+			"files": ["**/*.test.js"],
+			"env": {
+				"jest": true
+			}
+		}
+	]
+}

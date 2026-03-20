@@ -1,0 +1,65 @@
+FROM node:22-slim
+
+# Set working directory
+WORKDIR /app
+
+# Accept build argument for npm_token
+ARG NPM_TOKEN
+
+# Copy only package files first for better caching
+COPY package*.json ./
+
+# Update system and install required packages
+RUN apt-get update && apt-get install -y \
+    make \
+    python3 \
+    g++ \
+    build-essential \
+    imagemagick \
+    graphicsmagick \
+    ghostscript \
+    git \
+    bash \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Doppler CLI
+RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg && \
+    curl -sLf --retry 3 --tlsv1.2 --proto "=https" 'https://packages.doppler.com/public/cli/gpg.DE2A7741A397C129.key' | gpg --dearmor -o /usr/share/keyrings/doppler-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/doppler-archive-keyring.gpg] https://packages.doppler.com/public/cli/deb/debian any-version main" | tee /etc/apt/sources.list.d/doppler-cli.list && \
+    apt-get update && \
+    apt-get -y install doppler && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create .npmrc file with authentication
+RUN if [ -n "$NPM_TOKEN" ]; then \
+        echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" > .npmrc; \
+        echo "@joinworth:registry=https://npm.pkg.github.com" >> .npmrc; \
+        echo "always-auth=true" >> .npmrc; \
+    else \
+        echo "Warning: No NPM_TOKEN provided, private packages may fail to install"; \
+    fi
+
+# Install node dependencies (no postinstall scripts)
+RUN npm ci --ignore-scripts --no-audit --no-fund
+
+# Rebuild native modules that require compilation
+RUN npm rebuild @confluentinc/kafka-javascript || npm rebuild
+
+# Install system dependencies for Playwright
+RUN npx playwright install-deps
+
+# Install Playwright browsers
+RUN npx playwright install chromium
+
+# Copy all source files
+COPY . .
+
+# Expose port
+EXPOSE 3002
+EXPOSE 9229
+
+# Start the app with migrations
+CMD ["doppler", "run", "--", "sh", "-c", "npm run migrate:up && npm run dev"]
+
+# Comment above line and uncomment below if you would like to run without Doppler and a .env.local file
+# CMD ["sh", "-c", "npm run migrate:up && npm run dev"]

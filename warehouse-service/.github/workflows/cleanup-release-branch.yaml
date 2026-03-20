@@ -1,0 +1,54 @@
+name: Cleanup Old Release Branches
+on:
+  schedule:
+    - cron: '0 0 * * 0' # Runs weekly on Sunday at midnight
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # Fetch all history to check branch dates
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+    - name: Set up Git
+      run: |
+        git config user.name "GitHub Actions"
+        git config user.email "actions@github.com"
+
+    - name: Delete old release branches
+      run: |
+        # Get the current date in seconds since epoch
+        current_date=$(date +%s)
+
+        # Calculate the cutoff date (20 days ago) in seconds
+        cutoff_seconds=$((20 * 24 * 60 * 60))
+        cutoff_date=$((current_date - cutoff_seconds))
+
+        echo "Current date: $(date -d @$current_date)"
+        echo "Cutoff date: $(date -d @$cutoff_date)"
+
+        # Get all remote branches that start with 'release/'
+        git fetch origin
+        branches=$(git branch -r | grep 'origin/release/' | sed 's/origin\///')
+
+        for branch in $branches; do
+          # Get the commit date of the latest commit in seconds since epoch
+          branch_date=$(git log -1 --format="%ct" origin/$branch)
+          branch_date_human=$(git log -1 --format="%cd" origin/$branch)
+
+          echo "Branch: $branch, Last commit date: $branch_date_human"
+
+          # Compare branch date with cutoff date
+          if [ $branch_date -lt $cutoff_date ]; then
+            echo "Branch $branch is older than 20 days. Deleting..."
+            git push origin --delete $branch
+          else
+            echo "Branch $branch is newer than 20 days. Keeping..."
+          fi
+        done

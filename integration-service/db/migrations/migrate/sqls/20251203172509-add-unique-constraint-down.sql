@@ -1,0 +1,7 @@
+ALTER TABLE integration_data.payment_processor_merchant_profiles
+DROP CONSTRAINT uniq_business_platform;
+
+ALTER TABLE integration_data.payment_processor_accounts
+DROP CONSTRAINT uniq_account_platform;
+
+DROP INDEX IF EXISTS integration_data.uq_processor_accounts_platform_profile;

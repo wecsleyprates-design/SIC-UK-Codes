@@ -1,0 +1,2 @@
+/* Add Constraint Back In -- Caused issues with Middesk code */
+ALTER TABLE integration_data.business_entity_verification ADD CONSTRAINT business_entity_verification_external_id_key UNIQUE (external_id);

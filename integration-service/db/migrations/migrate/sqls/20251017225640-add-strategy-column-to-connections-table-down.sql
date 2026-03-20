@@ -1,0 +1,1 @@
+ALTER TABLE integrations.data_connections DROP COLUMN strategy;

@@ -1,0 +1,148 @@
+name: PR Title Validation
+permissions:
+  contents: write
+  pull-requests: write
+on:
+  pull_request:
+    types: [edited, opened, synchronize, reopened, ready_for_review]
+jobs:
+  verify_title_format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = context.payload.pull_request.title;
+            const baseBranch = context.payload.pull_request.base.ref;
+            const prNumber = context.payload.pull_request.number;
+            
+            // Conventional commit types (https://github.com/conventional-changelog/commitlint/?tab=readme-ov-file#what-is-commitlint)
+            const conventionalTypes = ['build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test'];
+            const typePattern = new RegExp(`^[A-Z]+-[0-9]+:\\s*(${conventionalTypes.join('|')})(\\(.+\\))?:\\s*.+`);
+            const typePatternNoJira = new RegExp(`(${conventionalTypes.join('|')})(\\(.+\\))?:\\s*.+`);
+            
+            const hasJIRA = /^[A-Z]+-[0-9]+:/.test(title);
+            const hasNOJIRA = /#(NO_JIRA)/.test(title);
+            const hasConventionalType = typePattern.test(title) || (hasNOJIRA && typePatternNoJira.test(title));
+            const hasFF = /#(LIVE|FLAG)/.test(title);
+            const isReleaseBranch = /^release\/.+/.test(baseBranch);
+            const hasObjective = /#(HOTFIX|FAST|REGULAR)/.test(title);
+            
+            const commentIdentifier = '<!-- PR_TITLE_VALIDATION_COMMENT -->';
+            let validationErrors = [];
+            
+            // Check JIRA requirement
+            if (!hasJIRA && !hasNOJIRA) {
+              validationErrors.push('❌ Title must begin with a JIRA ID (e.g., "WIN-123:") or contain #NO_JIRA');
+            }
+            
+            // Check conventional commit type
+            if (!hasConventionalType) {
+              validationErrors.push(`❌ Title must include a conventional commit type: ${conventionalTypes.join(', ')}`);
+            }
+            
+            // Check feature flag tag
+            if (!hasFF) {
+              validationErrors.push('❌ Title must include #FLAG (if changes can be disabled by feature flag) or #LIVE (otherwise)');
+            }
+            
+            // Check release branch requirements
+            if (isReleaseBranch && !hasObjective) {
+              validationErrors.push(`❌ PRs targeting release branch "${baseBranch}" must contain #HOTFIX or #FAST`);
+            }
+            
+            // Get existing comments to find and replace our comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+            });
+            
+            const existingComment = comments.find(comment => 
+              comment.body.includes(commentIdentifier)
+            );
+            
+            let commentBody;
+            
+            if (validationErrors.length > 0) {
+              // Create error comment
+              commentBody = `${commentIdentifier}
+              ## 🚨 PR Title Validation Failed
+                          
+              **Current title:** \`${title}\`
+                          
+              **Issues found:**
+              ${validationErrors.map(error => `- ${error}`).join('\n')}
+                          
+              **Expected format:**
+              - \`JIRA-123: feat: Description #FLAG\` or \`JIRA-123: fix: Description #LIVE\`
+              - With optional scope: \`JIRA-123: feat(auth): Description #FLAG\`
+              - Or use \`#NO_JIRA\`: \`feat: Description #NO_JIRA #LIVE\`
+              - For release branches: include \`#HOTFIX\` or \`#FAST\`
+              
+              **Valid types:** ${conventionalTypes.join(', ')}
+              
+              📚 [Conventional Commits Reference](https://github.com/conventional-changelog/commitlint/?tab=readme-ov-file#what-is-commitlint)
+                          
+              Please edit the PR title to match the expected format. This check will automatically re-run when the title is updated.`;
+              
+              // Fail the workflow
+              core.setFailed('PR title validation failed. See comment for details.');
+            } else {
+              // Create success comment
+              commentBody = `${commentIdentifier}
+              ## ✅ PR Title Validation Passed
+                          
+              **Title:** \`${title}\`
+                          
+              All validation checks passed! 🎉`;
+            }
+            
+            if (existingComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: commentBody,
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                body: commentBody,
+              });
+            }
+            
+            // Add JIRA link as a comment if JIRA ID is present
+            if (hasJIRA) {
+              // Extract JIRA ID using a match
+              const jiraIdMatch = title.match(/^([A-Z]+-[0-9]+):?/);
+              if (jiraIdMatch) {
+                const jiraId = jiraIdMatch[1];
+                const jiraBaseUrl = 'https://worth-ai.atlassian.net/browse/';
+                const jiraLink = `${jiraBaseUrl}${jiraId}`;
+                
+                // Check if we already added a comment for this JIRA ID
+                const jiraCommentExists = comments.find(comment =>
+                  comment.user.type === 'Bot' &&
+                  comment.body.includes(jiraId)
+                );
+                
+                if (!jiraCommentExists) {
+                  // Create a new comment with the JIRA link
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: prNumber,
+                    body: `📎 JIRA ticket: [${jiraId}](${jiraLink})`
+                  });
+                  core.info(`Added JIRA link comment for ticket ${jiraId}`);
+                } else {
+                  core.info(`JIRA link comment already exists for ticket ${jiraId}`);
+                }
+              }
+            }

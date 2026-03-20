@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS public.rel_invites_info_requests CASCADE;

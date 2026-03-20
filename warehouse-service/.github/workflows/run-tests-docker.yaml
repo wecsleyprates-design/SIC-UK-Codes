@@ -1,0 +1,92 @@
+name: Run Tests with Docker Compose
+
+on: [push]
+
+env:
+  INTEGRATION_BUCKET: ${{ vars.INTEGRATION_BUCKET }}
+
+jobs:
+  run-tests:
+    environment: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify Docker Compose
+        run: docker compose version
+
+      - name: Build and start services
+        env:
+          CONFIG_REDIS_URL: redis://redis:6379/0
+          CONFIG_REDIS_HOST: redis
+          CONFIG_REDIS_PORT: 6379
+          CONFIG_REDIS_EC_CLUSTER: ""
+          CONFIG_REDIS_DISABLE_TLS: "false"
+          CONFIG_REDIS_DISABLE_TLS_REJECT_UNAUTHORIZED: "true"
+          CONFIG_REDIS_RECONNECT_MAX_WAIT: "2000"
+          CONFIG_DB_HOST: postgres
+          CONFIG_DB_PORT: "5432"
+          CONFIG_DB_NAME: postgres
+          CONFIG_DB_USER: admin
+          CONFIG_DB_PASSWORD: admin
+          CONFIG_KAFKA_GROUP_ID: "warehouse-service"
+          CONFIG_KAFKA_CLIENT_ID: ""
+          CONFIG_KAFKA_SSL_ENABLED: "false"
+          CONFIG_KAFKA_BROKERS: broker:9092
+          CONFIG_KAFKA_SASL_USERNAME: ""
+          CONFIG_KAFKA_SASL_PASSWORD: ""
+          CONFIG_AWS_SES_REGION: us-east-1
+          CONFIG_AWS_COGNITO_REGION: us-east-1
+          SIMILARITY_MODEL_PATH: /code/artifacts/xgboost.json
+          DE_BUCKET: worthai-data-exchange
+          DS_BUCKET: worthai-data-science
+          CONFIG_AWS_REDSHIFT_URL: worthai-prod-redshift-warehouse.808338307022.us-east-1.redshift-serverless.amazonaws.com
+          CONFIG_AWS_REDSHIFT_PORT: "5439"
+          CONFIG_AWS_REDSHIFT_DB: dev
+          CONFIG_AWS_REDSHIFT_USER: warehouse_dev
+          CONFIG_AWS_REDSHIFT_IAM_USER: worthai-dataplatform-service-user
+          CONFIG_AWS_REDSHIFT_PASSWORD: ""
+          CONFIG_AWS_REDSHIFT_WORKGROUP_NAME: worthai-prod-redshift-warehouse
+          AWS_ACCESS_KEY_ID: ""
+          AWS_SECRET_ACCESS_KEY: ""
+          AWS_DEFAULT_REGION: us-east-1
+          CONFIG_WORTH_ADMIN_USER_POOL_ID: ""
+          CONFIG_CUSTOMER_USER_POOL_ID: ""
+          CONFIG_APPLICANT_USER_POOL_ID: ""
+          CONFIG_WORTH_ADMIN_CLIENT_ID: ""
+          CONFIG_CUSTOMER_CLIENT_ID: ""
+          CONFIG_APPLICANT_CLIENT_ID: ""
+          CONFIG_INTEGRATION_SERVICE_API_URL: ""
+          CONFIG_INTEGRATION_SERVICE_API_KEY: ""
+          CONFIG_SLACK_NOTIFICATION_CHANNEL: "bot-test-channel"
+          CONFIG_SLACK_TOKEN: ${{ secrets.CONFIG_SLACK_TOKEN }}
+        run: |
+          set -euxo pipefail
+          docker compose up -d --build --wait
+          docker compose ps -a
+
+      - name: Run tests
+        run: |
+          set -euxo pipefail
+          docker compose exec -T warehouse-api pytest -q
+
+      - name: Dump docker compose logs (on failure)
+        if: failure()
+        run: |
+          set -euxo pipefail
+          docker compose ps -a || true
+          docker compose logs --no-color --timestamps --tail=500 || true
+
+          CID="$(docker compose ps -q warehouse-celery-beat || true)"
+          echo "warehouse-celery-beat CID=$CID"
+          if [ -n "$CID" ]; then
+            docker inspect "$CID" --format \
+              'Status={{.State.Status}} ExitCode={{.State.ExitCode}} OOMKilled={{.State.OOMKilled}} Error={{.State.Error}} FinishedAt={{.State.FinishedAt}}' || true
+          fi
+
+      - name: Tear down services
+        if: always()
+        run: |
+          docker compose down -v

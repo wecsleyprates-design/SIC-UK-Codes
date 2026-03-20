@@ -1,0 +1,76 @@
+
+name: PR title has JIRA ID and LaunchDarkly tag
+
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  pull_request:
+    types: [edited, opened, synchronize, reopened, ready_for_review]
+
+jobs:
+  verify_title_format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const title = context.payload.pull_request.title;
+            const baseBranch = context.payload.pull_request.base.ref; // Target branch
+            const hasJIRA = /^[A-Z]+-[0-9]+:? /.test(title);
+            const hasNOJIRA = /#(NO_JIRA)/.test(title);
+            const hasFF = /#(LIVE|FLAG)/.test(title);
+            const isReleaseBranch = /^release\/.+/.test(baseBranch);
+            const hasObjective = /#(HOTFIX|FAST|REGULAR)/.test(title);
+
+            if ((!hasJIRA && !hasNOJIRA) || !hasFF) {
+              core.setFailed(`Pull request titles must either begin with a JIRA ID (e.g., "WIN-NNN") or contain #NO_JIRA if not linked to a JIRA ID. Additionally, the title should include #FLAG if the changes can be disabled by a feature flag, or #LIVE otherwise.`);
+              core.info(`The actual title found was "${title}".`);
+              core.info('Edit the PR title to match the expected format. This action will automatically re-run whenever an edit is made.');
+            }
+
+            // If it's a release branch, check for #HOTFIX or #FAST in the title
+            if (isReleaseBranch && !hasObjective) {
+              core.setFailed(`Pull requests targeting a release branch ("${baseBranch}") must contain #HOTFIX or #FAST in the title.`);
+              core.info(`The actual title found was "${title}".`);
+              core.info('Edit the PR title to include #HOTFIX or #FAST. This action will automatically re-run whenever an edit is made.');
+            }
+
+            // Add JIRA link as a comment if JIRA ID is present
+            if (hasJIRA) {
+              // Extract JIRA ID using a match
+              const jiraIdMatch = title.match(/^([A-Z]+-[0-9]+):?/);
+              if (jiraIdMatch) {
+                const jiraId = jiraIdMatch[1];
+                const jiraBaseUrl = 'https://worth-ai.atlassian.net/browse/';
+                const jiraLink = `${jiraBaseUrl}${jiraId}`;
+
+                // Check if we already added a comment for this JIRA ID
+                const { data: comments } = await github.rest.issues.listComments({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                });
+
+                const botComment = comments.find(comment =>
+                  comment.user.type === 'Bot' &&
+                  comment.body.includes(jiraId)
+                );
+
+                if (!botComment) {
+                  // Create a new comment with the JIRA link
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: context.issue.number,
+                    body: `📎 JIRA ticket: [${jiraId}](${jiraLink})`
+                  });
+
+                  core.info(`Added JIRA link comment for ticket ${jiraId}`);
+                } else {
+                  core.info(`JIRA link comment already exists for ticket ${jiraId}`);
+                }
+              }
+            }

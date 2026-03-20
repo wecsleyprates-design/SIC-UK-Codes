@@ -1,0 +1,9 @@
+DROP TABLE integration_data.payment_processor_merchant_profiles;
+
+DROP INDEX IF EXISTS idx_merchant_profile_account_id;
+
+DROP INDEX IF EXISTS idx_merchant_profile_platform_id_customer_id;
+
+DROP INDEX IF EXISTS idx_merchant_profile_business_id;
+
+DROP TRIGGER IF EXISTS update_merchant_profiles_timestamp ON integration_data.payment_processor_merchant_profiles;

@@ -1,0 +1,32 @@
+FROM node:18.18.1-alpine
+
+# Accept build argument for npm_token
+ARG NPM_TOKEN
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN apk update && \
+    apk upgrade && \
+    apk add make
+
+# Create .npmrc file with authentication
+RUN if [ -n "$NPM_TOKEN" ]; then \
+    echo "//npm.pkg.github.com/:_authToken=$NPM_TOKEN" > .npmrc; \
+    echo "@joinworth:registry=https://npm.pkg.github.com" >> .npmrc; \
+    echo "always-auth=true" >> .npmrc; \
+else \
+    echo "Warning: No NPM_TOKEN provided, private packages may fail to install"; \
+fi
+
+RUN npm ci --ignore-scripts
+
+COPY ./db ./db
+COPY .db-migraterc .db-migraterc
+
+CMD [ "npm", "run", "migrate:up" ]

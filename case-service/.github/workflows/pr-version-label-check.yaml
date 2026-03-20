@@ -1,0 +1,58 @@
+name: PR Version Label Check
+
+# This workflow enforces that PRs merged to main have exactly one version label.
+# The label determines how the version will be bumped when the PR is merged.
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+    branches:
+      - main
+
+jobs:
+  check-version-label:
+    name: Verify Version Label
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for exactly one version label
+        env:
+          PR_LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          echo "PR Labels: $PR_LABELS"
+
+          # Count version labels
+          MAJOR_COUNT=$(echo "$PR_LABELS" | grep -o "major" | wc -l)
+          MINOR_COUNT=$(echo "$PR_LABELS" | grep -o "minor" | wc -l)
+          PATCH_COUNT=$(echo "$PR_LABELS" | grep -o "patch" | wc -l)
+          TOTAL=$((MAJOR_COUNT + MINOR_COUNT + PATCH_COUNT))
+
+          echo "Version labels found: $TOTAL (major: $MAJOR_COUNT, minor: $MINOR_COUNT, patch: $PATCH_COUNT)"
+
+          if [ $TOTAL -eq 0 ]; then
+            echo "❌ ERROR: No version label found!"
+            echo ""
+            echo "Please add exactly ONE of these labels to your PR:"
+            echo ""
+            echo "  🐛 patch  - Bug fixes, small tweaks, documentation updates"
+            echo "             Examples: Fixing a bug, updating docs, refactoring without API changes"
+            echo ""
+            echo "  ✨ minor  - New features (backward compatible)"
+            echo "             Examples: Adding new endpoints, new optional fields, new features"
+            echo "             Note: Existing functionality must continue to work"
+            echo ""
+            echo "  🚀 major  - Breaking changes"
+            echo "             Examples: Removing endpoints, changing required fields,"
+            echo "             changing response formats, removing functionality"
+            echo ""
+            echo "When your PR is merged to main, a new version tag will be created"
+            echo "automatically based on this label, and it will be deployed to dev."
+            exit 1
+          elif [ $TOTAL -gt 1 ]; then
+            echo "❌ ERROR: Multiple version labels found!"
+            echo ""
+            echo "Please use exactly ONE version label on your PR."
+            echo "Remove the extra label(s) and keep only one: major, minor, or patch"
+            exit 1
+          fi
+
+          echo "✅ Version label check passed!"

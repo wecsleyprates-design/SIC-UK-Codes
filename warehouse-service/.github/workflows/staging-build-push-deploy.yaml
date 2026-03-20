@@ -1,0 +1,200 @@
+name: Staging:Build, Push & Create deploy PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      refToBuild:
+        description: "Branch, tag or commit SHA1 to build"
+        required: true
+        type: string
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/**'
+
+jobs:
+  build:
+    name: Build and Push
+    runs-on: ubuntu-latest
+    environment: staging
+
+    outputs:
+      IMAGE_TAG: ${{ steps.capture-image-tag.outputs.IMAGE_TAG }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.refToBuild }}
+
+      # Get Git vals for image tag format
+      - name: Get Git Branch
+        run: echo "BRANCH=`git rev-parse --abbrev-ref HEAD | sed -r 's/HEAD/pr/g'`" >> $GITHUB_ENV
+
+      - name: Get Git Commit SHA (short)
+        run: echo "SHA_SHORT=`git rev-parse --short HEAD`" >> $GITHUB_ENV
+
+      - name: Check Branch and Commit
+        run: echo running on branch ${{ env.BRANCH }} with commit ${{ env.SHA_SHORT }}
+
+      - name: Capture Image Tag
+        id: capture-image-tag
+        run: |
+          # Check if triggered by a tag
+          if [ "${{ github.ref_type }}" = "tag" ]; then
+            TAG="${{ github.ref_name }}_${{ env.SHA_SHORT }}"
+          else
+            # Replace / with - in branch names for Docker compatibility
+            SAFE_BRANCH=$(echo "${{ env.BRANCH }}" | sed 's/\//-/g')
+            TAG="${SAFE_BRANCH}_${{ env.SHA_SHORT }}"
+          fi
+          echo "The image tag is $TAG"
+          echo "IMAGE_TAG=$TAG" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
+          aws-region: us-east-1
+
+      - name: Login to AWS ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Build Image for Migration Job
+      # - name: Build, tag, and push migration image to AWS ECR
+      #   id: build-migration-job-image
+      #   env:
+      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+      #     ECR_MIGRATION_REPOSITORY: ${{ vars.ECR_MIGRATION_REPOSITORY}}
+      #     IMAGE_TAG: ${{ env.IMAGE_TAG }}
+      #   run: |
+      #     # Build a docker container and push it to ECR
+      #     docker build -t $ECR_REGISTRY/$ECR_MIGRATION_REPOSITORY:$IMAGE_TAG -f ./Dockerfile-migrations .
+      #     echo "Pushing image to ECR..."
+      #     docker push $ECR_REGISTRY/$ECR_MIGRATION_REPOSITORY:$IMAGE_TAG
+      #     echo "name=image::$ECR_REGISTRY/$ECR_MIGRATION_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      # Build Image for service
+      - name: Build, tag, and push service image to AWS ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY}}
+          IMAGE_TAG: ${{ env.IMAGE_TAG }}
+        run: |
+          # Build a docker container and push it to ECR
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./Dockerfile .
+          echo "Pushing image to ECR..."
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+  deploy:
+    name: Create PR on deploy repo
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      GITHUB_USER: "patjoinworth"
+      GITHUB_USER_EMAIL: "github.pat@joinworth.com"
+      IMAGE_TAG: ${{ needs.build.outputs.IMAGE_TAG }}
+      COMMIT_MSG_UPDATE: ${{ format('Auto update tag staging :{0}', needs.build.outputs.IMAGE_TAG) }}
+      DEPLOY_REPO: "warehouse-service-deploy"
+      TARGET_FILE: "staging/kustomization.yaml"
+      TARGET_BRANCH: ${{ format('staging-tag-update-{0}', needs.build.outputs.IMAGE_TAG) }}
+    steps:
+      - name: Create new branch
+        run: |
+          git clone https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/joinworth/${{ env.DEPLOY_REPO }}.git
+          echo "Cloned ${{ env.DEPLOY_REPO }} repository successfully."
+          cd ${{ env.DEPLOY_REPO }}
+          echo "Creating branch ${{ env.TARGET_BRANCH }} . . ."
+          git checkout -b ${{ env.TARGET_BRANCH }}
+          git config --global user.email $GITHUB_USER_EMAIL
+          git config --global user.name $GITHUB_USER
+          git push origin ${{ env.TARGET_BRANCH }}
+
+      - name: checkout deploy repo
+        uses: actions/checkout@v4
+        with:
+          repository: joinworth/${{ env.DEPLOY_REPO }}
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: ${{ env.DEPLOY_REPO }}
+          ref: ${{ env.TARGET_BRANCH }}
+
+      - name: check staging image version
+        run: |
+          yq eval '.images[0].newTag' "$DEPLOY_REPO/$TARGET_FILE"
+          echo "### $TARGET_FILE: "
+          cat "$DEPLOY_REPO/$TARGET_FILE"
+
+      - name: Get Image Tag from File
+        run: |
+          echo "IMAGE_TAG=${{ env.IMAGE_TAG }}" >> $GITHUB_ENV
+
+      - name: Change staging image
+        run: |
+          yq eval --inplace ".images[0].newTag=\"${{ needs.build.outputs.IMAGE_TAG }}\"" "$DEPLOY_REPO/$TARGET_FILE"
+          echo "### Updated $TARGET_FILE: "
+          cat "$DEPLOY_REPO/$TARGET_FILE"
+
+      - name: commit changes and create PR
+        run: |
+          git config --global user.email $GITHUB_USER_EMAIL
+          git config --global user.name $GITHUB_USER
+          cd $DEPLOY_REPO
+          echo "### Checking status prior..."
+          git status
+          git add .
+          echo "### Added files. Commiting..."
+          git commit -m "$COMMIT_MSG_UPDATE"
+          git status
+          echo "### Checking diff..."
+          git diff origin/$TARGET_BRANCH $TARGET_FILE
+          git push
+
+          # Store the PAT in a file that can be accessed by the
+          # GitHub CLI.
+          echo "${{ secrets.PERSONAL_ACCESS_TOKEN }}" > token.txt
+
+          # Authorize GitHub CLI for the current repository and
+          # create a pull-requests containing the updates.
+          gh auth login --with-token < token.txt
+          gh pr create \
+            --body "Tag update for deployment - Created by Github Action
+                    Triggered by: ${{ github.actor }}" \
+            --title "$COMMIT_MSG_UPDATE by ${{ github.actor }}" \
+            --head "$TARGET_BRANCH" \
+            --base "main"
+          # Get PR URL
+          PR_URL=$(gh pr view --json url -q ".url")
+          echo "Pull Request created: $PR_URL"
+          echo "${{ secrets.PERSONAL_ACCESS_TOKEN_AUTOAPPROVEBOT }}" > token.txt
+          gh auth login --with-token < token.txt
+          # Approve the PR using GITHUB_TOKEN
+          gh pr review --approve "$PR_URL"
+          # Wait for checks to complete before merging
+          echo "Waiting for status checks to complete..."
+          sleep 5
+
+          # Check PR status and retry merge
+          MAX_RETRIES=5
+          RETRY_COUNT=0
+
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            if gh pr merge --squash --auto "$PR_URL"; then
+              echo "PR merged successfully"
+              break
+            else
+              echo "Merge failed, retrying in 5 seconds... (Attempt $((RETRY_COUNT + 1))/$MAX_RETRIES)"
+              sleep 5
+              RETRY_COUNT=$((RETRY_COUNT + 1))
+            fi
+          done
+
+          if [ $RETRY_COUNT -eq $MAX_RETRIES ]; then
+            echo "Failed to merge after $MAX_RETRIES attempts"
+            exit 1
+          fi

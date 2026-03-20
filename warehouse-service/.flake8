@@ -1,0 +1,5 @@
+[flake8]
+exclude = .git,__pycache__,.tox,.eggs,*.egg,__cache__,venv,.circleci,migrations/*
+show-source = TRUE
+max-line-length = 100
+extend-ignore=E203

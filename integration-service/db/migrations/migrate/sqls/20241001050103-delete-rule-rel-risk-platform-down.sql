@@ -1,0 +1,7 @@
+ALTER TABLE IF EXISTS rel_risk_alert_failure_platforms DROP CONSTRAINT IF EXISTS rel_risk_alert_failure_platforms_core_integrations_platforms_fk;
+
+ALTER TABLE IF EXISTS rel_risk_alert_failure_platforms ADD CONSTRAINT rel_risk_alert_failure_platforms_core_integrations_platforms_fk FOREIGN KEY (platform_id) REFERENCES integrations.core_integrations_platforms(id);
+
+ALTER TABLE IF EXISTS rel_risk_alert_failure_platforms DROP CONSTRAINT IF EXISTS rel_risk_alert_failure_platforms_data_risk_alerts_fk;
+
+ALTER TABLE IF EXISTS rel_risk_alert_failure_platforms ADD CONSTRAINT rel_risk_alert_failure_platforms_data_risk_alerts_fk FOREIGN KEY (risk_alert_id) REFERENCES public.data_risk_alerts(id);

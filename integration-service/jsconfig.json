@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"module": "ES6",
+		"allowUnusedLabels": false,
+		"moduleResolution": "node",
+		"outDir": "dist",
+		"paths": {
+			"#lib/*": ["./lib/*"],
+			"#clients/*": ["./src/clients/*"],
+			"#configs/*": ["./src/configs/*"],
+			"#core/*": ["./src/core/*"],
+			"#constants/*": ["./src/constants/*"],
+			"#decorators/*": ["./src/decorators/*"],
+			"#helpers/*": ["./src/helpers/*"],
+			"#messaging/*": ["./src/messaging/*"],
+			"#middlewares/*": ["./src/middlewares/*"],
+			"#models/*": ["./src/models/*"],
+			"#utils/*": ["./src/utils/*"],
+			"#common/*": ["./src/common/*"],
+			"#api/*": ["./src/api/*"],
+			"#workers/*": ["./src/workers/*"]
+		}
+	},
+	"exclude": ["node_modules"]
+}

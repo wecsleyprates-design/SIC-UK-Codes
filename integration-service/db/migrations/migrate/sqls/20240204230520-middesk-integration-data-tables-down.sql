@@ -1,0 +1,17 @@
+DROP TABLE IF EXISTS integration_data.business_entity_review_task;
+DROP TABLE IF EXISTS integration_data.business_entity_registration;
+DROP TABLE IF EXISTS integration_data.business_entity_address_source;
+-- drop this table last as it has foreign key constraints to the other tables
+DROP TABLE IF EXISTS integration_data.business_entity_verification;
+
+DROP INDEX IF EXISTS integration_data.idx_business_entity_verification_task_id;
+DROP INDEX IF EXISTS integration_data.idx_business_entity_review_verification_id;
+DROP INDEX IF EXISTS integration_data.idx_business_entity_registration_verification_id;
+DROP INDEX IF EXISTS integration_data.idx_business_entity_address_source_verification_id;
+
+DROP FUNCTION IF EXISTS update_updated_at_column;
+
+DROP TRIGGER IF EXISTS update_business_entity_verification_timestamp ON integration_data.business_entity_verification;
+DROP TRIGGER IF EXISTS update_business_entity_review_task_timestamp ON integration_data.business_entity_review_task;
+DROP TRIGGER IF EXISTS update_business_entity_registration_timestamp ON integration_data.business_entity_registration;
+DROP TRIGGER IF EXISTS update_business_entity_address_source_timestamp ON integration_data.business_entity_address_source;

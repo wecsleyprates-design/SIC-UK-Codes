@@ -1,0 +1,3 @@
+DROP TRIGGER IF EXISTS update_rel_task_bank_account_updated_at ON integration_data.rel_task_bank_account;
+
+DROP TABLE IF EXISTS integration_data.rel_task_bank_account;

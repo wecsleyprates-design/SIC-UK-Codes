@@ -1,0 +1,1 @@
+INSERT INTO core_case_statuses(id, code, label) VALUES (12, 'SUBMITTED', 'SUBMITTED');

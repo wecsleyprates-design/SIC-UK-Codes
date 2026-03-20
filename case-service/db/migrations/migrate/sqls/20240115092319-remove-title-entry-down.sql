@@ -1,0 +1,1 @@
+INSERT INTO core_owner_titles (id, title) VALUES (4, 'PARTNER');

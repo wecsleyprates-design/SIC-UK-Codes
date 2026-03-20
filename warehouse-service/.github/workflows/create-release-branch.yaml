@@ -1,0 +1,122 @@
+name: Create Release Branch
+on:
+  workflow_dispatch:
+    inputs:
+      branchName:
+        description: 'Name of the release branch to create'
+        required: true
+        type: string
+      tagOption:
+        description: 'Tag to create release branch from'
+        required: true
+        type: choice
+        options:
+          - latest-prod-tag
+          - custom
+        default: latest-prod-tag
+      customTagName:
+        description: 'Custom tag name (only required if "custom" is selected)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+  deployments: read
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+    - name: Setup Git
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: Validate custom tag input
+      if: inputs.tagOption == 'custom'
+      run: |
+        if [ -z "${{ inputs.customTagName }}" ]; then
+          echo "❌ Error: Custom tag name is required when 'custom' option is selected"
+          exit 1
+        fi
+
+    - name: Get latest production deployment tag
+      if: inputs.tagOption == 'latest-prod-tag'
+      id: latest-prod-tag
+      run: |
+        # Get latest production deployment using GitHub API
+        DEPLOYMENT_DATA=$(curl -s \
+          -H "Authorization: Bearer ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
+          -H "Accept: application/vnd.github+json" \
+          "https://api.github.com/repos/${{ github.repository }}/deployments?environment=production&per_page=1")
+
+        # Check if any deployments exist
+        if [ "$(echo "$DEPLOYMENT_DATA" | jq length)" -eq 0 ]; then
+          echo "❌ Error: No production deployments found"
+          exit 1
+        fi
+
+        # Extract the ref (which could be a tag, branch, or commit SHA)
+        DEPLOYMENT_REF=$(echo "$DEPLOYMENT_DATA" | jq -r '.[0].ref')
+
+        if [ -z "$DEPLOYMENT_REF" ] || [ "$DEPLOYMENT_REF" == "null" ]; then
+          echo "❌ Error: Could not extract ref from latest deployment"
+          exit 1
+        fi
+
+        # Check if the ref is a tag (tags are prefixed with refs/tags/ in git)
+        if git rev-parse --verify "refs/tags/$DEPLOYMENT_REF" >/dev/null 2>&1; then
+          DEPLOYMENT_TAG="$DEPLOYMENT_REF"
+        else
+          echo "❌ Error: Deployment ref '$DEPLOYMENT_REF' does not exist in repository"
+          exit 1
+        fi
+
+        echo "prod_tag=$DEPLOYMENT_TAG" >> $GITHUB_OUTPUT
+        echo "✅ Latest production deployment tag found: $DEPLOYMENT_TAG"
+
+    - name: Set target tag
+      id: target-tag
+      run: |
+        if [ "${{ inputs.tagOption }}" == "latest-prod-tag" ]; then
+          TARGET_TAG="${{ steps.latest-prod-tag.outputs.prod_tag }}"
+        else
+          TARGET_TAG="${{ inputs.customTagName }}"
+        fi
+
+        SANITIZED_TAG_NAME=$(echo "$TARGET_TAG" | tr -d '[:space:]')
+        echo "target_tag=$SANITIZED_TAG_NAME" >> $GITHUB_OUTPUT
+        echo "🎯 Target tag set to: $SANITIZED_TAG_NAME"
+
+    - name: Create release branch from tag
+      run: |
+        SANITIZED_BRANCH_NAME=$(echo "${{ inputs.branchName }}" | tr -d '[:space:]')
+        TARGET_TAG="${{ steps.target-tag.outputs.target_tag }}"
+
+        # Check if tag exists
+        if git rev-parse --verify "refs/tags/$TARGET_TAG" >/dev/null 2>&1; then
+          echo "✅ Tag '$TARGET_TAG' exists"
+
+          # Check if branch exists on remote
+          if git ls-remote --exit-code --heads origin "$SANITIZED_BRANCH_NAME" >/dev/null 2>&1; then
+            echo "❌ Error: Branch '$SANITIZED_BRANCH_NAME' already exists on remote"
+            exit 1
+          fi
+
+          git checkout -b "$SANITIZED_BRANCH_NAME" "refs/tags/$TARGET_TAG"
+          git push origin "$SANITIZED_BRANCH_NAME"
+
+          echo "✅ Successfully created branch '$SANITIZED_BRANCH_NAME' from tag '$TARGET_TAG'"
+
+        else
+          echo "❌ Error: Tag '$TARGET_TAG' does not exist in this repository"
+          exit 1
+        fi

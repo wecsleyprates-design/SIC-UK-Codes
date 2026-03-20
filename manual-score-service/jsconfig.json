@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"module": "ES6",
+		"allowUnusedLabels": false,
+		"moduleResolution": "node",
+		"paths": {
+			"#configs/*": ["./src/configs/*"],
+			"#constants/*": ["./src/constants/*"],
+			"#helpers/*": ["./src/helpers/*"],
+			"#middlewares/*": ["./src/middlewares/*"],
+			"#utils/*": ["./src/utils/*"],
+			"#lib/*": ["./lib/*"],
+			"#common/*": ["./src/common/*"]
+		}
+	},
+	"exclude": ["node_modules"]
+}

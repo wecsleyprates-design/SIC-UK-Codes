@@ -1,0 +1,166 @@
+x-environment-common: &env_common
+  CONFIG_APP_PORT: "8000"
+  ENVIRONMENT: local
+  SUBDOMAIN: worth-ai
+  CONFIG_AWS_REDSHIFT_URL: ${CONFIG_AWS_REDSHIFT_URL}
+  CONFIG_AWS_REDSHIFT_PORT: ${CONFIG_AWS_REDSHIFT_PORT}
+  CONFIG_AWS_REDSHIFT_DB: ${CONFIG_AWS_REDSHIFT_DB}
+  CONFIG_AWS_REDSHIFT_PASSWORD: ${CONFIG_AWS_REDSHIFT_PASSWORD}
+  CONFIG_AWS_REDSHIFT_USER: ${CONFIG_AWS_REDSHIFT_USER}
+  CONFIG_AWS_REDSHIFT_IAM_USER: ${CONFIG_AWS_REDSHIFT_IAM_USER}
+  CONFIG_AWS_REDSHIFT_WORKGROUP_NAME: ${CONFIG_AWS_REDSHIFT_WORKGROUP_NAME}
+  CONFIG_AWS_REDSHIFT_USE_IAM: "false"
+  AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+  AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+  AWS_DEFAULT_REGION: "us-east-1"
+  DS_BUCKET: ${DS_BUCKET}
+  INTEGRATION_BUCKET: ${INTEGRATION_BUCKET}
+  SQLALCHEMY_SILENCE_UBER_WARNING: ${SQLALCHEMY_SILENCE_UBER_WARNING}
+  CONFIG_DB_HOST: postgres
+  CONFIG_DB_PORT: 5432
+  CONFIG_DB_NAME: postgres
+  CONFIG_DB_USER: admin
+  CONFIG_DB_PASSWORD: admin
+  CONFIG_AWS_SES_REGION: us-east-1
+  CONFIG_AWS_COGNITO_REGION: us-east-1
+  CONFIG_KAFKA_GROUP_ID: ${CONFIG_KAFKA_GROUP_ID}
+  CONFIG_KAFKA_CLIENT_ID: ${CONFIG_KAFKA_CLIENT_ID}
+  CONFIG_KAFKA_SSL_ENABLED: 'true'
+  CONFIG_KAFKA_BROKERS: broker:29092
+  CONFIG_KAFKA_CONSUMER_BROKERS: broker:29092
+  CONFIG_KAFKA_SASL_USERNAME: ${CONFIG_KAFKA_SASL_USERNAME}
+  CONFIG_KAFKA_SASL_PASSWORD: ${CONFIG_KAFKA_SASL_PASSWORD}
+  CONFIG_REDIS_URL: redis://redis:6379/0
+  CONFIG_REDIS_HOST: redis
+  CONFIG_REDIS_PORT: ${CONFIG_REDIS_PORT}
+  CONFIG_REDIS_EC_CLUSTER: ${CONFIG_REDIS_EC_CLUSTER}
+  CONFIG_REDIS_PASSWORD: ${CONFIG_REDIS_PASSWORD}
+  CONFIG_REDIS_DISABLE_TLS: "false"
+  CONFIG_REDIS_DISABLE_TLS_REJECT_UNAUTHORIZED: "false"
+  CONFIG_REDIS_RECONNECT_MAX_WAIT: "2000"
+  CONFIG_WORTH_ADMIN_USER_POOL_ID: ${CONFIG_WORTH_ADMIN_USER_POOL_ID}
+  CONFIG_CUSTOMER_USER_POOL_ID: ${CONFIG_CUSTOMER_USER_POOL_ID}
+  CONFIG_APPLICANT_USER_POOL_ID: ${CONFIG_APPLICANT_USER_POOL_ID}
+  CONFIG_WORTH_ADMIN_CLIENT_ID: ${CONFIG_WORTH_ADMIN_CLIENT_ID}
+  CONFIG_CUSTOMER_CLIENT_ID: ${CONFIG_CUSTOMER_CLIENT_ID}
+  CONFIG_APPLICANT_CLIENT_ID: ${CONFIG_APPLICANT_CLIENT_ID}
+  CONFIG_INTEGRATION_SERVICE_API_URL: ${CONFIG_INTEGRATION_SERVICE_API_URL}
+  CONFIG_INTEGRATION_SERVICE_API_KEY: ${CONFIG_INTEGRATION_SERVICE_API_KEY}
+  CONFIG_SLACK_TOKEN: ${CONFIG_SLACK_TOKEN}
+  SIMILARITY_MODEL_PATH: /code/artifacts/xgboost.json
+  DD_SERVICE: warehouse-service
+  DD_ENV: local
+
+x-warehouse-common: &warehouse_common
+  build:
+    context: .
+    dockerfile: Dockerfile
+  environment:
+    <<: *env_common
+  depends_on:
+    - redis
+    - postgres
+    - broker
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    environment:
+      REDIS_PASSWORD: ${CONFIG_REDIS_PASSWORD}
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  broker:
+    image: bitnamilegacy/kafka:latest
+    container_name: broker
+    hostname: broker
+    ports:
+      - 9092:9092
+      - 29092:29092
+    environment:
+      KAFKA_KRAFT_CLUSTER_ID: XqtiA1cQRK2p5RC0OTkFZw
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_PROCESS_ROLES: broker,controller
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@broker:29093
+      KAFKA_CFG_LISTENERS: PLAINTEXT_INTERNAL://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092,CONTROLLER://0.0.0.0:29093
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT_INTERNAL://broker:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT_INTERNAL:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_CFG_INTER_BROKER_LISTENER_NAME: PLAINTEXT_INTERNAL
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_CFG_DEFAULT_REPLICATION_FACTOR: 1
+      KAFKA_CFG_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_CFG_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_CFG_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_CFG_MIN_INSYNC_REPLICAS: 1
+      KAFKA_HEAP_OPTS: "-Xms256m -Xmx256m"
+      ALLOW_PLAINTEXT_LISTENER: "yes"
+      KAFKA_CREATE_TOPICS: "facts.v1:1:1"
+    healthcheck:
+      test: ["CMD-SHELL", "kafka-broker-api-versions.sh --bootstrap-server broker:29092 > /dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "admin"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  warehouse-api:
+    <<: *warehouse_common
+    container_name: warehouse-api
+    # ENABLE FOR LOCAL DEV
+    # volumes:
+    #   - ".:/code"
+    ports:
+      - "1337:1337"
+    entrypoint: hypercorn --bind=0.0.0.0:1337 datapooler.web.app:app --reload --log-level=info --access-logfile -
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+      broker:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  warehouse-worker:
+    <<: *warehouse_common
+    container_name: warehouse-celery-worker
+    entrypoint: celery -A datapooler.adapters.queues.celery:TaskQueue worker --loglevel=info --pool=solo -c 1
+    depends_on:
+      broker:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  warehouse-beat:
+    <<: *warehouse_common
+    container_name: warehouse-celery-beat
+    entrypoint: celery -A datapooler.adapters.queues.celery:TaskQueue beat --loglevel=info
+    depends_on:
+      broker:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+
+  facts-consumer:
+    <<: *warehouse_common
+    container_name: warehouse-facts-consumer
+    entrypoint: datapooler facts consume
+    restart: always

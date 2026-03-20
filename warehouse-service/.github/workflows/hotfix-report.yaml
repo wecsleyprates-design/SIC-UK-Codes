@@ -1,0 +1,116 @@
+name: Quarterly HOTFIX PR Report
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+  workflow_dispatch:
+    inputs:
+      year:
+        description: 'Year to generate report for'
+        required: true
+        type: choice
+        options:
+          - '2025'
+          - '2024'
+          - '2023'
+        default: '2025'
+      quarter:
+        description: 'Quarter to generate report for'
+        required: true
+        type: choice
+        options:
+          - 'Q1'
+          - 'Q2'
+          - 'Q3'
+          - 'Q4'
+        default: 'Q1'
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install PyGithub
+
+      - name: Generate HOTFIX Report and Notify Slack
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_HOTFIX_REPORTS_WEBHOOK_URL }}
+          SELECTED_YEAR: ${{ github.event.inputs.year || '' }}
+          SELECTED_QUARTER: ${{ github.event.inputs.quarter || '' }}
+        run: |
+          cat << 'EOF' > notify_slack.py
+          import os
+          import re
+          import traceback
+          from datetime import datetime, timedelta, timezone
+          from github import Github
+          import requests
+
+          def get_quarter_dates():
+              selected_year = os.environ.get('SELECTED_YEAR')
+              selected_quarter = os.environ.get('SELECTED_QUARTER')
+
+              if selected_year and selected_quarter:
+                  year = int(selected_year)
+                  quarter = int(selected_quarter[1])  # Convert Q1-Q4 to 1-4
+              else:
+                  today = datetime.now(timezone.utc)
+                  year = today.year
+                  quarter = (today.month - 1) // 3 + 1
+
+              quarter_start = datetime(year, (quarter - 1) * 3 + 1, 1, tzinfo=timezone.utc)
+              quarter_end = datetime(year + 1, 1, 1, tzinfo=timezone.utc) - timedelta(days=1) if quarter == 4 else datetime(year, quarter * 3 + 1, 1, tzinfo=timezone.utc) - timedelta(days=1)
+
+              return quarter_start, quarter_end
+
+          def format_pr_data(pr):
+              return f"*{pr.title}*\n> *Date:* {pr.created_at.strftime('%Y-%m-%d')}\n> *Base Branch:* {pr.base.ref}\n> *PR URL:* <{pr.html_url}>\n> *Merge Commit:* <{pr.base.repo.html_url}/commit/{pr.merge_commit_sha}>"
+
+          def send_to_slack(message):
+              webhook_url = os.environ['SLACK_WEBHOOK_URL']
+              payload = {
+                  "text": message,
+                  "mrkdwn": True
+              }
+              response = requests.post(webhook_url, json=payload)
+              if response.status_code != 200:
+                  raise Exception(f"Slack notification failed: {response.status_code}, {response.text}")
+
+          def main():
+              g = Github(os.environ['GITHUB_TOKEN'])
+              repo_name = os.environ['GITHUB_REPOSITORY']
+              quarter_start, quarter_end = get_quarter_dates()
+
+              try:
+                  repo = g.get_repo(repo_name)
+                  all_prs = repo.get_pulls(state='closed', sort='created', direction='desc')
+                  hotfix_prs = [
+                      format_pr_data(pr) for pr in all_prs
+                      if pr.merged and quarter_start <= pr.created_at <= quarter_end and re.match(r"^release/[^/]+$", pr.base.ref) and '#HOTFIX' in pr.title.upper()
+                  ]
+
+                  if hotfix_prs:
+                      message = f"*Quarterly HOTFIX PR Report for {repo_name}*\n*Period:* {quarter_start.strftime('%Y-%m-%d')} to {quarter_end.strftime('%Y-%m-%d')}\n*Total HOTFIX PRs:* {len(hotfix_prs)}\n\n" + "\n\n".join(hotfix_prs)
+                      send_to_slack(message)
+                  else:
+                      send_to_slack(f"No HOTFIX PRs found for {repo_name} during {quarter_start.strftime('%Y-%m-%d')} to {quarter_end.strftime('%Y-%m-%d')}")
+              except Exception as e:
+                  print(f"Error: {e}")
+                  traceback.print_exc()
+
+          if __name__ == "__main__":
+              main()
+          EOF
+
+          python notify_slack.py

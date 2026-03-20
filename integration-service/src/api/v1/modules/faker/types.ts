@@ -1,0 +1,124 @@
+export interface AccountingType {
+  id: string;
+  business_integration_task_id: string;
+  business_id: string;
+  platform_id: number;
+  external_id: string;
+  balance: string | number;
+  category: "liability" | "asset";
+  status: "active" | "not active";
+  account_type: "accounts_receivable" | "accounts_payable";
+  currency: string;
+  created_at: Date;
+  updated_at: Date;
+  start_date: Date;
+  end_date: Date;
+  total_expenses: number,
+  total_assets: string | number;
+  total_equity: string | number;
+  total_liabilities: string | number;
+  assets: Record<string, any>;
+  equity: Record<string, any>;
+  liabilities: Record<string, any>;
+  display_name: string;
+  currencies: string;
+  addresses: {
+    mailing: string[];
+  };
+  starting_balance: number;
+  ending_balance: number;
+  net_flow: number;
+  gross_cash_in: number;
+  gross_cash_out: number;
+  total_operating_activities: number;
+  total_investing_activities: number;
+  total_financing_activities: number;
+  operating_activities: Record<string, any>;
+  investing_activities: Record<string, any>;
+  financing_activities: Record<string, any>;
+  accounting_standard: number;
+  net_income: string | number;
+  total_revenue: string | number;
+  revenue: Record<string, any>;
+  expenses: Record<string, any>;
+  cost_of_sales: Record<string, any>;
+}
+
+export interface PlacesType {
+  id: string;
+  average_rating: number;
+  total_reviews: number;
+  created_at: Date;
+  updated_at: Date;
+  text: string;
+  star_rating: number;
+  review_datetime: Date;
+}
+
+export type TaxFilingRecord = {
+  id: string;
+  business_type: string;
+  business_integration_task_id: string;
+  naics: number;
+  naics_title: string;
+  period: number | string;
+  form: number | string;
+  form_type: string;
+  filing_status: string;
+  adjusted_gross_income: number;
+  total_income: number;
+  total_sales: number;
+  total_compensation: number;
+  total_wages: number;
+  irs_balance: number;
+  lien_balance: number;
+  interest: number;
+  interest_date: string;
+  penalty: number;
+  penalty_date: string;
+  filed_date: string;
+  balance: number;
+  tax_period_ending_date: string;
+  amount_filed: number;
+  cost_of_goods_sold: number;
+  version: number;
+};
+
+export type VerDataRecord = {
+  id: string;
+  business_integration_task_id: string;
+  number_of_business_liens: number;
+  most_recent_business_lien_filing_date: string;
+  most_recent_business_lien_status: string;
+  number_of_bankruptcies: number;
+  most_recent_bankruptcy_filing_date: string;
+  number_of_judgement_fillings: number;
+  most_recent_judgement_filling_date: string;
+  corporate_filing_business_name: string;
+  corporate_filing_filling_date: string;
+  corporate_filing_incorporation_state: string;
+  corporate_filing_corporation_type: string;
+  corporate_filing_resgistration_type: string;
+  corporate_filing_secretary_of_state_status: string;
+  corporate_filing_secretary_of_state_status_date: string;
+  average_rating: number;
+  angi_review_count: number;
+  bbb_review_count: number;
+  google_review_count: number;
+  yelp_review_count: number;
+  healthgrades_review_count: number;
+  vitals_review_count: number;
+  webmd_review_count: number;
+  angi_review_percentage: number;
+  bbb_review_percentage: number;
+  google_review_percentage: number;
+  yelp_review_percentage: number;
+  healthgrades_review_percentage: number;
+  vitals_review_percentage: number;
+  webmd_review_percentage: number;
+  monthly_rating: number;
+  monthly_rating_date: string;
+  created_at: string;
+  updated_at: string;
+  official_website: string;
+};

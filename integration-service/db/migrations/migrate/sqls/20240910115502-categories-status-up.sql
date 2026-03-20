@@ -1,0 +1,26 @@
+CREATE TABLE integrations.rel_platforms_status (
+	platform_id int NOT NULL,
+	risk_alert_status boolean NOT NULL,
+	notification_status boolean NOT NULL,
+	CONSTRAINT rel_platforms_status_core_platforms_fk FOREIGN KEY (platform_id) REFERENCES integrations.core_integrations_platforms(id)
+);
+INSERT INTO integrations.rel_platforms_status (platform_id,risk_alert_status,notification_status) VALUES (1,TRUE,TRUE),
+(2,TRUE,TRUE),
+(3,FALSE,FALSE),
+(4,FALSE,FALSE),
+(5,TRUE,TRUE),
+(6,TRUE,TRUE),
+(7,TRUE,TRUE),
+(8,TRUE,TRUE),
+(9,TRUE,TRUE),
+(10,TRUE,TRUE),
+(11,TRUE,TRUE),
+(12,TRUE,TRUE),
+(13,TRUE,TRUE),
+(14,TRUE,TRUE),
+(16,FALSE,FALSE),
+(15,TRUE,TRUE),
+(18,FALSE,FALSE),
+(17,FALSE,FALSE),
+(19,FALSE,FALSE),
+(20,TRUE,TRUE);

@@ -1,0 +1,1 @@
+alter table onboarding_schema.data_custom_fields drop column customer_access;

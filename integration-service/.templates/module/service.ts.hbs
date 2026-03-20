@@ -1,0 +1,11 @@
+// This is a dummy service. Please edit this service to suit your needs
+// You can add more functions to this service
+import { {{camelCase name}}Repository } from "./repository";
+
+class {{pascalCase name}} {
+    async dummyFunction(params: any, body: any, user: any, query: any): Promise<any> {
+        return { message: "Hello World" };
+    }
+};
+
+export const {{camelCase name}} = new {{pascalCase name}}();

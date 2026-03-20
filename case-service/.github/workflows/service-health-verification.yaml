@@ -1,0 +1,87 @@
+name: Service Health Verification
+
+on:
+  pull_request:
+    branches: 
+      - "main"
+      - "release/*"
+
+permissions:
+  id-token: write
+  contents: read
+  
+jobs:
+  verify:
+    name: Verify Service Health
+    runs-on: [self-hosted, joinworth-org-runner, eks]
+    env:
+      DOPPLER_PROJECT: case-service
+      DOPPLER_CONFIG: development
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+
+      - name: Get OIDC token
+        id: get_token
+        run: |
+          TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+                       "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https://github.com/$GITHUB_REPOSITORY_OWNER")
+          echo "OIDC_TOKEN=$(echo $TOKEN | jq -r '.value')" >> $GITHUB_ENV
+
+      - name: Install Doppler CLI
+        uses: dopplerhq/cli-action@v3
+
+      - name: Login with OIDC token
+        run: doppler oidc login --scope=. --identity=${{ secrets.DOPPLER_ALL_PROJECTS_OIDC_ID }} --token=$OIDC_TOKEN
+
+      - name: Fetch Environment Variables from Doppler
+        run: |
+          doppler run -p "$DOPPLER_PROJECT" -c "$DOPPLER_CONFIG" -- env > .env
+
+      - name: Override Port Configuration
+        run: |
+          echo "CONFIG_APP_PORT=3001" >> .env
+
+      - name: Enable Health Check Mode
+        run: |
+          # Health check mode verifies all connections (DB, Kafka, Redis) without
+          # actually consuming Kafka messages or processing Bull queue jobs.
+          # This prevents data loss when the app is killed after health check passes.
+          echo "CONFIG_HEALTH_CHECK_MODE=true" >> .env
+        
+      - name: Install dependencies
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{secrets.PERSONAL_ACCESS_TOKEN_READ_PACKAGE}}" > .npmrc
+          npm ci --ignore-scripts
+
+      - name: Rebuild native modules
+        run: npm rebuild @confluentinc/kafka-javascript || npm rebuild
+          
+      - name: Run App & Verify Health
+        env:
+          DD_SERVICE: case-service
+          DD_ENV: test
+        run: |
+          timeout 300 bash -c '
+            npm run start:prod &
+            APP_PID=$!
+            # Wait until the process dies or health endpoint succeeds
+            while kill -0 $APP_PID 2>/dev/null; do
+              if curl -f -H "Host: localhost" http://localhost:3001/health 2>/dev/null; then
+                echo "✅ Health check passed"
+                kill $APP_PID
+                exit 0
+              fi
+              sleep 1
+            done
+            echo "❌ App failed to start properly"
+            exit 1
+          '

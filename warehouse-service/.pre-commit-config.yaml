@@ -1,0 +1,62 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v6.0.0
+  hooks:
+  - id: trailing-whitespace
+    name: Fix Trailing Whitespace
+    description: This hook removes trailing whitespace.
+  - id: requirements-txt-fixer
+    name: Format requirements.txt File
+    description: sorts entries in requirements.txt.
+  - id: end-of-file-fixer
+    name: Validate End of File
+    description: This hook adds a line to the end of files.
+  - id: check-yaml
+    name: Validate YAML Integrity
+    description: This hook validates that yaml integrity.
+  - id: check-json
+    name: Validate JSON Integrity
+    description: This hook validates that JSON integrity.
+  - id: check-toml
+    name: Validate TOML Integrity
+    description: This hook validates that TOML integrity.
+- repo: https://github.com/pre-commit/pygrep-hooks
+  rev: v1.10.0  # Use the ref you want to point at
+  hooks:
+  - id: python-use-type-annotations
+    name: Enforce Python Type Annotations
+    description: This hook ensures that all function definitions have type annotations.
+- repo: https://github.com/sondrelg/pep585-upgrade
+  rev: v1.0.1
+  hooks:
+  - id: upgrade-type-hints
+    name: Upgrade Type Hints
+    files: ^v[0-9]worthscore\/.*
+- repo: https://github.com/asottile/pyupgrade
+  rev: v3.21.0
+  hooks:
+  - id: pyupgrade
+    name: PyUpgrade
+    description: This hook automatically upgrades syntax for newer versions of Python.
+- repo: https://github.com/psf/black
+  rev: 25.9.0
+  hooks:
+  - id: black
+    name: Black Format Python
+    description: This hook sets a standard for formatting PY files.
+    language_version: python3
+- repo: https://github.com/pycqa/isort
+  rev: 7.0.0
+  hooks:
+  - id: isort
+    name: isort Python Imports
+    description: This hook sets the standard for ordering Python Imports.
+    language: python
+    language_version: python3
+    args: [--profile, black]
+- repo:  https://github.com/pycqa/flake8
+  rev: 7.3.0
+  hooks:
+  - id: flake8
+    name: Flake8 Lint
+    description: This hook sets the python coding standard practices.

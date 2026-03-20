@@ -1,0 +1,1 @@
+DROP table if exists score_inputs;

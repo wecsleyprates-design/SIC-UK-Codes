@@ -1,0 +1,1 @@
+DELETE FROM rel_business_customer_monitoring;

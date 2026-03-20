@@ -1,0 +1,1 @@
+export const OPENAI_MODEL_VERSION = "gpt-4.1-nano";

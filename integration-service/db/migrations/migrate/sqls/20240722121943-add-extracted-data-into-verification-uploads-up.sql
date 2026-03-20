@@ -1,0 +1,2 @@
+ALTER TABLE integration_data.business_entity_verification_uploads
+ADD COLUMN extracted_data jsonb;

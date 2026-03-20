@@ -1,0 +1,3 @@
+ALTER TABLE integration_data.payment_processor_accounts drop column processor_id;
+
+drop table integration_data.payment_processors;

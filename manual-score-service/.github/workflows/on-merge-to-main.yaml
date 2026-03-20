@@ -1,0 +1,205 @@
+name: Version, Release & Deploy to Dev
+
+run-name: "Release & Deploy: ${{ github.event.head_commit.message }}"
+
+# This workflow automatically runs when code is merged to main:
+# 1. Extracts the version label (major/minor/patch) from the merged PR
+# 2. Creates a new version release and tag based on semantic versioning
+# 3. Automatically deploys the new version to development
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+jobs:
+  get-version-type:
+    name: Get Version Type from Merged PR
+    runs-on: ubuntu-latest
+    outputs:
+      version_type: ${{ steps.version.outputs.version_type }}
+      pr_number: ${{ steps.version.outputs.pr_number }}
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Get merged PR labels
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Get the PR that was just merged
+          # Method 1: Search by commit SHA
+          PR_NUMBER=$(gh pr list \
+            --search "${{ github.sha }}" \
+            --state merged \
+            --json number \
+            --jq '.[0].number')
+          
+          # Method 2: If not found, try to find PRs merged in the last few minutes
+          if [ -z "$PR_NUMBER" ]; then
+            echo "⚠️  Could not find PR by commit SHA, trying recent merges..."
+            SHA="${{ github.sha }}"
+            PR_NUMBER=$(gh pr list \
+              --state merged \
+              --limit 5 \
+              --json number,mergeCommit \
+              --jq ".[] | select(.mergeCommit.oid == \"$SHA\" or .mergeCommit.oid == \"\") | .number" | head -1)
+          fi
+          
+          if [ -z "$PR_NUMBER" ] || [ "$PR_NUMBER" == "null" ]; then
+            echo "❌ Could not find merged PR for commit ${{ github.sha }}"
+            echo "This might happen if the commit was pushed directly to main"
+            exit 1
+          fi
+          
+          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
+          echo "Found merged PR #$PR_NUMBER"
+          
+          # Get labels from the PR
+          LABELS=$(gh pr view $PR_NUMBER --json labels --jq '.labels[].name')
+          
+          echo "PR Labels: $LABELS"
+          
+          # Determine version type
+          if echo "$LABELS" | grep -q "major"; then
+            echo "version_type=major" >> $GITHUB_OUTPUT
+            echo "🚀 Version bump: MAJOR"
+          elif echo "$LABELS" | grep -q "minor"; then
+            echo "version_type=minor" >> $GITHUB_OUTPUT
+            echo "✨ Version bump: MINOR"
+          elif echo "$LABELS" | grep -q "patch"; then
+            echo "version_type=patch" >> $GITHUB_OUTPUT
+            echo "🐛 Version bump: PATCH"
+          else
+            echo "❌ No version label found (major/minor/patch)"
+            exit 1
+          fi
+
+  create-release:
+    name: Create New Version Release
+    runs-on: ubuntu-latest
+    needs: get-version-type
+    outputs:
+      new_tag: ${{ steps.bump.outputs.new_tag }}
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Bump version and create release
+        id: bump
+        run: |
+          # Get latest tag
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "Latest tag: $LATEST_TAG"
+          
+          # Parse version (remove 'v' prefix)
+          VERSION=${LATEST_TAG#v}
+          IFS='.' read -ra PARTS <<< "$VERSION"
+          MAJOR=${PARTS[0]:-0}
+          MINOR=${PARTS[1]:-0}
+          PATCH=${PARTS[2]:-0}
+          
+          # Bump based on label
+          case "${{ needs.get-version-type.outputs.version_type }}" in
+            major)
+              MAJOR=$((MAJOR + 1))
+              MINOR=0
+              PATCH=0
+              ;;
+            minor)
+              MINOR=$((MINOR + 1))
+              PATCH=0
+              ;;
+            patch)
+              PATCH=$((PATCH + 1))
+              ;;
+          esac
+          
+          NEW_TAG="v${MAJOR}.${MINOR}.${PATCH}"
+          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
+          echo "🚀 New release tag: $NEW_TAG"
+      
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.bump.outputs.new_tag }}
+          name: Release ${{ steps.bump.outputs.new_tag }}
+          body: |
+            Release ${{ steps.bump.outputs.new_tag }}
+            
+            Created from PR #${{ needs.get-version-type.outputs.pr_number }}
+            
+            This release was automatically created when code was merged to main.
+          draft: false
+          prerelease: false
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+  deploy-to-dev:
+    name: Deploy to Development
+    needs: [get-version-type, create-release]
+    uses: ./.github/workflows/deploy.yaml
+    with:
+      environment: development
+      ref_to_build: ${{ needs.create-release.outputs.new_tag }}
+    secrets: inherit
+
+  update-manifest:
+    name: Update Release Manifest
+    needs: [create-release, deploy-to-dev]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install yq
+        run: |
+          curl -fsSLo /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          chmod +x /usr/local/bin/yq
+          yq --version || (echo "yq download or execution failed" && exit 1)
+      # PAT must have push access to joinworth/releases (Contents: Read and Write for that repo).
+      - name: Checkout releases repo
+        uses: actions/checkout@v4
+        with:
+          repository: joinworth/releases
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          path: releases
+      - name: Update manifest
+        run: |
+          cd releases
+          export SERVICE_NAME="${{ github.event.repository.name }}"
+          export NEW_TAG="${{ needs.create-release.outputs.new_tag }}"
+
+          if [ ! -f manifest.yaml ]; then
+            echo "❌ manifest.yaml not found in releases repo"
+            exit 1
+          fi
+          yq eval --inplace '.services[strenv(SERVICE_NAME)].dev = strenv(NEW_TAG)' manifest.yaml
+          if ! yq eval '.services[strenv(SERVICE_NAME)].dev' manifest.yaml | grep -Fxq "$NEW_TAG"; then
+            echo "❌ manifest update verification failed"
+            exit 1
+          fi
+
+          git config user.email "github.pat@joinworth.com"
+          git config user.name "patjoinworth"
+          git add manifest.yaml
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Update ${SERVICE_NAME} dev to ${NEW_TAG}"
+            git push
+          fi
+

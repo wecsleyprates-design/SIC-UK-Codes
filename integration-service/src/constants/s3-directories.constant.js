@@ -1,0 +1,20 @@
+export const DIRECTORIES = {
+	ACCOUNTING: "businesses/:businessID/accounting/:integrationPlatform",
+	BANKING: "businesses/:businessID/banking/:integrationPlatform",
+	TAXATION: "businesses/:businessID/taxation/:integrationPlatform",
+	PUBLIC_RECORDS: "businesses/:businessID/public_records/:integrationPlatform",
+	BUSINESS_ENTITY_VERIFICATION: "businesses/:businessID/business_entity_verification/:integrationPlatform",
+	BUSINESS_VERIFICATION_UPLOADS: "businesses/:businessID/business_verification_uploads",
+	BUSINESS_STATEMENT_UPLOADS: "businesses/:businessID/business_statement_uploads",
+	BUSINESS_TAX_RETURN_UPLOADS: "businesses/:businessID/business_tax_return_uploads",
+	BUSINESS_SERP_SCRAPE: "businesses/:businessID/business_serp_scrape",
+	BUSINESS_WORTH_INFO: "businesses/:businessID/worth",
+	WHITE_LABEL_CUSTOMER_SETTINGS: "white-label/:customerId",
+	EQUIFAX: "businesses/:businessID/credit_bureau/:integrationPlatform",
+	MANUAL: "businesses/:businessID/manual",
+	ECONOMICS: "economics",
+	ELECTRONIC_CONSENT: "electronic-consent",
+	BUSINESS_ACCOUNTING_STATEMENT_UPLOADS: "businesses/:businessID/business_accounting_statement_uploads",
+	BUSINESS_BANK_STATEMENT_UPLOADS: "businesses/:businessID/business_bank_statement_uploads",
+	TRANSACTION_EXPORTS: "businesses/:businessID/transaction-exports"
+};

@@ -1,0 +1,4 @@
+drop table integration_data.accounting_business_info_tasks;
+drop table integration_data.accounting_cashflow_tasks;
+drop table integration_data.accounting_balancesheet_tasks;
+drop table integration_data.accounting_incomestatement_tasks;
