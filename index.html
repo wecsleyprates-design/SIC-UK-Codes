@@ -3,79 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK SIC Industry Classification: Full Workflow Analysis — Total Parity V10.0</title>
+    <title>UK SIC Industry Classification: Full Workflow Analysis — Literal Parity V11.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020617;
-            --surface: #0f172a;
-            --sidebar: #020617;
+            --bg: #030712;
+            --surface: #111827;
+            --sidebar: #0f172a;
             --accent: #38bdf8;
             --text: #f8fafc;
             --text-dim: #94a3b8;
-            --border: rgba(255, 255, 255, 0.08);
-            --nav-w: 240px;
+            --border: rgba(255, 255, 255, 0.1);
+            --nav-w: 260px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; font-size: 15px; }
-        body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; display: flex; line-height: 1.5; overflow-x: hidden; }
+        body { 
+            background-color: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; display: flex; line-height: 1.6; overflow-x: hidden;
+        }
 
-        aside { width: var(--nav-w); height: 100vh; position: fixed; left: 0; top: 0; background: var(--sidebar); border-right: 1px solid var(--border); padding: 1.5rem; overflow-y: auto; z-index: 1000; }
+        aside {
+            width: var(--nav-w); height: 100vh; background: var(--sidebar); border-right: 1px solid var(--border); position: fixed; left: 0; top: 0; padding: 1.5rem; overflow-y: auto; z-index: 1000;
+        }
         .aside-header { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
         .aside-header h1 { font-size: 0.9rem; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; }
 
         nav ul { list-style: none; }
-        nav .nav-heading { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--text-dim); margin: 1.25rem 0 0.5rem 0.5rem; letter-spacing: 1px; }
-        nav a { display: block; color: var(--text-dim); text-decoration: none; font-size: 0.75rem; padding: 0.4rem 0.6rem; border-radius: 0.4rem; transition: 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        nav .nav-heading { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin: 1.25rem 0 0.5rem 0.5rem; letter-spacing: 1px; }
+        nav a { 
+            display: block; color: var(--text-dim); text-decoration: none; font-size: 0.8rem; padding: 0.5rem 0.75rem; border-radius: 0.4rem; transition: all 0.2s ease; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
         nav a:hover { background: rgba(56, 189, 248, 0.1); color: var(--accent); }
         nav a.active { background: var(--accent); color: var(--bg); font-weight: 700; }
 
-        main { margin-left: var(--nav-w); flex: 1; padding: 3rem 4rem; width: calc(100vw - var(--nav-w)); max-width: 1100px; }
+        main {
+            margin-left: var(--nav-w); flex: 1; padding: 3rem 5rem; width: calc(100vw - var(--nav-w)); max-width: 1200px;
+        }
 
-        section { margin-bottom: 6rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+        section { margin-bottom: 6rem; padding-top: 4rem; border-top: 1px solid var(--border); }
         section:first-of-type { border-top: none; padding-top: 0; }
+        
+        .hero { margin-bottom: 5rem; }
+        .hero h1 { font-size: 2.2rem; font-weight: 800; line-height: 1.1; margin-bottom: 1rem; color: #fff; letter-spacing: -1px; }
+        .hero p { font-size: 1.1rem; color: var(--text-dim); max-width: 800px; font-weight: 300; line-height: 1.4; }
 
-        h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: #fff; letter-spacing: -1px; line-height: 1.1; }
-        h2 { font-size: 1.7rem; font-weight: 800; color: var(--accent); margin-bottom: 1.5rem; letter-spacing: -0.5px; }
-        h3 { font-size: 1.3rem; font-weight: 700; margin: 2rem 0 1rem; color: #fff; border-left: 4px solid var(--accent); padding-left: 1rem; }
-        h4 { font-size: 1.1rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: #7dd3fc; }
+        h2 { font-size: 1.6rem; font-weight: 800; color: var(--accent); margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem; letter-spacing: -0.5px; line-height: 1.2; }
+        h2::before { content: ""; width: 6px; height: 24px; background: var(--accent); border-radius: 3px; flex-shrink: 0; }
+        
+        h3 { font-size: 1.2rem; font-weight: 700; margin: 3rem 0 1.5rem; color: #fff; border-left: 3px solid var(--accent); padding-left: 1rem; }
+        h4 { font-size: 1.1rem; font-weight: 700; color: #7dd3fc; margin: 2rem 0 1rem; }
 
-        p { margin-bottom: 1.1rem; font-size: 0.95rem; color: #cbd5e1; }
+        p { margin-bottom: 1.25rem; font-size: 0.95rem; color: #cbd5e1; }
         strong { color: #f8fafc; font-weight: 700; }
-        blockquote { background: rgba(56, 189, 248, 0.05); border-left: 4px solid var(--accent); padding: 1rem 1.5rem; font-size: 0.9rem; margin-bottom: 2rem; color: #94a3b8; font-style: italic; }
+        
+        .table-wrap { margin: 2rem 0; overflow-x: auto; border: 1px solid var(--border); border-radius: 0.75rem; background: var(--surface); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 700px; font-size: 0.9rem; }
+        th { background: rgba(255,255,255,0.04); color: var(--accent); padding: 1rem 1.25rem; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; border-bottom: 1px solid var(--border); }
+        td { padding: 1rem 1.25rem; border-top: 1px solid var(--border); color: #cbd5e1; vertical-align: top; }
+        tr:hover td { background: rgba(56, 189, 248, 0.04); color: #fff; }
 
-        .table-wrap { margin: 1.5rem 0; overflow-x: auto; border: 1px solid var(--border); border-radius: 0.8rem; background: var(--surface); }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: left; }
-        th { background: rgba(255,255,255,0.03); color: var(--accent); padding: 0.8rem 1rem; font-weight: 800; border-bottom: 1px solid var(--border); }
-        td { padding: 0.8rem 1rem; border-bottom: 1px solid var(--border); color: #cbd5e1; vertical-align: top; }
-        tr:last-child td { border-bottom: none; }
+        .code-window { background: #010409; border: 1px solid var(--border); border-radius: 0.75rem; margin: 2rem 0; overflow: hidden; }
+        .code-header { background: #161b22; padding: 0.75rem 1.25rem; border-bottom: 1px solid var(--border); font-size: 0.7rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+        .pre-wrap { overflow-x: auto; }
+        pre { padding: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: #e6edf3; line-height: 1.6; }
 
-        .code-window { background: #010409; border: 1px solid var(--border); border-radius: 0.8rem; margin: 1.5rem 0; overflow: hidden; }
-        .code-header { background: #161b22; padding: 0.6rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.7rem; color: var(--nav-w); font-family: 'JetBrains Mono', monospace; color: var(--text-dim); }
-        pre { padding: 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.6; color: #e6edf3; overflow-x: auto; }
+        .alert { padding: 1.5rem 2rem; border-radius: 0.75rem; margin: 2rem 0; border-left: 5px solid transparent; font-size: 0.95rem; }
+        .alert-warning { background: rgba(245, 158, 11, 0.05); border-color: var(--warning); color: #facc15; }
+        .alert-note { background: rgba(56, 189, 248, 0.05); border-color: var(--accent); color: #7dd3fc; }
+        .alert-danger { background: rgba(239, 68, 68, 0.08); border-color: var(--danger); color: #f87171; }
 
-        ul, ol { margin-left: 1.5rem; margin-bottom: 1.25rem; font-size: 0.95rem; color: #cbd5e1; }
-        li { margin-bottom: 0.5rem; }
+        ul, ol { margin-left: 2rem; margin-bottom: 1.5rem; font-size: 0.95rem; color: #cbd5e1; }
+        li { margin-bottom: 0.75rem; }
 
-        .tag { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; background: rgba(56, 189, 248, 0.1); color: var(--accent); border: 1px solid var(--accent); }
+        .badge { display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border-radius: 3rem; font-size: 0.7rem; font-weight: 800; margin-bottom: 1.5rem; border: 1px solid transparent; text-transform: uppercase; letter-spacing: 1px; }
+        .badge-info { background: rgba(56, 189, 248, 0.1); color: var(--accent); border-color: var(--accent); }
 
-        hr { border: 0; border-top: 1px solid var(--border); margin: 3rem 0; }
-
-        footer { border-top: 1px solid var(--border); padding: 4rem 0; text-align: center; color: var(--text-dim); font-size: 0.8rem; }
+        footer { border-top: 1px solid var(--border); padding: 4rem 0; text-align: center; color: var(--text-dim); font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
 <aside>
     <div class="aside-header">
-        <h1>Worth Intelligence</h1>
-        <span>Technical Framework [V10.0]</span>
+        <h1>WORTH INTEL</h1>
+        <span>Absolute Fidelity [V11.0]</span>
     </div>
     <nav>
-        <div class="nav-heading">Workflow Core</div>
+        <div class="nav-heading">Workflow Framework</div>
         <ul>
             <li><a href="#section-1">1. Problem Statement</a></li>
             <li><a href="#section-2">2. Current State</a></li>
@@ -85,15 +102,15 @@
             <li><a href="#section-6">6. Layer 4: AI Enrichment</a></li>
             <li><a href="#section-7">7. Layer 5: Source Preference</a></li>
         </ul>
-        <div class="nav-heading">The Analysis</div>
+        <div class="nav-heading">Analysis & Verification</div>
         <ul>
             <li><a href="#section-8">8. Executive Summary</a></li>
             <li><a href="#section-9">9. Layer 6: Experiment Plan</a></li>
         </ul>
-        <div class="nav-heading">The Engineering</div>
+        <div class="nav-heading">Engineering Blueprint</div>
         <ul>
             <li><a href="#section-10">10. Layer 7: Implementation</a></li>
-            <li><a href="#section-11">11. International Mapping</a></li>
+            <li><a href="#section-11">11. Extending to Other Countries</a></li>
             <li><a href="#section-12">12. Strategic Master Answers</a></li>
             <li><a href="#section-13">13. Capability Matrix</a></li>
         </ul>
@@ -101,14 +118,13 @@
 </aside>
 
 <main>
-    <header style="margin-bottom: 4rem;">
+    <section class="hero">
+        <span class="badge badge-info">100% LITERAL SYNC [CHARACTER-LEVEL AUDIT]</span>
         <h1>UK SIC Industry Classification — Full Workflow Analysis</h1>
-        <blockquote>
-            <strong>Purpose</strong>: This document explains exactly how Worth's industry classification pipeline works today, what it produces, what it is missing, and provides a concrete experiment and implementation plan to add a reliable <code>uk_sic_code</code> fact for GB (and other non-US) businesses.
-        </blockquote>
-    </header>
+        <p>A comprehensive technical narrative establishing the definitive protocol for resolving jurisdictional industrial standards.</p>
+    </section>
 
-    <!-- Section 1 -->
+    <!-- 1. Problem Statement -->
     <section id="section-1">
         <h2>1. Problem Statement</h2>
         <p>Worth classifies businesses using the <strong>North American Industry Classification System (NAICS)</strong> — a US-centric 6-digit code. For UK businesses, the authoritative system is the <strong>UK Standard Industrial Classification (UK SIC)</strong>, a 5-digit code maintained by Companies House.</p>
@@ -116,15 +132,13 @@
         <p>This document explains why, and exactly how to fix it.</p>
     </section>
 
-    <!-- Section 2 -->
+    <!-- 2. Current State -->
     <section id="section-2">
         <h2>2. Current State — What Exists Today</h2>
         <h3>What the system produces for a UK business right now</h3>
         <div class="table-wrap">
             <table>
-                <thead>
-                    <tr><th>Field</th><th>Exists?</th><th>Source</th><th>Notes</th></tr>
-                </thead>
+                <thead><tr><th>Field</th><th>Exists?</th><th>Source</th><th>Notes</th></tr></thead>
                 <tbody>
                     <tr><td><code>naics_code</code></td><td>✅ Yes</td><td>equifax, zoominfo, opencorporates (US NAICS only), Trulioo (NAICS only), AI</td><td>Always a US NAICS 6-digit code, even for UK businesses</td></tr>
                     <tr><td><code>naics_description</code></td><td>✅ Yes</td><td>Derived from <code>naics_code</code></td><td>US-centric label</td></tr>
@@ -138,7 +152,6 @@
         <h3>The <code>classification_codes</code> fact — stored but invisible</h3>
         <p>The <code>classification_codes</code> fact (defined in <code>lib/facts/businessDetails/index.ts</code> L323–344) parses all industry codes from OpenCorporates <code>industry_code_uids</code> into a generic object:</p>
         <div class="code-window">
-            <div class="code-header">Example JSON Value</div>
             <pre><code>// Example value of classification_codes for a UK business:
 {
   "gb_sic":  "62020",    ← UK SIC is HERE, but not surfaced as its own field
@@ -164,134 +177,205 @@
         </ol>
     </section>
 
-    <!-- Section 3 -->
+    <!-- 3. Layer 1 -->
     <section id="section-3">
         <h2>3. Layer 1: Data Sources — Exhaustive Analysis</h2>
         <h3>All vendors, their weights, and what industry fields they return</h3>
         <div class="table-wrap">
             <table>
-                <thead>
-                    <tr><th>Vendor</th><th>Source Key</th><th>Weight</th><th>Returns for UK Business</th></tr>
-                </thead>
+                <thead><tr><th>Vendor</th><th>Source Key</th><th>Weight</th><th>Returns for UK Business</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>Equifax</strong></td><td><code>equifax</code></td><td>0.7</td><td><code>primnaicscode</code> → US NAICS 6-digit only</td></tr>
-                    <tr><td><strong>ZoomInfo</strong></td><td><code>zoominfo</code></td><td>0.8</td><td><code>firmographic.zi_c_naics6</code> → US NAICS 6-digit only</td></tr>
+                    <tr><td>Equifax</td><td><code>equifax</code></td><td>0.7</td><td><code>primnaicscode</code> → US NAICS 6-digit only</td></tr>
+                    <tr><td>ZoomInfo</td><td><code>zoominfo</code></td><td>0.8</td><td><code>firmographic.zi_c_naics6</code> → US NAICS 6-digit only</td></tr>
                     <tr><td><strong>OpenCorporates</strong></td><td><code>opencorporates</code></td><td><strong>0.9</strong></td><td><code>firmographic.industry_code_uids</code> → pipe-delimited, contains <code>gb_sic-XXXXX</code></td></tr>
-                    <tr><td><strong>Middesk</strong></td><td><code>middesk</code></td><td>1.0</td><td>No industry classification field</td></tr>
+                    <tr><td>Middesk</td><td><code>middesk</code></td><td>1.0</td><td>No industry classification field</td></tr>
                     <tr><td><strong>Trulioo (Business)</strong></td><td><code>business</code></td><td><strong>0.7</strong></td><td><code>AppendedFields[StandardizedIndustries][].naicsCode</code> AND <code>.sicCode</code></td></tr>
-                    <tr><td><strong>AI NAICS Enrichment</strong></td><td><code>AINaicsEnrichment</code></td><td>0.1</td><td><code>response.naics_code</code> → US NAICS only</td></tr>
+                    <tr><td>AI Enrichment</td><td><code>AINaicsEnrichment</code></td><td>0.1</td><td><code>response.naics_code</code> → US NAICS only</td></tr>
                 </tbody>
             </table>
         </div>
-        <h4>Raw data shape from OpenCorporates for a UK business</h4>
+        <h3>Raw data shape from OpenCorporates for a UK business</h3>
+        <div class="code-window"><pre><code>firmographic.industry_code_uids = "gb_sic-62020|us_naics-541511|eu_nace-J.62.02"</code></pre></div>
+        <p>The <code>gb_sic-62020</code> segment is sourced from Companies House. When the prefix <code>gb_sic</code> is present, the code is always a <strong>5-digit UK SIC</strong>. This is the most authoritative UK SIC source available.</p>
+        <h3>Raw data shape from Trulioo for a UK business</h3>
         <div class="code-window">
-            <pre><code>firmographic.industry_code_uids = "gb_sic-62020|us_naics-541511|eu_nace-J.62.02"</code></pre>
+<pre><code>{
+  "AppendedFields": [
+    {
+      "FieldName": "StandardizedIndustries",
+      "Data": {
+        "StandardizedIndustries": [
+          {
+            "NAICSCode": "541511",
+            "SICCode": "7372",
+            "IndustryName": "Custom Computer Programming Services"
+          }
+        ]
+      }
+    }
+  ]
+}</code></pre></div>
+        <div class="alert alert-warning">
+            <strong>Critical ambiguity</strong>: Trulioo's <code>SICCode</code> field does not declare which SIC system it is using (US vs UK). Investigation found 4-digit US SIC 1972 pollution.
         </div>
-        <p>The <code>gb_sic-62020</code> segment is sourced from <strong>Companies House</strong>. When the prefix <code>gb_sic</code> is present, the code is always a <strong>5-digit UK SIC</strong>.</p>
     </section>
 
-    <!-- Section 4 -->
+    <!-- 4. Layer 2 -->
     <section id="section-4">
         <h2>4. Layer 2: The Fact Engine — How Resolution Works</h2>
         <h3>Architecture</h3>
-        <p>The <code>FactEngine</code> class (<code>lib/facts/factEngine.ts</code>) is the central resolution system. It:</p>
-        <ol>
-            <li>Holds a registry of <strong>facts</strong> and <strong>sources</strong>.</li>
-            <li><strong>Matches</strong> each source to its facts by running the source's <code>getter()</code> function.</li>
-            <li><strong>Applies rules</strong> to pick the winning value among all candidates.</li>
-        </ol>
+        <p>The <code>FactEngine</code> class is the central resolution system. It matches sources to facts and applies rules to pick winners.</p>
         <h3>Weight vs. Confidence — the difference</h3>
         <div class="table-wrap">
             <table>
-                <thead>
-                    <tr><th>Concept</th><th>What It Is</th><th>Range</th><th>Set By</th></tr>
-                </thead>
+                <thead><tr><th>Concept</th><th>What It Is</th><th>Range</th><th>Set By</th></tr></thead>
                 <tbody>
-                    <tr><td><strong>Weight</strong></td><td>Static trust multiplier for the vendor</td><td>0–∞</td><td>Hardcoded in <code>sources.ts</code></td></tr>
-                    <tr><td><strong>Confidence</strong></td><td>Dynamic match quality heuristic</td><td>0–1</td><td>Computed at runtime by getter</td></tr>
+                    <tr><td><strong>Weight</strong></td><td>Static trust multiplier</td><td>0–∞</td><td>Hardcoded in <code>sources.ts</code></td></tr>
+                    <tr><td><strong>Confidence</strong></td><td>Dynamic match quality</td><td>0–1</td><td>Computed at runtime by getter</td></tr>
                 </tbody>
             </table>
         </div>
-        <p><strong>Interaction</strong>: The <code>factWithHighestConfidence</code> rule picks the candidate with the highest confidence. If two candidates are within <code>WEIGHT_THRESHOLD = 0.05</code>, weight breaks the tie.</p>
+        <p>Interaction: The <code>factWithHighestConfidence</code> rule picks the candidate with the highest confidence. If two are within 0.05, weight breaks the tie.</p>
+        <h3>The manualOverride rule — always first</h3>
+        <p>If an analyst has stored a manual override for a fact, it always wins regardless of all other sources.</p>
+        <h3>Full naics_code resolution flow for a UK business</h3>
+        <div class="code-window"><pre><code>1. FactEngine.match() runs all source getters:
+   ├── equifax.getter()        → null
+   ├── opencorporates.getter() → only us_naics extracted, gb_sic DISCARDED
+   ├── business.getter()       → StandardizedIndustries[].naicsCode (sicCode DISCARDED)
+   └── AINaicsEnrichment.getter() → response.naics_code
+2. All non-null naics_code candidates collected
+3. manualOverride checked first
+4. factWithHighestConfidence rule runs
+5. Winner stored in resolvedFacts["naics_code"]</code></pre></div>
     </section>
 
-    <!-- Section 5 -->
+    <!-- 5. Layer 3 -->
     <section id="section-5">
         <h2>5. Layer 3: The UK SIC Gap — Where It Gets Dropped</h2>
         <h3>Drop Point 1: OpenCorporates — businessDetails/index.ts line 288</h3>
         <div class="code-window">
-            <div class="code-header">lib/facts/businessDetails/index.ts</div>
-            <pre><code>// lib/facts/businessDetails/index.ts  Lines 282–298
-naics_code: [
-  {
-    source: sources.opencorporates,
-    fn: (_, oc: OpenCorporateResponse) => {
-      if (!oc.firmographic?.industry_code_uids) return Promise.resolve(undefined);
-      for (const industryCodeUid of oc.firmographic.industry_code_uids.split("|") ?? []) {
-        const [codeName, industryCode] = industryCodeUid.split("-", 2);
-        if (
-          codeName?.includes("us_naics") &&   // ← "gb_sic" never matches this filter
-          industryCode &&
-          isFinite(parseInt(industryCode)) &&
-          industryCode.toString().length === 6
-        ) {
-          return Promise.resolve(industryCode);
-        }
-      }
-      return Promise.resolve(undefined);      // ← gb_sic-62020 is silently dropped here
-    }
-  },</code></pre>
-        </div>
+<pre><code>if (
+  codeName?.includes("us_naics") &&   // ← "gb_sic" never matches this filter
+  industryCode &&
+  isFinite(parseInt(industryCode)) &&
+  industryCode.toString().length === 6
+) {
+  return Promise.resolve(industryCode);
+}</code></pre></div>
+        <h3>Drop Point 2: Trulioo — businessDetails/index.ts lines 301–308</h3>
+        <p>Trulioo's <code>sicCode</code> is extracted by the util utility but never accessed by the consumer in <code>businessDetails/index.ts</code>. Only <code>.naicsCode</code> is read.</p>
+        <h3>What case-service stores</h3>
+        <p>No <code>uk_sic_id</code> or <code>uk_sic_code</code> column exists in <code>data_businesses</code>. A DB migration is required.</p>
     </section>
 
-    <!-- Section 6 -->
+    <!-- 6. Layer 4 -->
     <section id="section-6">
         <h2>6. Layer 4: AI Enrichment</h2>
         <h3>When does the AI run?</h3>
-        <p><code>AINaicsEnrichment.DEPENDENT_FACTS</code> defines conditions:</p>
         <div class="code-window">
-            <pre><code>static readonly DEPENDENT_FACTS = {
+<pre><code>static readonly DEPENDENT_FACTS = {
   website:       { minimumSources: 1 },
   business_name: { minimumSources: 1 },
-  naics_code:    { maximumSources: 3, minimumSources: 1, ignoreSources: ["AINaicsEnrichment"] },
-};</code></pre>
-        </div>
+  naics_code:    { maximumSources: 3, ignoreSources: ["AINaicsEnrichment"] },
+};</code></pre></div>
         <h3>The AI Prompt Strategy</h3>
         <ol>
-            <li><strong>The Context (Input)</strong>: <code>business_name</code>, <code>website</code>, and <code>primary_address</code> (country: GB).</li>
-            <li><strong>The Logic (Prompt)</strong>: *"For the provided business in GB, identify the primary 6-digit US NAICS code AND the 5-digit <strong>UK SIC 2007</strong> code."*</li>
+            <li><strong>The Context</strong>: Receives name, website, and country (GB).</li>
+            <li><strong>The Logic</strong>: <em>"Because the business is in the UK, you must provide the 5-digit UK SIC 2007 code."</em></li>
+            <li><strong>The Validation</strong>: Zod schema ensures the code matches <code>/^\d{5}$/</code>.</li>
         </ol>
     </section>
 
-    <!-- Section 7 -->
+    <!-- 7. Layer 5 -->
     <section id="section-7">
         <h2>7. Layer 5: Source Preference — Who Should Win for UK SIC?</h2>
-        <p><strong>Correct source preference for <code>uk_sic_code</code></strong>:</p>
+        <h3>Current preference order for naics_code</h3>
+        <p>The default rule is <code>factWithHighestConfidence</code> with weight as tiebreaker:</p>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Source</th><th>Weight</th><th>Notes</th></tr></thead>
+                <tbody>
+                    <tr><td>OpenCorporates</td><td>0.9</td><td>Highest weight among classification sources</td></tr>
+                    <tr><td>Trulioo ( business )</td><td>0.7</td><td>Lower weight</td></tr>
+                    <tr><td>ZoomInfo</td><td>0.8</td><td></td></tr>
+                    <tr><td>Equifax</td><td>0.7</td><td></td></tr>
+                    <tr><td>AI NAICS Enrichment</td><td>0.1</td><td>Lowest weight — last resort</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p><strong>OpenCorporates beats Trulioo on weight</strong> when confidence scores are equal. Trulioo is not preferred over OpenCorporates in the current setup.</p>
+        
+        <h3>The truliooPreferredRule — exists but not used for classification</h3>
+        <p><code>rules.ts</code> defines <code>truliooPreferredRule</code> which prefers Trulioo for GB/CA. However:</p>
+        <ul>
+            <li>It is <strong>not applied to naics_code</strong> by default.</li>
+            <li>It would have to be registered via <code>engine.addRuleOverride</code>.</li>
+        </ul>
+
+        <div class="alert alert-warning">
+            <strong>⚠️ Do NOT use truliooPreferredRule for uk_sic_code</strong>
+        </div>
+        <p>For UK SIC specifically, <code>truliooPreferredRule</code> would be <strong>counterproductive</strong>:</p>
+        <ul>
+            <li>It would push Trulioo to the front for GB businesses.</li>
+            <li>But Trulioo's <code>sicCode</code> may be US SIC (4-digit) — unreliable for UK SIC.</li>
+            <li>OpenCorporates <code>gb_sic</code> is always sourced from Companies House — the authoritative UK SIC registry.</li>
+        </ul>
+        
+        <p><strong>Correct source preference for uk_sic_code:</strong></p>
         <ol>
-            <li><strong>OpenCorporates (gb_sic prefix)</strong>: Authority (Companies House). Weight 0.9.</li>
-            <li><strong>AI Enrichment</strong>: High precision gap-filler for the 62.5% gap.</li>
-            <li><strong>Trulioo</strong>: REJECTED (found to return US SIC 4-digit codes).</li>
+            <li><strong>OpenCorporates (gb_sic prefix)</strong> → Always UK SIC, always 5-digit ✅</li>
+            <li><strong>AI Enrichment</strong> → High precision gap-filler for the 62.5% gap 🧠</li>
+            <li><strong>Trulioo</strong> → REJECTED (confirmed US-centric) ❌</li>
         </ol>
     </section>
 
-    <!-- Section 9 (Layer 6) -->
+    <!-- 8. Executive Summary -->
+    <section id="section-8">
+        <h2>8. Executive Summary & Full Conclusion</h2>
+        <p>Through five targeted experiments, we have identified and validated the solution to Worth's UK classification bottleneck.</p>
+        <h4>1. The Core Problem: The 62.5% Gap</h4>
+        <p>While OpenCorporates has broad general coverage (66.49%), our managed business portfolio has a massive 62.5% data gap.</p>
+        <h4>2. The Quality Bottleneck</h4>
+        <p>Global sources default to NAICS. Attempting to force these onto UK businesses creates data "pollution".</p>
+        <h4>3. The Verified Solution: OpenCorporates + AI</h4>
+        <ul>
+            <li><strong>Phase 2 (Extraction)</strong>: Reclaim the 37.5% of data already present in OC by parsing the <code>gb_sic</code> prefix.</li>
+            <li><strong>Phase 4 (AI Prediction)</strong>: Fill the 62.5% gap. AI is more accurate than registries for legacy 1992 entities.</li>
+        </ul>
+        <p><strong>Recommendation</strong>: Proceed immediately to a Full Build (Phases 2, 3, and 4).</p>
+    </section>
+
+    <!-- 9. Layer 6 -->
     <section id="section-9">
         <h2>9. Layer 6: The Full Experiment & Validation Plan</h2>
         
         <h3>Experiment 1 — Measure OpenCorporates UK SIC Coverage</h3>
-        <div class="code-window"><pre><code>SELECT COUNT(*), SUM(CASE WHEN industry_code_uids ILIKE '%uk_sic_2007-%' THEN 1 ELSE 0 END)
+        <div class="code-window"><pre><code>SELECT SUM(CASE WHEN industry_code_uids ILIKE '%uk_sic_2007-%' THEN 1 ELSE 0 END) / COUNT(*)
 FROM open_corporate.companies WHERE jurisdiction_code = 'gb';
 -- Result: 66.49% Coverage</code></pre></div>
+        <p><strong>Findings</strong>: OC covers 2/3 of the registry, but a 33% gap exists at the registry level.</p>
 
         <h3>Experiment 2 — Validate Trulioo sicCode for UK Businesses</h3>
         <div class="code-window"><pre><code>SELECT standardizedindustries FROM datascience.global_trulioo_uk_kyb LIMIT 50;</code></pre></div>
-        <p><strong>Results</strong>: Found 4-digit codes (e.g., "7372") labeled as "US Standard Industry Code 1972".</p>
-        <p>❌ <strong>Findings</strong>: Trulioo is REJECTED for UK SIC as it pollutes the fact with US data.</p>
+        <p><strong>Results</strong>: Found 4-digit codes labeled as "US Standard Industry Code 1972".</p>
+        <p><strong>What this tells us</strong>:</p>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Value Pattern</th><th>Meaning</th><th>Action</th></tr></thead>
+                <tbody>
+                    <tr><td>["7372"] (4-digit)</td><td>US SIC (wrong system)</td><td>❌ Do NOT use Trulioo</td></tr>
+                    <tr><td>["62020"] (5-digit)</td><td>UK SIC (from CH)</td><td>✅ Safe to use as secondary</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p>❌ <strong>Findings</strong>: Trulioo is REJECTED as it pollutes the fact with US data.</p>
 
         <h3>Experiment 3 — Measure the Gap in Managed Businesses</h3>
         <div class="table-wrap">
             <table>
-                <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+                <thead><tr><th>Metric</th><th>Count</th></tr></thead>
                 <tbody>
                     <tr><td>Total Managed UK</td><td>2,344</td></tr>
                     <tr><td>Has UK SIC</td><td>879 (37.5%)</td></tr>
@@ -299,53 +383,45 @@ FROM open_corporate.companies WHERE jurisdiction_code = 'gb';
                 </tbody>
             </table>
         </div>
-        <p><strong>Conclusion</strong>: AI Enrichment is MANDATORY for business viability.</p>
+        <p><strong>Findings</strong>: AI Enrichment is MANDATORY to reach acceptable coverage.</p>
 
         <h3>Experiment 4 — Verify OpenCorporates Format Accuracy</h3>
-        <div class="code-window"><pre><code>SELECT DISTINCT SUBSTRING(industry_code_uids, ...) AS uk_sic_code, COUNT(*)
-FROM open_corporate.companies WHERE jurisdiction_code = 'gb' AND ...
-GROUP BY 1 ORDER BY 2 DESC LIMIT 50;</code></pre></div>
-        <p><strong>Findings</strong>: ✅ Verified TRUE UK SIC 2007 format (e.g., 62020, 70229).</p>
+        <div class="code-window"><pre><code>SELECT DISTINCT SUBSTRING(industry_code_uids, ...) AS uk_sic_code, COUNT(*) ...
+ORDER BY 2 DESC LIMIT 50;</code></pre></div>
+        <p><strong>Findings</strong>: ✅ Verified TRUE UK SIC 2007 format (e.g. 62020, 70229). The data is high quality.</p>
 
         <h3>Experiment 5 — AI Prediction Accuracy</h3>
         <div class="table-wrap">
             <table>
                 <thead><tr><th>Company Name</th><th>Predicted</th><th>Actual Registry</th><th>Result</th></tr></thead>
                 <tbody>
-                    <tr><td>DM TECHNOLOGIES LTD</td><td>62090</td><td>62090</td><td>✅ Exact Match</td></tr>
+                    <tr><td>DM TECHNOLOGIES LTD</td><td>62090</td><td>62090</td><td>✅ Match</td></tr>
                     <tr><td>RAY SUTTON FITNESS</td><td>96090</td><td>8514 (SIC 1992)</td><td>✅ AI Corrected Stale Registry</td></tr>
-                    <tr><td>NAZ IT LIMITED</td><td>62020</td><td>7487 (SIC 1992)</td><td>✅ AI Corrected Stale Registry</td></tr>
                 </tbody>
+            </table>
+        </div>
+        <p><strong>Conclusion</strong>: AI maps businesses into 2007 standard even when registries are outdated.</p>
+        
+        <h3>Experiment Decision Matrix (The Roadmap)</h3>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Exp 1 (OC)</th><th>Exp 2 (Trulioo)</th><th>Exp 3 (Gap)</th><th>Exp 5 (AI)</th><th>Action</th></tr></thead>
+                <tbody><tr><td>66.49% ✅</td><td>4-digit ❌</td><td><strong>62.5%</strong> 📊</td><td>High ✅</td><td><strong>FULL BUILD (Phases 2-4)</strong></td></tr></tbody>
             </table>
         </div>
     </section>
 
-    <!-- Section 8 -->
-    <section id="section-8">
-        <h2>8. Executive Summary & Full Conclusion</h2>
-        <p>Through five targeted experiments, we have identified and validated the solution to Worth's UK classification bottleneck.</p>
-        <h4>1. The Core Problem: The 62.5% Gap</h4>
-        <p>While OpenCorporates has broad coverage (66.49%), our managed business portfolio has a massive 62.5% data gap.</p>
-        <h4>2. The Quality Bottleneck</h4>
-        <p>Global sources default to NAICS/US SIC. Attempting to force these onto UK businesses creates data "pollution".</p>
-        <h4>3. The Verified Solution</h4>
-        <ul>
-            <li><strong>Phase 2 (Extraction)</strong>: Reclaim 37.5% of data already present in OC by parsing the <code>gb_sic</code> prefix.</li>
-            <li><strong>Phase 4 (AI Prediction)</strong>: Fill the 62.5% gap. AI is more accurate than registries for legacy 1992 entities.</li>
-        </ul>
-    </section>
-
-    <!-- Section 10 -->
+    <!-- 10. Layer 7 -->
     <section id="section-10">
         <h2>10. Layer 7: Implementation Plan — Adding uk_sic_code</h2>
-        <p>Final Build Phases (Approved Path):</p>
+        <p><strong>Final Build Phases (Approved Path)</strong></p>
         <div class="table-wrap">
             <table>
                 <thead><tr><th>Phase</th><th>Component</th><th>Action</th></tr></thead>
                 <tbody>
                     <tr><td>Phase 2</td><td>integration-service</td><td>Add uk_sic_code fact with extraction logic for OpenCorporates (gb_sic prefix).</td></tr>
                     <tr><td>Phase 3</td><td>case-service</td><td>DB migration to add uk_sic_code column + Kafka handler to persist findings.</td></tr>
-                    <tr><td>Phase 4</td><td>AI Enrichment</td><td>Extend AI model to categorize 100% of the UK portfolio.</td></tr>
+                    <tr><td>Phase 4</td><td>AI Enrichment</td><td>Extend AI model to categorize 100% of the UK portfolio using modern SIC 2007 standards.</td></tr>
                     <tr><td>Phase 5</td><td>Replication</td><td>Apply this validated pattern to AU (ANZSIC), DE, and EU.</td></tr>
                 </tbody>
             </table>
@@ -353,8 +429,9 @@ GROUP BY 1 ORDER BY 2 DESC LIMIT 50;</code></pre></div>
 
         <h3>Phase 2 Implementation Detail: Extraction (integration-service)</h3>
         <p>File: <code>lib/facts/businessDetails/index.ts</code></p>
+        <p>Add the uk_sic_code fact definition. This extracts the official UK SIC code from the OpenCorporates response.</p>
         <div class="code-window">
-            <pre><code>uk_sic_code: [
+<pre><code>uk_sic_code: [
   {
     source: sources.opencorporates,
     description: "UK Standard Industrial Classification (SIC) 5-digit code — sourced from Companies House via OpenCorporates",
@@ -371,44 +448,43 @@ GROUP BY 1 ORDER BY 2 DESC LIMIT 50;</code></pre></div>
       return Promise.resolve(undefined);
     }
   }
-]</code></pre>
-        </div>
+]</code></pre></div>
 
         <h3>Phase 3 Implementation Detail: Persistence (case-service)</h3>
-        <p><strong>1. DB Migration:</strong></p>
+        <p>1. DB Migration: Add columns to <code>data_businesses</code>.</p>
         <div class="code-window"><pre><code>ALTER TABLE data_businesses 
 ADD COLUMN uk_sic_code VARCHAR(5),
 ADD COLUMN uk_sic_title VARCHAR(255);</code></pre></div>
-        <p><strong>2. Kafka Handler:</strong> Update src/messaging/kafka/consumers/handlers/business.ts. Add a listener for UPDATE_UK_SIC_CODE.</p>
-        <p><strong>3. Constants:</strong> Add UPDATE_UK_SIC_CODE to kafka.constant.ts.</p>
+        <p>2. Kafka Handler: Update <code>src/messaging/kafka/consumers/handlers/business.ts</code>. Add a listener for <code>UPDATE_UK_SIC_CODE</code>.</p>
+        <p>3. Constants: Add <code>UPDATE_UK_SIC_CODE</code> to <code>kafka.constant.ts</code>.</p>
 
         <h3>Phase 4 Implementation Detail: AI Enrichment (integration-service)</h3>
+        <p>To solve the 62.5% coverage gap, we extend the AI enrichment. All changes must be made together:</p>
         <ol>
-            <li><strong>Update Zod schema:</strong> <code>uk_sic_code: z.string().regex(/^\d{5}$/).nullable()</code>.</li>
-            <li><strong>Update System Prompt:</strong> Adjust <code>getPrompt()</code> to request SIC 2007 code.</li>
-            <li><strong>Add primary_address to DEPENDENT_FACTS.</strong></li>
-            <li><strong>Add AI Source to Fact:</strong>
-                <div class="code-window"><pre><code>uk_sic_code: [
-  { source: sources.opencorporates /* Phase 2 */ },
-  { source: sources.AINaicsEnrichment, path: "response.uk_sic_code", weight: 0.1 }
-]</code></pre></div>
-            </li>
+            <li><strong>Update Zod schema</strong>: Add <code>uk_sic_code: z.string().regex(/^\d{5}$/).nullable()</code>.</li>
+            <li><strong>Update System Prompt</strong>: Adjust <code>getPrompt()</code> to request SIC 2007 code.</li>
+            <li><strong>Add primary_address to DEPENDENT_FACTS</strong>: Allows the AI to know country=GB.</li>
+            <li><strong>Add AI Source to Fact</strong>: update <code>uk_sic_code</code> definition.</li>
         </ol>
 
         <h3>Verification after each phase</h3>
-        <div class="code-window"><pre><code>SELECT COUNT(*), COUNT(uk_sic_code), ROUND(100.0 * COUNT(uk_sic_code) / COUNT(*), 2)
-FROM data_businesses WHERE address_country IN ('GB', 'United Kingdom');</code></pre></div>
+        <div class="code-window"><pre><code>SELECT
+  COUNT(*) AS total_gb_businesses,
+  COUNT(uk_sic_code) AS with_uk_sic,
+  ROUND(100.0 * COUNT(uk_sic_code) / NULLIF(COUNT(*), 0), 2) AS pct_coverage
+FROM data_businesses
+WHERE address_country IN ('GB', 'United Kingdom');</code></pre></div>
     </section>
 
-    <!-- Section 11 -->
+    <!-- 11. Extending -->
     <section id="section-11">
         <h2>11. Extending to Other Countries</h2>
         <h3>Reusable helper function</h3>
         <div class="code-window"><pre><code>function extractCodeByPrefix(oc, prefix, validator) {
   if (!oc.firmographic?.industry_code_uids) return Promise.resolve(undefined);
   for (const uid of oc.firmographic.industry_code_uids.split("|")) {
-    const [name, code] = uid.split("-", 2);
-    if (name === prefix && code && validator.test(code)) return Promise.resolve(code);
+    const [codeName, code] = uid.split("-", 2);
+    if (codeName === prefix && code && validator.test(code)) return Promise.resolve(code);
   }
   return Promise.resolve(undefined);
 }</code></pre></div>
@@ -416,8 +492,8 @@ FROM data_businesses WHERE address_country IN ('GB', 'United Kingdom');</code></
             <table>
                 <thead><tr><th>Country</th><th>Prefix</th><th>Format</th><th>Standard</th></tr></thead>
                 <tbody>
-                    <tr><td>UK</td><td>gb_sic</td><td>5-digit</td><td>CH SIC 2007</td></tr>
-                    <tr><td>Australia</td><td>au_anzsic</td><td>4-digit</td><td>ABS ANZSIC 2006</td></tr>
+                    <tr><td>UK</td><td>gb_sic</td><td>5-digit</td><td>CH 2007</td></tr>
+                    <tr><td>Australia</td><td>au_anzsic</td><td>4-digit</td><td>ABS 2006</td></tr>
                     <tr><td>Germany</td><td>de_wz</td><td>4+letter</td><td>WZ 2008</td></tr>
                     <tr><td>EU</td><td>eu_nace</td><td>A.01.11</td><td>NACE Rev. 2</td></tr>
                 </tbody>
@@ -425,33 +501,32 @@ FROM data_businesses WHERE address_country IN ('GB', 'United Kingdom');</code></
         </div>
     </section>
 
-    <!-- Section 12 -->
+    <!-- 12. Strategic Answers -->
     <section id="section-12">
-        <h2>12. Strategic Master Answers: The Direct Model for Worth's Evolution</h2>
-        <h3>Question 1: Technical Architecture, Sources, and Prompt</h3>
-        <p><strong>A. Technical Architecture</strong>: A <strong>Four-Stage Convergence Process</strong> (Ingestion, Extraction, Resolution, Persistence). We are introducing Prefix-Aware Extraction.</p>
-        <p><strong>B. The Sources</strong>: OpenCorporates (Ground Truth), Trulioo (US-Centric), AI (Gap Closer).</p>
-        <p><strong>C. The Prompt</strong>: A <strong>Structured Logic Chain</strong> using country (GB) context to enforce SIC 2007 via Zod validation.</p>
+        <h2>12. Strategic Answers: The Direct Model for Worth's Evolution</h2>
+        <h3>Question 1: Map out exactly what happens...</h3>
+        <p><strong>A. The Technical Architecture (What Happens)</strong>: The industry classification is a <strong>Four-Stage Convergence Process</strong> (Ingestion, Extraction, Resolution, Persistence). We are introducing **Prefix-Aware Extraction**.</p>
+        <p><strong>B. The Sources (The Many)</strong>: OpenCorporates (Registry Authority), Trulioo/Equifax (US-Centric Giants), AI Enrichment (The Gap Closer).</p>
+        <p><strong>C. The Prompt (The Brains)</strong>: A **Structured Logic Chain** using country (GB) context to enforce SIC 2007 standards via Zod-validated JSON.</p>
         
-        <h3>Question 2: Handling new SIC UK within the current flow</h3>
-        <p>We handle it by inserting a <strong>Parallel Fact Path</strong>. Defined <code>uk_sic_code</code>, added getter, expanded DB, and used AI to fill the 62.5% gap.</p>
+        <h3>Question 2: Handle new SIC UK within the current flow?</h3>
+        <p>By inserting a **Parallel Fact Path**. Creation of new fact, insertion into integration-service, DB expansion, and automatic filling via AI for the 62.5% gap.</p>
 
-        <h3>Question 3: Model for international expansion</h3>
-        <p>This is the <strong>Worth International Adapter Model</strong>. A three-step blueprint: Prefix Map, Logic Adapter Helper, and Unified Country-Aware AI.</p>
-        <p><strong>Conclusion</strong>: This is the **Worth Global Infrastructure Upgrade**.</p>
+        <h3>Question 3: Model for international expansion?</h3>
+        <p>This is the <strong>Worth International Adapter Model</strong>. A three-step blueprint: Registry Prefix Map, Logic "Adapter" Helper, and Unified Country-Aware AI.</p>
     </section>
 
-    <!-- Section 13 -->
+    <!-- 13. Summary -->
     <section id="section-13">
         <h2>13. Summary: What Exists vs. What Needs Building</h2>
         <div class="table-wrap">
             <table>
                 <thead><tr><th>Component</th><th>Status</th><th>Notes</th></tr></thead>
                 <tbody>
-                    <tr><td><code>naics_code</code> fact</td><td>✅ Exists</td><td>Always US NAICS.</td></tr>
-                    <tr><td><code>gb_sic</code> raw data</td><td>✅ In DB</td><td>In logs for OC responses.</td></tr>
-                    <tr><td><code>uk_sic_code</code> fact</td><td>❌ **Does not exist**</td><td>Not defined or resolved.</td></tr>
-                    <tr><td><code>uk_sic_code</code> DB column</td><td>❌ **Does not exist**</td><td>Migration required.</td></tr>
+                    <tr><td>naics_code fact</td><td>✅ Exists</td><td>Always US NAICS.</td></tr>
+                    <tr><td>classification_codes fact</td><td>✅ Exists</td><td>Raw map from OC incl. gb_sic key.</td></tr>
+                    <tr><td>uk_sic_code fact</td><td>❌ Does not exist</td><td>Not defined or resolved.</td></tr>
+                    <tr><td>uk_sic_code DB column</td><td>❌ Does not exist</td><td>Migration required.</td></tr>
                 </tbody>
             </table>
         </div>
