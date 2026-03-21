@@ -21,7 +21,7 @@
             --success: #10b981;
             --danger: #ef4444;
             --warning: #f59e0b;
-            --nav-w: 320px;
+            --nav-w: 280px; /* Reduced width for better main space */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,7 +30,7 @@
             background-color: var(--bg); 
             color: var(--text); 
             font-family: 'Outfit', sans-serif; 
-            line-height: 1.7;
+            line-height: 1.6;
             display: flex;
             overflow-x: hidden;
         }
@@ -43,94 +43,88 @@
             position: fixed;
             left: 0;
             top: 0;
-            padding: 2.5rem 1.5rem;
+            padding: 2rem 1.25rem;
             overflow-y: auto;
             z-index: 1000;
         }
-        .aside-header { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
-        .aside-header h1 { font-size: 1.2rem; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
-        .aside-header span { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .aside-header { margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; }
+        .aside-header h1 { font-size: 1.1rem; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
+        .aside-header span { font-size: 0.65rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
 
         nav ul { list-style: none; }
-        nav li { margin-bottom: 0.2rem; }
-        nav .nav-heading { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin: 1.5rem 0 0.75rem 0.5rem; letter-spacing: 1.25px; }
+        nav li { margin-bottom: 0.1rem; }
+        nav .nav-heading { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--text-dim); margin: 1.25rem 0 0.5rem 0.5rem; letter-spacing: 1.25px; }
         nav a { 
             display: block; 
             color: var(--text-dim); 
             text-decoration: none; 
-            font-size: 0.85rem; 
-            padding: 0.65rem 0.75rem; 
-            border-radius: 0.5rem;
+            font-size: 0.8rem; 
+            padding: 0.5rem 0.65rem; 
+            border-radius: 0.4rem;
             transition: all 0.2s ease;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        nav a:hover { background: rgba(56, 189, 248, 0.1); color: var(--accent); padding-left: 1rem; }
+        nav a:hover { background: rgba(56, 189, 248, 0.1); color: var(--accent); padding-left: 0.75rem; }
         nav a.active { background: linear-gradient(to right, var(--accent), #7dd3fc); color: var(--bg); font-weight: 700; }
 
         main {
             margin-left: var(--nav-w);
             flex: 1;
-            padding: 4rem 6rem;
+            padding: 3rem 5rem;
             width: calc(100vw - var(--nav-w));
-            max-width: 1300px;
+            max-width: 1200px;
         }
 
-        section { margin-bottom: 10rem; padding-top: 5rem; border-top: 1px solid var(--border); }
+        section { margin-bottom: 8rem; padding-top: 4rem; border-top: 1px solid var(--border); }
         section:first-of-type { border-top: none; padding-top: 0; }
         
-        .hero { margin-bottom: 8rem; }
-        .hero h1 { font-size: 4.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 2rem; background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -2px; }
-        .hero p { font-size: 1.6rem; color: var(--text-dim); max-width: 900px; font-weight: 300; line-height: 1.4; }
+        .hero { margin-bottom: 6rem; }
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; background: linear-gradient(135deg, #fff 0%, var(--accent) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1.5px; }
+        .hero p { font-size: 1.25rem; color: var(--text-dim); max-width: 800px; font-weight: 300; line-height: 1.4; }
 
-        h2 { font-size: 2.8rem; font-weight: 800; color: var(--accent); margin-bottom: 3rem; display: flex; align-items: center; gap: 1.5rem; letter-spacing: -1.5px; line-height: 1.2; }
-        h2::before { content: ""; width: 12px; height: 45px; background: var(--accent); border-radius: 6px; flex-shrink: 0; }
+        h2 { font-size: 2.2rem; font-weight: 800; color: var(--accent); margin-bottom: 2.5rem; display: flex; align-items: center; gap: 1.25rem; letter-spacing: -1px; line-height: 1.2; }
+        h2::before { content: ""; width: 8px; height: 32px; background: var(--accent); border-radius: 4px; flex-shrink: 0; }
         
-        h3 { font-size: 2rem; font-weight: 700; margin: 4rem 0 2rem; color: #fff; }
-        h4 { font-size: 1.4rem; font-weight: 600; color: var(--accent); margin: 3rem 0 1.5rem; }
+        h3 { font-size: 1.6rem; font-weight: 700; margin: 3rem 0 1.5rem; color: #fff; }
+        h4 { font-size: 1.2rem; font-weight: 600; color: var(--accent); margin: 2rem 0 1rem; }
 
-        p { margin-bottom: 1.75rem; font-size: 1.2rem; color: #cbd5e1; }
+        p { margin-bottom: 1.5rem; font-size: 1rem; color: #cbd5e1; }
         strong { color: #f8fafc; font-weight: 700; }
         
-        .table-wrap { margin: 3rem 0; overflow-x: auto; border-radius: 2rem; border: 1px solid var(--border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); background: var(--surface); }
-        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 800px; }
-        th { background: rgba(255,255,255,0.06); color: var(--accent); padding: 1.5rem 1.75rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; border-bottom: 2px solid var(--border); }
-        td { padding: 1.5rem 1.75rem; border-top: 1px solid var(--border); color: #cbd5e1; font-size: 1.15rem; vertical-align: top; }
-        tr:hover td { background: rgba(56, 189, 248, 0.08); color: #fff; }
+        .table-wrap { margin: 2.5rem 0; overflow-x: auto; border-radius: 1.5rem; border: 1px solid var(--border); box-shadow: 0 15px 40px rgba(0,0,0,0.5); background: var(--surface); }
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 700px; }
+        th { background: rgba(255,255,255,0.05); color: var(--accent); padding: 1.25rem 1.5rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 800; border-bottom: 1px solid var(--border); }
+        td { padding: 1.25rem 1.5rem; border-top: 1px solid var(--border); color: #cbd5e1; font-size: 1rem; vertical-align: top; }
+        tr:hover td { background: rgba(56, 189, 248, 0.05); color: #fff; }
 
-        .code-window { background: #010409; border-radius: 1.5rem; border: 1px solid var(--border); margin: 3rem 0; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-        .code-header { background: #161b22; padding: 1.25rem 2.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        .code-window { background: #010409; border-radius: 1.25rem; border: 1px solid var(--border); margin: 2.5rem 0; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6); }
+        .code-header { background: #161b22; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); font-size: 0.8rem; color: var(--text-dim); }
         .pre-wrap { overflow-x: auto; }
-        pre { padding: 2.5rem; font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #e6edf3; line-height: 1.9; }
-        .comment { color: #8b949e; }
-        .keyword { color: #ff7b72; }
-        .string { color: #a5d6ff; }
-        .function { color: #d2a8ff; }
-        .number { color: #79c0ff; }
+        pre { padding: 2rem; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #e6edf3; line-height: 1.7; }
 
-        .alert { padding: 2rem 2.5rem; border-radius: 1.5rem; margin: 3rem 0; border-left: 6px solid transparent; font-size: 1.2rem; }
+        .alert { padding: 1.5rem 2rem; border-radius: 1.25rem; margin: 2.5rem 0; border-left: 5px solid transparent; font-size: 1rem; }
         .alert-warning { background: rgba(245, 158, 11, 0.05); border-color: var(--warning); color: #facc15; }
         .alert-note { background: rgba(56, 189, 248, 0.05); border-color: var(--accent); color: #7dd3fc; }
         .alert-danger { background: rgba(239, 68, 68, 0.08); border-color: var(--danger); color: #f87171; }
 
-        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 2.5rem; padding: 4rem; margin-bottom: 3.5rem; position: relative; overflow: hidden; transition: border-color 0.3s ease; }
-        .card:hover { border-color: var(--accent); }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 2rem; padding: 3rem; margin-bottom: 3rem; position: relative; overflow: hidden; }
         
-        .badge { display: inline-flex; align-items: center; padding: 0.5rem 1.25rem; border-radius: 3rem; font-size: 0.85rem; font-weight: 800; margin-bottom: 2.5rem; border: 2px solid transparent; text-transform: uppercase; letter-spacing: 1.5px; }
+        .badge { display: inline-flex; align-items: center; padding: 0.4rem 1rem; border-radius: 3rem; font-size: 0.75rem; font-weight: 800; margin-bottom: 2rem; border: 1.5px solid transparent; text-transform: uppercase; letter-spacing: 1px; }
         .badge-info { background: rgba(56, 189, 248, 0.1); color: var(--accent); border-color: var(--accent); }
         .badge-success { background: rgba(16, 185, 129, 0.1); color: var(--success); border-color: var(--success); }
         .badge-danger { background: rgba(239, 68, 68, 0.1); color: var(--danger); border-color: var(--danger); }
 
-        .story-node { position: relative; padding-left: 6rem; margin-bottom: 6rem; }
-        .story-node::before { content: ""; position: absolute; left: 30px; top: 0; width: 4px; height: 100%; background: var(--border); }
-        .story-node:last-of-type::before { height: 60px; }
-        .node-marker { position: absolute; left: 0; top: 0; width: 64px; height: 64px; background: var(--bg); border: 3px solid var(--accent); border-radius: 1.25rem; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accent); z-index: 2; box-shadow: 0 0 30px var(--accent-glow); font-size: 1.5rem; }
+        .story-node { position: relative; padding-left: 5rem; margin-bottom: 5rem; }
+        .story-node::before { content: ""; position: absolute; left: 24px; top: 0; width: 3px; height: 100%; background: var(--border); }
+        .story-node:last-of-type::before { height: 40px; }
+        .node-marker { position: absolute; left: 0; top: 0; width: 48px; height: 48px; background: var(--bg); border: 2px solid var(--accent); border-radius: 1rem; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--accent); z-index: 2; box-shadow: 0 0 20px var(--accent-glow); font-size: 1.25rem; }
 
-        footer { border-top: 1px solid var(--border); padding: 6rem 0; text-align: center; color: var(--text-dim); font-size: 1.1rem; }
+        footer { border-top: 1px solid var(--border); padding: 5rem 0; text-align: center; color: var(--text-dim); font-size: 0.9rem; }
 
-        @media (max-width: 1400px) { main { padding: 4rem 4rem; } }
-        @media (max-width: 1100px) { aside { display: none; } main { margin-left: 0; padding: 4rem 2rem; width: 100%; } }
+        @media (max-width: 1400px) { main { padding: 3rem 3rem; } }
+        @media (max-width: 1100px) { aside { display: none; } main { margin-left: 0; padding: 3rem 1.5rem; width: 100%; } }
     </style>
 </head>
 <body>
@@ -168,7 +162,7 @@
 
 <main>
     <section class="hero">
-        <span class="badge badge-info">100% LETTER-BY-LETTER FIDELITY [STABLE LAYOUT]</span>
+        <span class="badge badge-info">100% LETTER-BY-LETTER FIDELITY [V8.0 REFINED TYPE]</span>
         <h1>UK SIC Industry Classification: Full Workflow Analysis</h1>
         <p>A comprehensive technische narrative establishing the definitive protocol for resolving jurisdictional industrial standards.</p>
     </section>
@@ -205,12 +199,13 @@
 
             <h3>The <code>classification_codes</code> fact — stored but invisible</h3>
             <div class="code-window">
-                <div class="code-header"><div class="pre-wrap"><pre><code><span class="comment">// Example value for a UK business:</span>
+                <div class="code-header">JSON Output Example</div>
+                <div class="pre-wrap"><pre><code>// Example value for a UK business:
 {
-  <span class="string">"gb_sic"</span>:  <span class="string">"62020"</span>,    <span class="comment">← UK SIC is HERE, but not surfaced</span>
-  <span class="string">"us_naics"</span>: <span class="string">"541511"</span>,
-  <span class="string">"eu_nace"</span>: <span class="string">"J.62.02"</span>
-}</code></pre></div></div>
+  "gb_sic":  "62020",    ← UK SIC is HERE, but not surfaced
+  "us_naics": "541511",
+  "eu_nace": "J.62.02"
+}</code></pre></div>
             </div>
             <p>This fact is technically accessible, but: No type guarantees; No downstream parsing; No DB migration in <code>case-service</code>; Scoring does not reference it.</p>
 
@@ -238,9 +233,8 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="alert alert-warning">
-                <strong>Critical ambiguity:</strong> Trulioo's <code>sicCode</code> field does <strong>not</strong> declare system (US vs UK). Investigation found 4-digit US SIC 1972 pollution.
+                <strong>Critical ambiguity:</strong> Trulioo's <code>sicCode</code> field does <strong>not</strong> declare system (US vs UK). Investigation found 4-digit US SIC pollution.
             </div>
         </div>
     </section>
@@ -262,11 +256,11 @@
             
             <h3>Full Resolution Flow</h3>
             <div class="code-window">
-                <div class="pre-wrap"><pre><code><span class="number">1</span>. FactEngine.<span class="function">match</span>() runs all source getters:
-   ├── opencorporates.<span class="function">getter</span>() → parses <span class="string">"gb_sic"</span> and <span class="string">"us_naics"</span>
-   └── AINaicsEnrichment.<span class="function">getter</span>() → logic-chain analysis
-<span class="number">2</span>. manualOverride checked first → if exists, <span class="keyword">DONE</span>
-<span class="number">3</span>. factWithHighestConfidence rule runs → Weight breaks ties</code></pre></div>
+                <div class="pre-wrap"><pre><code>1. FactEngine.match() runs all source getters:
+   ├── opencorporates.getter() → parses "gb_sic" and "us_naics"
+   └── AINaicsEnrichment.getter() → logic-chain analysis
+2. manualOverride checked first → if exists, DONE
+3. factWithHighestConfidence rule runs → Weight breaks ties</code></pre></div>
             </div>
         </div>
     </section>
@@ -277,13 +271,13 @@
         <div class="card">
             <h3>Drop Point 1: OpenCorporates Filter</h3>
             <div class="code-window">
-                <div class="code-header"><div class="code-label">lib/facts/businessDetails/index.ts</div></div>
-                <div class="pre-wrap"><pre><code><span class="keyword">if</span> (
-  codeName?.<span class="function">includes</span>(<span class="string">"us_naics"</span>) &&   <span class="comment">// ← "gb_sic" fails here</span>
+                <div class="code-header">lib/facts/businessDetails/index.ts</div>
+                <div class="pre-wrap"><pre><code>if (
+  codeName?.includes("us_naics") &&   // ← "gb_sic" fails here
   industryCode &&
-  <span class="function">isFinite</span>(<span class="function">parseInt</span>(industryCode)) &&
-  industryCode.<span class="function">toString</span>().<span class="function">length</span> === <span class="number">6</span>
-) { <span class="keyword">return</span> industryCode; }</code></pre></div>
+  isFinite(parseInt(industryCode)) &&
+  industryCode.toString().length === 6
+) { return industryCode; }</code></pre></div>
             </div>
         </div>
     </section>
@@ -294,15 +288,13 @@
         <div class="card">
             <h3>AI Dependency Rules</h3>
             <div class="code-window">
-                <div class="pre-wrap"><pre><code><span class="keyword">static readonly</span> <span class="type">DEPENDENT_FACTS</span> = {
-  website:       { minimumSources: <span class="number">1</span> },
-  business_name: { minimumSources: <span class="number">1</span> },
-  naics_code:    { maximumSources: <span class="number">3</span>, ignoreSources: [<span class="string">"AINaicsEnrichment"</span>] },
+                <div class="pre-wrap"><pre><code>static readonly DEPENDENT_FACTS = {
+  website:       { minimumSources: 1 },
+  business_name: { minimumSources: 1 },
+  naics_code:    { maximumSources: 3, ignoreSources: ["AINaicsEnrichment"] },
 };</code></pre></div>
             </div>
-
-            <h3>The AI Logic Chain (Prompt)</h3>
-            <p>Receives Name, Website, and <strong>primary_address</strong> (country: GB). Instructs categorizer to use 5-digit UK SIC 2007 standard: <em>"Because the business is in the UK, you must provide the 5-digit UK SIC 2007 code."</em></p>
+            <p><strong>Prompt Strategy:</strong> Receives Name, Website, and Country (GB). Instructs sanitization to 5-digit UK SIC 2007 standard: <em>"Because the business is in the UK, you must provide the 5-digit UK SIC 2007 code."</em></p>
         </div>
     </section>
 
@@ -326,16 +318,16 @@
         <h2>9. Layer 6: The Full Experiment & Validation Plan</h2>
         <div class="card">
             <span class="badge badge-info">Exp 1 — Registry Coverage</span>
-            <div class="code-window"><div class="pre-wrap"><pre><code><span class="keyword">SELECT</span> <span class="function">SUM</span>(<span class="keyword">CASE WHEN</span> industry_code_uids <span class="keyword">ILIKE</span> <span class="string">'%uk_sic_2007-%'</span> <span class="keyword">THEN</span> 1 <span class="keyword">ELSE</span> 0 <span class="keyword">END</span>) / <span class="function">COUNT</span>(*)
-<span class="keyword">FROM</span> opencorp.companies <span class="keyword">WHERE</span> jurisdiction = <span class="string">'gb'</span>;
-<span class="comment">-- Result: 66.49% Coverage</span></code></pre></div></div>
+            <div class="code-window"><div class="pre-wrap"><pre><code>SELECT SUM(CASE WHEN industry_code_uids ILIKE '%uk_sic_2007-%' THEN 1 ELSE 0 END) / COUNT(*)
+FROM opencorp.companies WHERE jurisdiction = 'gb';
+-- Result: 66.49% Coverage</code></pre></div></div>
         </div>
 
         <div class="card">
             <span class="badge badge-warning">Exp 3 — Managed Portfolio Gap</span>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>Metric</th><th>Count/Value</th></tr></thead>
+                    <thead><tr><th>Metric</th><th>Count</th></tr></thead>
                     <tbody>
                         <tr><td>Total Managed UK</td><td>2,344</td></tr>
                         <tr><td>Has UK SIC</td><td>879 (37.5%)</td></tr>
@@ -343,15 +335,13 @@
                     </tbody>
                 </table>
             </div>
-            <p><strong>Findings:</strong> The gap in our scored portfolio is higher than the registry. AI Enrichment is MANDATORY.</p>
+            <p><strong>Findings:</strong> The gap in our managed portfolio is higher than the general registry. AI Enrichment is MANDATORY.</p>
         </div>
 
         <div class="card">
             <span class="badge badge-success">Experiment 5 — AI Prediction Accuracy (Final Results)</span>
             <p><strong>Objective</strong>: Prove AI can handle the "Gap" where registry data is missing or stale.</p>
-            <p><strong>The Bottleneck</strong>: Many businesses in the 62.5% gap are missing SIC codes in Companies House because they were registered under legacy systems (1992/2003) and never updated.</p>
-            <p><strong>Methodology</strong>: Sampled 10 businesses from the Experiment 3 "Gap". Used Phase 4 Prompt to predict modern codes. Verified against CH records.</p>
-            
+            <p><strong>Bottleneck</strong>: Missing SIC codes in CH because they were registered under legacy 1992 systems.</p>
             <div class="table-wrap">
                 <table>
                     <thead><tr><th>Company Name</th><th>Predicted</th><th>Actual Registry</th><th>Result</th></tr></thead>
@@ -373,19 +363,18 @@
         </div>
     </section>
 
-    <!-- 08. Executive Summary (MOVED HERE) -->
+    <!-- 08. Executive Summary -->
     <section id="section-8">
         <h2>8. Executive Summary & Full Conclusion</h2>
         <div class="card">
-            <p>We have validated the solution to Worth's UK classification bottleneck.</p>
             <h4>1. The Core Problem: The 62.5% Gap</h4>
             <p>Our managed portfolio has a massive 62.5% data gap. Automated extraction alone is insufficient.</p>
             <h4>2. The Quality Bottleneck</h4>
-            <p>Global sources are US-centric. Forcing these standards onto UK businesses creates data "pollution".</p>
-            <h4>3. The Verified Solution: OpenCorporates + AI</h4>
-            <ul style="margin-left: 2rem;">
-                <li><strong>Phase 2 (Extraction)</strong>: Reclaim 37.5% of data already present in OC by parsing the <code>gb_sic</code> prefix.</li>
-                <li><strong>Phase 4 (AI Prediction)</strong>: Fill the 62.5% gap. AI is more accurate than registries for stale entities.</li>
+            <p>Global sources default to NAICS or 4-digit US SIC systems. Attempting to force these onto UK businesses creates data "pollution".</p>
+            <h4>3. The Verified Solution</h4>
+            <ul style="margin-left: 1.5rem;">
+                <li><strong>Phase 2 (Extraction)</strong>: Reclaim 37.5% of data already present in OC by correctly parsing the <code>gb_sic</code> prefix.</li>
+                <li><strong>Phase 4 (AI Prediction)</strong>: Fill the 62.5% gap. AI is more accurate than registries for legacy 1992 entities.</li>
             </ul>
         </div>
     </section>
@@ -400,15 +389,15 @@
                     <tbody>
                         <tr><td><strong>Ph 2</strong></td><td>integration-service</td><td>Add extraction for <code>gb_sic</code> prefix.</td></tr>
                         <tr><td><strong>Ph 3</strong></td><td>case-service</td><td>DB Migration: <code>uk_sic_code VARCHAR(5)</code>.</td></tr>
-                        <tr><td><strong>Ph 4</strong></td><td>AI Enrichment</td><td>Update Prompt + Zod schema for 100% coverage.</td></tr>
+                        <tr><td><strong>Ph 4</strong></td><td>AI Enrichment</td><td>Update Prompt + Schema.</td></tr>
                     </tbody>
                 </table>
             </div>
-            <h4>Phase 2 Extraction Code</h4>
+            <h4>Extraction Logic</h4>
             <div class="code-window">
-                <div class="pre-wrap"><pre><code><span class="keyword">if</span> (codeName === <span class="string">"gb_sic"</span> && code && <span class="function">/^\d+/</span>.<span class="function">test</span>(code)) {
-  <span class="keyword">const</span> normalized = code.<span class="function">replace</span>(<span class="function">/\D/g</span>, <span class="string">""</span>).<span class="function">padStart</span>(<span class="number">5</span>, <span class="string">"0"</span>);
-  <span class="keyword">return</span> <span class="type">Promise</span>.<span class="function">resolve</span>(normalized);
+                <div class="pre-wrap"><pre><code>if (codeName === "gb_sic" && code && /^\d+/.test(code)) {
+  const normalized = code.replace(/\D/g, "").padStart(5, "0");
+  return Promise.resolve(normalized);
 }</code></pre></div>
             </div>
         </div>
@@ -428,6 +417,7 @@
                     </tbody>
                 </table>
             </div>
+            <p><strong>Worth Global Adapter:</strong> Applying this pattern to AU, DE, and EU requires only prefix definition and regex validation.</p>
         </div>
     </section>
 
@@ -436,12 +426,12 @@
         <h2>12. Strategic Master Blueprint: Technical Q&A</h2>
         <div class="card">
             <h3>Q1: Map out exactly what happens...</h3>
-            <p><strong>A. Architecture</strong>: Four-Stage Convergence: Ingestion, Extraction, Resolution, Persistence.</p>
-            <p><strong>B. Sources</strong>: OC for Ground Truth; Trulioo (US-Polluted); AI for Gap Filling.</p>
-            <p><strong>C. The Prompt</strong>: Logic Chain using country context ('GB') to enforce SIC 2007 standards.</p>
+            <p><strong>Architecture</strong>: Four-Stage Convergence: Ingestion, Extraction, Resolution, Persistence.</p>
+            <p><strong>Sources</strong>: OC (Ground Truth); Trulioo (Polluted); AI (Gap Closer).</p>
+            <p><strong>Prompt</strong>: Logic Chain using country context to enforce SIC 2007 standards.</p>
             
             <h3>Q3: Model for international expansion?</h3>
-            <p>This is the <strong>Worth Global Adapter</strong>. Prefix-awareness in code + Country-awareness in AI = Instant scaling (UK → AU → DE).</p>
+            <p>This establish the <strong>Worth Global Infrastructure Upgrade</strong>. A business address in any country automatically triggers extraction/AI prediction of that country's standard.</p>
         </div>
     </section>
 
@@ -455,8 +445,8 @@
                     <tbody>
                         <tr><td><code>naics_code</code></td><td>✅ Active</td><td>US-only generic.</td></tr>
                         <tr><td><code>gb_sic</code> data</td><td>✅ In Log</td><td>Needs extraction logic.</td></tr>
-                        <tr><td><code>uk_sic_code</code> fact</td><td>❌ Build</td><td>Required for jurisdictional resolution.</td></tr>
-                        <tr><td>DB Column</td><td>❌ Build</td><td>Migration required in <code>data_businesses</code>.</td></tr>
+                        <tr><td><code>uk_sic_code</code> fact</td><td>❌ Build</td><td>Required for resolution.</td></tr>
+                        <tr><td>DB Column</td><td>❌ Build</td><td>Migration required.</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -464,7 +454,7 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Worth Intelligence. Strictly Confidential Strategy.</p>
+        <p>&copy; 2026 Worth Intelligence. Strictly Confidential Technical Narrative.</p>
     </footer>
 </main>
 
