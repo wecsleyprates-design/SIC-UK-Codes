@@ -60,24 +60,7 @@
 <blockquote>
 <p><strong>Purpose</strong>: This document explains exactly how Worth&#39;s industry classification pipeline works today, what it produces, what it is missing, and provides a concrete experiment and implementation plan to add a reliable <code>uk_sic_code</code> fact for GB (and other non-US) businesses.</p>
 </blockquote>
-<hr>
-<h2>Table of Contents</h2>
-<ol>
-<li><a href="#1-problem-statement">Problem Statement</a></li>
-<li><a href="#2-current-state--what-exists-today">Current State — What Exists Today</a></li>
-<li><a href="#3-layer-1-data-sources--vendors--fields">Layer 1: Data Sources — Vendors &amp; Fields</a></li>
-<li><a href="#4-layer-2-the-fact-engine--how-resolution-works">Layer 2: The Fact Engine — How Resolution Works</a></li>
-<li><a href="#5-layer-3-the-uk-sic-gap--where-it-gets-dropped">Layer 3: The UK SIC Gap — Where It Gets Dropped</a></li>
-<li><a href="#6-layer-4-ai-enrichment">Layer 4: AI Enrichment</a></li>
-<li><a href="#7-layer-5-source-preference--who-should-win-for-uk-sic">Layer 5: Source Preference — Who Should Win for UK SIC?</a></li>
-<li><a href="#executive-summary--full-conclusion">Executive Summary &amp; Full Conclusion</a></li>
-<li><a href="#8-layer-6-the-full-experiment--validation-plan">Layer 6: The Full Experiment &amp; Validation Plan</a></li>
-<li><a href="#9-layer-7-implementation-plan--adding-uk_sic_code">Layer 7: Implementation Plan — Adding <code>uk_sic_code</code></a></li>
-<li><a href="#10-extending-to-other-countries">Extending to Other Countries</a></li>
-<li><a href="#11-summary-what-exists-vs-what-needs-building">Summary: What Exists vs. What Needs Building</a></li>
-</ol>
-<hr>
-<h2>1. Problem Statement</h2>
+<hr><h2>1. Problem Statement</h2>
 <p>Worth classifies businesses using the <strong>North American Industry Classification System (NAICS)</strong> — a US-centric 6-digit code. For UK businesses, the authoritative system is the <strong>UK Standard Industrial Classification (UK SIC)</strong>, a 5-digit code maintained by Companies House.</p>
 <p><strong>The core problem</strong>: UK SIC data flows into Worth&#39;s pipeline from two vendors (OpenCorporates and Trulioo) but is <strong>silently discarded</strong> before it reaches any stored or surfaced fact. No <code>uk_sic_code</code> field exists anywhere in the system — not as a resolved fact, not as a database column, not in scoring.</p>
 <p>This document explains why, and exactly how to fix it.</p>
