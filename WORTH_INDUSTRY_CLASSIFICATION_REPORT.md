@@ -1362,17 +1362,37 @@ protected override async executePostProcessing<T, R>(
 
 ## SECTION 7 — SQL ANALYSIS QUERIES (COPY-PASTE READY)
 
+> ### ⚠️ CRITICAL: TWO SEPARATE DATABASES — READ BEFORE RUNNING ANY QUERY
+>
+> The Worth platform uses **two independent PostgreSQL instances**. They cannot be JOINed in a single
+> connection. You must connect to the correct database for each query.
+>
+> | Database | Connection | Tables |
+> |---|---|---|
+> | **case-service DB** | `CONFIG_DB_*` in `case-service/.env` | `public.data_businesses`, `public.core_naics_code`, `public.core_mcc_code`, `public.rel_naics_mcc` |
+> | **integration-service DB** | `CONFIG_DB_*` in `integration-service/.env` | `integration_data.request_response`, `integrations.core_integrations_platforms` |
+>
+> Queries 1, 2, 7, 8, 9 → **case-service DB only**
+> Queries 3, 4, 5, 6 → **integration-service DB only**
+> Queries 3 and 4 require a two-step approach (get UK business IDs from case-service DB first,
+> then use them in the integration-service DB query) because a cross-database JOIN is not possible.
+
+---
+
 ### Query 1: Current NAICS Coverage for All Businesses
 
+> **Run on: case-service DB**
+
 ```sql
+-- DATABASE: case-service
 -- What this measures: How many businesses have a resolved NAICS code vs. NULL?
 -- Why we need it: Baseline coverage metric before any changes.
 -- What the result tells us: The overall effectiveness of the classification pipeline.
 SELECT
-    COUNT(*)                                              AS total_businesses,
-    COUNT(naics_id)                                       AS has_naics,
-    COUNT(*) - COUNT(naics_id)                            AS missing_naics,
-    ROUND(100.0 * COUNT(naics_id) / NULLIF(COUNT(*), 0), 1) AS pct_with_naics
+    COUNT(*)                                                     AS total_businesses,
+    COUNT(naics_id)                                              AS has_naics,
+    COUNT(*) - COUNT(naics_id)                                   AS missing_naics,
+    ROUND(100.0 * COUNT(naics_id) / NULLIF(COUNT(*), 0), 1)     AS pct_with_naics
 FROM public.data_businesses;
 ```
 
@@ -1380,28 +1400,51 @@ FROM public.data_businesses;
 
 ### Query 2: UK Businesses — Do They Have NAICS (Possibly Wrong)?
 
+> **Run on: case-service DB**
+
 ```sql
+-- DATABASE: case-service
 -- What this measures: For GB-address businesses, how many have a naics_id?
 -- Why we need it: UK businesses with naics_id likely have a US NAICS code (wrong taxonomy).
 -- What the result tells us: The scope of the UK classification problem.
--- [VALIDATE: confirm column name for country — may be address_country or a joined table]
+-- address_country confirmed from initial-tables migration (VARCHAR column on data_businesses)
 SELECT
-    COUNT(*)                                              AS total_uk_businesses,
-    COUNT(naics_id)                                       AS has_naics,
-    COUNT(*) - COUNT(naics_id)                            AS missing_naics,
-    ROUND(100.0 * COUNT(naics_id) / NULLIF(COUNT(*), 0), 1) AS pct_with_naics
+    COUNT(*)                                                     AS total_uk_businesses,
+    COUNT(naics_id)                                              AS has_naics,
+    COUNT(*) - COUNT(naics_id)                                   AS missing_naics,
+    ROUND(100.0 * COUNT(naics_id) / NULLIF(COUNT(*), 0), 1)     AS pct_with_naics
 FROM public.data_businesses
-WHERE address_country = 'GB';  -- [VALIDATE: confirm column name]
+WHERE address_country = 'GB';
 ```
 
 ---
 
 ### Query 3: OpenCorporates Coverage — How Many UK Businesses Have `uk_sic` in Raw Response?
 
+> **Two-step query — different DBs cannot be JOINed in one connection.**
+>
+> **Step A** runs on the **case-service DB** to get UK business IDs.
+> **Step B** runs on the **integration-service DB** using those IDs.
+
 ```sql
--- What this measures: If we fixed Gap 1 today, how many UK businesses would immediately get uk_sic?
--- Why we need it: Quantify the Phase 0 opportunity — data already in DB.
--- What the result tells us: Whether OpenCorporates is a viable uk_sic source for our UK portfolio.
+-- STEP A — Run on: case-service DB
+-- Get all UK business IDs. Copy the result UUIDs to use in Step B.
+SELECT id AS business_id
+FROM public.data_businesses
+WHERE address_country = 'GB';
+```
+
+```sql
+-- STEP B — Run on: integration-service DB
+-- Replace the VALUES list with the UUIDs returned by Step A.
+-- What this measures: Of all OpenCorporates responses for UK businesses,
+--                     how many already contain a uk_sic code in the raw JSON?
+-- What the result tells us: If we fix Gap 1 today, this many businesses get uk_sic immediately.
+
+-- First, confirm the OpenCorporates platform_id:
+SELECT id, code, label FROM integrations.core_integrations_platforms WHERE code ILIKE '%opencorporates%';
+-- Use the returned id in the query below as <oc_platform_id>
+
 SELECT
     COUNT(*)                                                              AS total_oc_uk_records,
     COUNT(*) FILTER (WHERE response::text LIKE '%uk_sic%')               AS has_uk_sic_in_response,
@@ -1410,87 +1453,125 @@ SELECT
             / NULLIF(COUNT(*), 0),
         1
     )                                                                     AS pct_with_uk_sic
-FROM integration_data.request_response rr
-JOIN public.data_businesses db ON rr.business_id = db.id
-WHERE rr.platform_id = (
-    SELECT id FROM integrations.core_integrations_platforms WHERE code = 'opencorporates'
-)   -- [VALIDATE: confirm platform code string]
-AND db.address_country = 'GB';  -- [VALIDATE: confirm column name]
+FROM integration_data.request_response
+WHERE platform_id = <oc_platform_id>          -- replace with id from lookup above
+  AND business_id IN (
+      -- paste the UUID list from Step A here, e.g.:
+      -- 'uuid-1', 'uuid-2', 'uuid-3', ...
+      -- For large sets, load into a temp table first:
+      -- CREATE TEMP TABLE uk_biz_ids (id uuid);
+      -- INSERT INTO uk_biz_ids VALUES ('uuid-1'), ('uuid-2'), ...;
+      -- then: SELECT id FROM uk_biz_ids
+  );
 ```
+
+> **Shortcut if both schemas are on the same Postgres instance with different databases:**
+> Use `dblink` or a foreign data wrapper. Otherwise the two-step approach is the only option.
 
 ---
 
 ### Query 4: Trulioo — How Many GB Business Records Contain `sicCode`?
 
+> **Two-step query — same two-DB split as Query 3.**
+>
+> **Step A** runs on the **case-service DB**. **Step B** runs on the **integration-service DB**.
+
 ```sql
--- What this measures: How many Trulioo responses for UK businesses include a sicCode field?
--- Why we need it: Quantify the Phase 1 opportunity from Gap 2 (Trulioo sicCode is never read).
--- What the result tells us: Trulioo coverage of UK SIC for our UK portfolio.
+-- STEP A — Run on: case-service DB
+-- Get all UK business IDs (same as Query 3 Step A — reuse if already done).
+SELECT id AS business_id
+FROM public.data_businesses
+WHERE address_country = 'GB';
+```
+
+```sql
+-- STEP B — Run on: integration-service DB
+-- What this measures: How many Trulioo responses for UK businesses contain a sicCode?
+-- What the result tells us: Trulioo's UK SIC coverage for our portfolio (Gap 2 opportunity).
+
+-- First, confirm the Trulioo platform_id:
+SELECT id, code, label FROM integrations.core_integrations_platforms WHERE code ILIKE '%trulioo%';
+-- Use the returned id as <trulioo_platform_id>
+
 SELECT
-    COUNT(*)                                                              AS total_trulioo_uk_records,
+    COUNT(*)                                                                  AS total_trulioo_uk_records,
     COUNT(*) FILTER (
         WHERE response::jsonb #>> '{clientData,standardizedIndustries,0,sicCode}' IS NOT NULL
-    )                                                                     AS has_sic_code,
+    )                                                                         AS has_sic_code,
     ROUND(
         100.0 * COUNT(*) FILTER (
             WHERE response::jsonb #>> '{clientData,standardizedIndustries,0,sicCode}' IS NOT NULL
         ) / NULLIF(COUNT(*), 0),
         1
-    )                                                                     AS pct_with_sic_code
-FROM integration_data.request_response rr
-JOIN public.data_businesses db ON rr.business_id = db.id
-WHERE rr.platform_id = (
-    SELECT id FROM integrations.core_integrations_platforms WHERE code = 'trulioo'
-)   -- [VALIDATE: confirm platform code]
-AND rr.request_type = 'fetch_business_entity_verification'
-AND db.address_country = 'GB';
+    )                                                                         AS pct_with_sic_code
+FROM integration_data.request_response
+WHERE platform_id    = <trulioo_platform_id>   -- replace with id from lookup above
+  AND request_type   = 'fetch_business_entity_verification'
+  AND business_id IN (
+      -- paste UUID list from Step A here
+  );
 ```
 
 ---
 
 ### Query 5: `classification_codes` Fact — How Many Businesses Have `uk_sic` Stored?
 
+> **Run on: integration-service DB**
+
 ```sql
--- What this measures: Whether the classification_codes fact is being computed and stored,
---                     and whether uk_sic appears in it.
--- Why we need it: The classification_codes fact is computed but has no downstream consumer.
---                 This tells us how much work is already done.
--- [NOTE: classification_codes is stored in integration_data.request_response
---  but the exact request_type value used to store resolved facts needs validation]
--- [VALIDATE: confirm the request_type value used for stored facts — may be 'resolved_fact'
---  or the facts may not be persisted at all if the fact engine is purely in-memory]
+-- DATABASE: integration-service
+-- What this measures: Whether uk_sic has been parsed and stored anywhere in request_response.
+-- What the result tells us: Reveals all request_type values that contain uk_sic data.
+-- (The classification_codes fact may be in-memory only and not persisted — this tells us for sure.)
 SELECT
-    COUNT(*) FILTER (WHERE response::text LIKE '%uk_sic%')   AS has_uk_sic_in_classification_codes,
-    COUNT(*)                                                   AS total
+    request_type,
+    COUNT(*)                                                          AS total_rows,
+    COUNT(*) FILTER (WHERE response::text LIKE '%uk_sic%')           AS has_uk_sic
 FROM integration_data.request_response
-WHERE request_type = 'classification_codes';  -- [VALIDATE: confirm or discover actual value]
+GROUP BY request_type
+HAVING COUNT(*) FILTER (WHERE response::text LIKE '%uk_sic%') > 0
+ORDER BY has_uk_sic DESC;
 ```
 
 ---
 
 ### Query 6: Equifax — SIC Data Availability
 
+> **Run on: integration-service DB**
+
 ```sql
--- What this measures: How many Equifax records contain a primsic value?
+-- DATABASE: integration-service
+-- What this measures: How many Equifax records contain a primsic (US SIC 1987) value?
 -- Why we need it: US SIC is available from Equifax but never consumed — quantify the loss.
 -- What the result tells us: How many businesses could get US SIC codes if a fact were added.
+-- platform_id = 17 is hardcoded in the extended_attributes SQL function (confirmed)
 SELECT
-    COUNT(*)                                                                        AS total_equifax_records,
+    COUNT(*)                                                              AS total_equifax_records,
     COUNT(*) FILTER (
-        WHERE response->>'primsic' IS NOT NULL AND response->>'primsic' != ''
-    )                                                                               AS has_sic,
+        WHERE response->>'primsic' IS NOT NULL
+          AND response->>'primsic' != ''
+    )                                                                     AS has_primsic,
     COUNT(*) FILTER (
-        WHERE response->>'primnaicscode' IS NOT NULL AND response->>'primnaicscode' != ''
-    )                                                                               AS has_naics
+        WHERE response->>'primnaicscode' IS NOT NULL
+          AND response->>'primnaicscode' != ''
+    )                                                                     AS has_primnaicscode,
+    COUNT(*) FILTER (
+        WHERE response->>'secsic1' IS NOT NULL
+          AND response->>'secsic1' != ''
+    )                                                                     AS has_secsic1
 FROM integration_data.request_response
-WHERE platform_id = 17;  -- Equifax platform_id confirmed from extended_attributes function
+WHERE platform_id  = 17
+  AND request_type = 'fetch_public_records';
 ```
 
 ---
 
 ### Query 7: NAICS Code Distribution — Top 20 Most Common Industries
 
+> **Run on: case-service DB**
+
 ```sql
+-- DATABASE: case-service
 -- What this measures: Which NAICS codes are most prevalent in the business portfolio?
 -- Why we need it: Reveals portfolio concentration risk and validates classification quality.
 -- What the result tells us: If 561499 (AI fallback) appears in top 5, coverage is poor.
@@ -1510,7 +1591,10 @@ LIMIT 20;
 
 ### Query 8: NAICS → MCC Mapping — Which MCCs Are Most Common?
 
+> **Run on: case-service DB**
+
 ```sql
+-- DATABASE: case-service
 -- What this measures: Distribution of Merchant Category Codes in the portfolio.
 -- Why we need it: MCC distribution drives compliance risk profile for the customer.
 -- What the result tells us: Which merchant categories dominate, and whether 9999 (undefined) is high.
@@ -1529,17 +1613,26 @@ LIMIT 20;
 
 ### Query 9: Businesses with Fallback NAICS 561499 — AI Last Resort Usage
 
+> **Run on: case-service DB**
+
 ```sql
+-- DATABASE: case-service
 -- What this measures: How many businesses got the AI fallback code (561499)?
 -- Why we need it: A high count of 561499 indicates the pipeline has poor coverage.
 -- What the result tells us: Proportion of businesses where no source could determine an industry.
 SELECT
-    nc.code                                                AS naics_code,
-    nc.label                                               AS naics_label,
-    COUNT(db.id)                                           AS count,
-    ROUND(100.0 * COUNT(db.id) / (SELECT COUNT(*) FROM public.data_businesses WHERE naics_id IS NOT NULL), 2)
-                                                           AS pct_of_classified_businesses,
-    'AI fallback / unknown industry code'                  AS note
+    nc.code                                                    AS naics_code,
+    nc.label                                                   AS naics_label,
+    COUNT(db.id)                                               AS count,
+    ROUND(
+        100.0 * COUNT(db.id)
+            / NULLIF(
+                (SELECT COUNT(*) FROM public.data_businesses WHERE naics_id IS NOT NULL),
+                0
+              ),
+        2
+    )                                                          AS pct_of_classified_businesses,
+    'AI fallback / unknown industry code'                      AS note
 FROM public.data_businesses db
 JOIN public.core_naics_code nc ON db.naics_id = nc.id
 WHERE nc.code = 561499
