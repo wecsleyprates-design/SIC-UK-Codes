@@ -131,7 +131,9 @@ export const manualOverride: Rule = {
  */
 
 /**
- * Rule that prefers Trulioo data for UK/Canada businesses
+ * Rule that prefers Trulioo data for UK/Canada businesses.
+ * Note: Use with caution for industrial classification (SIC/NAICS) as Trulioo
+ * may return US-centric codes even for UK businesses.
  */
 export const truliooPreferredRule: Rule = {
 	name: "truliooPreferred",
@@ -161,6 +163,40 @@ export const truliooPreferredRule: Rule = {
 			const accConfidence = acc.confidence ?? acc.source?.confidence ?? 0;
 			return factConfidence > accConfidence ? fact : acc;
 		});
+	}
+};
+
+/**
+ * Rule that prefers official registry data (OpenCorporates) for classification facts
+ */
+export const registryPreferredRule: Rule = {
+	name: "registryPreferred",
+	description: "Prefer official registry data (OpenCorporates) for classification facts",
+	fn: (engine, factName: FactName, facts: Fact[]): Fact | undefined => {
+		const registryFact = facts.find(
+			fact => fact.source?.name === "opencorporates" && engine.isValidFactValue(fact.value)
+		);
+		if (registryFact) return registryFact;
+
+		// Fall back to highest confidence
+		return facts.reduce(
+			(acc, fact) => {
+				const factConfidence = fact.confidence ?? fact.source?.confidence ?? 0.1;
+				const accConfidence = acc?.confidence ?? acc?.source?.confidence ?? 0.1;
+				// Ignore facts with no value or empty arrays
+				if (fact.value === undefined || (Array.isArray(fact.value) && fact.value.length === 0)) {
+					return acc;
+				} else if (acc === undefined) {
+					return fact;
+				} else if (Math.abs(factConfidence - accConfidence) <= WEIGHT_THRESHOLD) {
+					return weightedFactSelector(fact, acc);
+				} else if (factConfidence > accConfidence) {
+					return fact;
+				}
+				return acc;
+			},
+			undefined as Fact | undefined
+		);
 	}
 };
 

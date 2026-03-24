@@ -43,6 +43,46 @@ export const businessFacts: readonly Fact[] = factAbbreviatedToFact({
 			}
 		}
 	],
+	uk_sic_code: [
+		{
+			source: sources.opencorporates,
+			description:
+				"UK Standard Industrial Classification (SIC) 5-digit code — sourced from Companies House via OpenCorporates",
+			schema: z.string().regex(/^\d{5}$/),
+			fn: (_, oc: OpenCorporateResponse) => {
+				if (!oc.firmographic?.industry_code_uids) return Promise.resolve(undefined);
+				for (const uid of oc.firmographic.industry_code_uids.split("|") ?? []) {
+					const [codeName, code] = uid.split("-", 2);
+					if (codeName === "gb_sic" && code && /^\d+/.test(code)) {
+						const normalized = code.replace(/\D/g, "").padStart(5, "0");
+						return Promise.resolve(normalized);
+					}
+				}
+				return Promise.resolve(undefined);
+			}
+		},
+		{
+			source: sources.business,
+			weight: 0.7,
+			fn: async (engine: FactEngine, truliooResponse: any): Promise<string | undefined> => {
+				if (!truliooResponse?.clientData) return undefined;
+				const country = engine.getResolvedFact("primary_address")?.value?.country;
+				if (country !== "GB") return undefined;
+
+				const sicCode = extractStandardizedIndustriesFromTruliooResponse(truliooResponse.clientData)?.find(
+					(i: any) => i.sicCode && /^\d{5}$/.test(i.sicCode)
+				)?.sicCode;
+
+				return sicCode;
+			}
+		},
+		{
+			source: sources.AINaicsEnrichment,
+			path: "response.uk_sic_code",
+			weight: 0.1,
+			schema: z.string().regex(/^\d{5}$/)
+		}
+	],
 	business_phone: [
 		{
 			source: sources.businessDetails,
