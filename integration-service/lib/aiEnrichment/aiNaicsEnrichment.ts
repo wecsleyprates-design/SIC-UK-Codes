@@ -23,6 +23,8 @@ const naicsEnrichmentResponseSchema = z.object({
 	reasoning: z.string(),
 	naics_code: z.string(),
 	naics_description: z.string(),
+	uk_sic_code: z.string().optional(),
+	uk_sic_description: z.string().optional(),
 	mcc_code: z.string(),
 	mcc_description: z.string(),
 	confidence: z.enum(["HIGH", "MED", "LOW"]),
@@ -53,9 +55,11 @@ export class AINaicsEnrichment extends AIEnrichment {
 		website: { minimumSources: 1 },
 		website_found: { minimumSources: 1 },
 		business_name: { minimumSources: 1 },
+		primary_address: { minimumSources: 1 },
 		dba: { minimumSources: 0 },
 		// If, by the time we get here, we have 3 sources for NAICS don't run the task (save OpenAI credits :) )
 		naics_code: { maximumSources: 3, minimumSources: 1, ignoreSources: ["AINaicsEnrichment"] as SourceName[] },
+		uk_sic_code: { maximumSources: 3, minimumSources: 0, ignoreSources: ["AINaicsEnrichment"] as SourceName[] },
 		mcc_code: { maximumSources: 3, minimumSources: 1, ignoreSources: ["AINaicsEnrichment"] as SourceName[] },
 		corporation: { minimumSources: 0 }
 	};
@@ -100,11 +104,13 @@ export class AINaicsEnrichment extends AIEnrichment {
 		const systemPrompt = `You are a helpful assistant that determines: 
 		1) 6 digit North American Industry Classification System (NAICS) codes as of the 2022 edition. Do not use earlier editions only the 2022 edition.
 		2) The canonical description of the NAICS Code from the 2022 edition.
-		3) The 4 digit Merchant Category Code (MCC)
-		4) The canonnical description of the MCC Code.
+		3) The 5 digit UK Standard Industrial Classification (SIC) code from the 2007 edition. This is only required if the business country is GB (United Kingdom).
+		4) The canonical description of the UK SIC Code.
+		5) The 4 digit Merchant Category Code (MCC)
+		6) The canonical description of the MCC Code.
 		Infer this information from industry info and business names. If a website URL is available, parse the website for the information.
-		If a company already has NAICS or MCC information, correct it if it doesn't match the business details.
-		Return a JSON object with fields reasoning, naics_code, naics_description, mcc_code, mcc_description, confidence (HIGH|MED|LOW), previous_naics_code, previous_mcc_code.\nIf there is no evidence at all, return naics_code 
+		If a company already has NAICS, UK SIC or MCC information, correct it if it doesn't match the business details.
+		Return a JSON object with fields reasoning, naics_code, naics_description, uk_sic_code (if applicable), uk_sic_description (if applicable), mcc_code, mcc_description, confidence (HIGH|MED|LOW), previous_naics_code, previous_mcc_code.\nIf there is no evidence at all, return naics_code
 		${this.NAICS_OF_LAST_RESORT} and mcc_code 5614 as a last resort.
 		`;
 		responseCreateWithInput.input.push({ role: "system", content: systemPrompt });
