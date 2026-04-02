@@ -1,0 +1,3102 @@
+[
+  {
+    "business_id": "biz_us_restaurant_000",
+    "entity_name": "Mario's Kitchen #1",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.68
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.68)",
+        "incumbent": "zoominfo:722511 (0.83)",
+        "conf_diff": 0.15,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.62)",
+        "incumbent": "zoominfo:722511 (0.83)",
+        "conf_diff": 0.21,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_001",
+    "entity_name": "Mario's Kitchen #2",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.68
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.6
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.68)",
+        "incumbent": "zoominfo:722511 (0.71)",
+        "conf_diff": 0.03,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.60)",
+        "incumbent": "zoominfo:722511 (0.71)",
+        "conf_diff": 0.11,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_002",
+    "entity_name": "Mario's Kitchen #3",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.77
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.72
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.77)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.72)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.06,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_003",
+    "entity_name": "Mario's Kitchen #4",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.66
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.66)",
+        "incumbent": "zoominfo:722511 (0.86)",
+        "conf_diff": 0.2,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.62)",
+        "incumbent": "zoominfo:722511 (0.86)",
+        "conf_diff": 0.24,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_004",
+    "entity_name": "Mario's Kitchen #5",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.7
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.65
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.70)",
+        "incumbent": "zoominfo:722511 (0.80)",
+        "conf_diff": 0.1,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.65)",
+        "incumbent": "zoominfo:722511 (0.80)",
+        "conf_diff": 0.15,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_005",
+    "entity_name": "Mario's Kitchen #6",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.75
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.65
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.75)",
+        "incumbent": "zoominfo:722511 (0.82)",
+        "conf_diff": 0.07,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.65)",
+        "incumbent": "zoominfo:722511 (0.82)",
+        "conf_diff": 0.17,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_006",
+    "entity_name": "Mario's Kitchen #7",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.7
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.66
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.70)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.08,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.66)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.12,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_007",
+    "entity_name": "Mario's Kitchen #8",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.73
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.63
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.73)",
+        "incumbent": "zoominfo:722511 (0.81)",
+        "conf_diff": 0.08,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.63)",
+        "incumbent": "zoominfo:722511 (0.81)",
+        "conf_diff": 0.18,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_008",
+    "entity_name": "Mario's Kitchen #9",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.76
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.64
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.76)",
+        "incumbent": "zoominfo:722511 (0.82)",
+        "conf_diff": 0.06,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.64)",
+        "incumbent": "zoominfo:722511 (0.82)",
+        "conf_diff": 0.18,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_us_restaurant_009",
+    "entity_name": "Mario's Kitchen #10",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": null,
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.78
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.63
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": false,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.78)",
+        "incumbent": "zoominfo:722511 (0.86)",
+        "conf_diff": 0.08,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.63)",
+        "incumbent": "zoominfo:722511 (0.86)",
+        "conf_diff": 0.23,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_000",
+    "entity_name": "The Ploughman's Arms #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.62
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.64
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.62)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.16,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.64)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.14,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_001",
+    "entity_name": "The Ploughman's Arms #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.6
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.6
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.60)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.18,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.60)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.18,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_002",
+    "entity_name": "The Ploughman's Arms #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.69
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.68
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.69)",
+        "incumbent": "zoominfo:722511 (0.80)",
+        "conf_diff": 0.11,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.68)",
+        "incumbent": "zoominfo:722511 (0.80)",
+        "conf_diff": 0.12,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_003",
+    "entity_name": "The Ploughman's Arms #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.7
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.61
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.70)",
+        "incumbent": "zoominfo:722511 (0.73)",
+        "conf_diff": 0.03,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.61)",
+        "incumbent": "zoominfo:722511 (0.73)",
+        "conf_diff": 0.12,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_004",
+    "entity_name": "The Ploughman's Arms #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.64
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.66
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.64)",
+        "incumbent": "zoominfo:722511 (0.76)",
+        "conf_diff": 0.12,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.66)",
+        "incumbent": "zoominfo:722511 (0.76)",
+        "conf_diff": 0.1,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_005",
+    "entity_name": "The Ploughman's Arms #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.74
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.74)",
+        "incumbent": "zoominfo:722511 (0.81)",
+        "conf_diff": 0.07,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.62)",
+        "incumbent": "zoominfo:722511 (0.81)",
+        "conf_diff": 0.19,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_006",
+    "entity_name": "The Ploughman's Arms #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.67
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.59
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.67)",
+        "incumbent": "zoominfo:722511 (0.67)",
+        "conf_diff": 0.0,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.59)",
+        "incumbent": "zoominfo:722511 (0.67)",
+        "conf_diff": 0.08,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_007",
+    "entity_name": "The Ploughman's Arms #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.69
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.69)",
+        "incumbent": "zoominfo:722511 (0.75)",
+        "conf_diff": 0.06,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.62)",
+        "incumbent": "zoominfo:722511 (0.75)",
+        "conf_diff": 0.13,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_008",
+    "entity_name": "The Ploughman's Arms #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "5812",
+      "uk_sic_code": "56101",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.67
+        },
+        {
+          "source": "zoominfo",
+          "code": "722511",
+          "conf": 0.67
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.67)",
+        "incumbent": "zoominfo:722511 (0.67)",
+        "conf_diff": 0.0,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.66)",
+        "incumbent": "zoominfo:722511 (0.67)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_009",
+    "entity_name": "The Ploughman's Arms #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.62
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.65
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.62)",
+        "incumbent": "zoominfo:722511 (0.71)",
+        "conf_diff": 0.09,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.65)",
+        "incumbent": "zoominfo:722511 (0.71)",
+        "conf_diff": 0.06,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_000",
+    "entity_name": "Singh & Sons Retailers #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "5411",
+      "uk_sic_code": "47110",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "445110",
+          "conf": 0.63
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "445110",
+          "conf": 0.73
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.63)",
+        "incumbent": "trulioo:5411 (0.76)",
+        "conf_diff": 0.13,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.73)",
+        "incumbent": "trulioo:5411 (0.76)",
+        "conf_diff": 0.03,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_001",
+    "entity_name": "Singh & Sons Retailers #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.65
+        },
+        {
+          "source": "zoominfo",
+          "code": "445110",
+          "conf": 0.73
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.73)",
+        "incumbent": "trulioo:5411 (0.65)",
+        "conf_diff": 0.08,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.84)",
+        "incumbent": "zoominfo:445110 (0.73)",
+        "conf_diff": 0.11,
+        "outcome": "CHALLENGER_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_002",
+    "entity_name": "Singh & Sons Retailers #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.67
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "445110",
+          "conf": 0.74
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.75)",
+        "incumbent": "trulioo:5411 (0.67)",
+        "conf_diff": 0.08,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.74)",
+        "incumbent": "zoominfo:445110 (0.75)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_003",
+    "entity_name": "Singh & Sons Retailers #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.76
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "445110",
+          "conf": 0.69
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.76)",
+        "incumbent": "trulioo:5411 (0.76)",
+        "conf_diff": 0.0,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.69)",
+        "incumbent": "zoominfo:445110 (0.76)",
+        "conf_diff": 0.07,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_004",
+    "entity_name": "Singh & Sons Retailers #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.64
+        },
+        {
+          "source": "zoominfo",
+          "code": "445110",
+          "conf": 0.61
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.61)",
+        "incumbent": "trulioo:5411 (0.64)",
+        "conf_diff": 0.03,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.69)",
+        "incumbent": "zoominfo:445110 (0.61)",
+        "conf_diff": 0.08,
+        "outcome": "CHALLENGER_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_005",
+    "entity_name": "Singh & Sons Retailers #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "5411",
+      "uk_sic_code": "47110",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "445110",
+          "conf": 0.7
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "445110",
+          "conf": 0.75
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.70)",
+        "incumbent": "trulioo:5411 (0.75)",
+        "conf_diff": 0.05,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.75)",
+        "incumbent": "trulioo:5411 (0.75)",
+        "conf_diff": 0.0,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_006",
+    "entity_name": "Singh & Sons Retailers #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.64
+        },
+        {
+          "source": "zoominfo",
+          "code": "445110",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.62)",
+        "incumbent": "trulioo:5411 (0.64)",
+        "conf_diff": 0.02,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.74)",
+        "incumbent": "zoominfo:445110 (0.62)",
+        "conf_diff": 0.12,
+        "outcome": "CHALLENGER_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_007",
+    "entity_name": "Singh & Sons Retailers #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.64
+        },
+        {
+          "source": "zoominfo",
+          "code": "445110",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.62)",
+        "incumbent": "trulioo:5411 (0.64)",
+        "conf_diff": 0.02,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.79)",
+        "incumbent": "zoominfo:445110 (0.62)",
+        "conf_diff": 0.17,
+        "outcome": "CHALLENGER_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_008",
+    "entity_name": "Singh & Sons Retailers #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.73
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "445110",
+          "conf": 0.76
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.72)",
+        "incumbent": "trulioo:5411 (0.73)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.76)",
+        "incumbent": "zoominfo:445110 (0.72)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_009",
+    "entity_name": "Singh & Sons Retailers #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "445110",
+      "uk_sic_code": "47110",
+      "mcc_code": "5411",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "trulioo",
+          "code": "5411",
+          "conf": 0.65
+        },
+        {
+          "source": "zoominfo",
+          "code": "445110",
+          "conf": 0.66
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": false,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "zoominfo:445110 (0.66)",
+        "incumbent": "trulioo:5411 (0.65)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "ai_enrichment:445110 (0.85)",
+        "incumbent": "zoominfo:445110 (0.66)",
+        "conf_diff": 0.19,
+        "outcome": "CHALLENGER_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_000",
+    "entity_name": "Joes Pizza Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.72
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.66
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.72)",
+        "incumbent": "zoominfo:722511 (0.76)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.66)",
+        "incumbent": "zoominfo:722511 (0.76)",
+        "conf_diff": 0.1,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_001",
+    "entity_name": "Bella Notte Foods #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.61
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.61)",
+        "incumbent": "zoominfo:722511 (0.83)",
+        "conf_diff": 0.22,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.62)",
+        "incumbent": "zoominfo:722511 (0.83)",
+        "conf_diff": 0.21,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_002",
+    "entity_name": "Bella Notte Foods #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.7
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.70)",
+        "incumbent": "zoominfo:722511 (0.69)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.62)",
+        "incumbent": "zoominfo:722511 (0.69)",
+        "conf_diff": 0.07,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_003",
+    "entity_name": "Bella Notte Foods #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "5812",
+      "uk_sic_code": "56101",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.66
+        },
+        {
+          "source": "zoominfo",
+          "code": "722511",
+          "conf": 0.69
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.66)",
+        "incumbent": "zoominfo:722511 (0.69)",
+        "conf_diff": 0.03,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.65)",
+        "incumbent": "zoominfo:722511 (0.69)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_004",
+    "entity_name": "Bella Notte Foods #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.69
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.63
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.69)",
+        "incumbent": "zoominfo:722511 (0.75)",
+        "conf_diff": 0.06,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.63)",
+        "incumbent": "zoominfo:722511 (0.75)",
+        "conf_diff": 0.12,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_005",
+    "entity_name": "Bella Notte Foods #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "5812",
+      "uk_sic_code": "56101",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.68
+        },
+        {
+          "source": "zoominfo",
+          "code": "722511",
+          "conf": 0.72
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.68)",
+        "incumbent": "zoominfo:722511 (0.72)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.68)",
+        "incumbent": "zoominfo:722511 (0.72)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_006",
+    "entity_name": "Bella Notte Foods #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.69
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.71
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.69)",
+        "incumbent": "zoominfo:722511 (0.82)",
+        "conf_diff": 0.13,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.71)",
+        "incumbent": "zoominfo:722511 (0.82)",
+        "conf_diff": 0.11,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_007",
+    "entity_name": "Bella Notte Foods #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.7
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.70)",
+        "incumbent": "zoominfo:722511 (0.75)",
+        "conf_diff": 0.05,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.62)",
+        "incumbent": "zoominfo:722511 (0.75)",
+        "conf_diff": 0.13,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_008",
+    "entity_name": "Bella Notte Foods #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.71
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.65
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.71)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.07,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.65)",
+        "incumbent": "zoominfo:722511 (0.78)",
+        "conf_diff": 0.13,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_joes_pizza_009",
+    "entity_name": "Bella Notte Foods #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "722511",
+      "uk_sic_code": "56101",
+      "mcc_code": "5812",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "64205",
+          "label": "Activities of financial holding companies"
+        },
+        {
+          "source": "equifax",
+          "code": "722511",
+          "label": "Full-Service Restaurants"
+        },
+        {
+          "source": "ai_enrichment",
+          "code": "492210",
+          "label": "Local Messengers and Local Delivery"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.57
+        },
+        {
+          "source": "trulioo",
+          "code": "5812",
+          "conf": 0.69
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.57)",
+        "incumbent": "zoominfo:722511 (0.74)",
+        "conf_diff": 0.17,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:5812 (0.69)",
+        "incumbent": "zoominfo:722511 (0.74)",
+        "conf_diff": 0.05,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_000",
+    "entity_name": "Meridian Capital Holdings #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "551112",
+      "uk_sic_code": "64205",
+      "mcc_code": "6159",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "812990",
+          "conf": 0.74
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.59
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.82)",
+        "incumbent": "zoominfo:812990 (0.74)",
+        "conf_diff": 0.08,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.59)",
+        "incumbent": "equifax:551112 (0.82)",
+        "conf_diff": 0.23,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_001",
+    "entity_name": "Meridian Capital Holdings #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "551112",
+      "uk_sic_code": "64205",
+      "mcc_code": "6159",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "812990",
+          "conf": 0.65
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.58
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.83)",
+        "incumbent": "zoominfo:812990 (0.65)",
+        "conf_diff": 0.18,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.58)",
+        "incumbent": "equifax:551112 (0.83)",
+        "conf_diff": 0.25,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_002",
+    "entity_name": "Meridian Capital Holdings #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "812990",
+      "uk_sic_code": "64205",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.72
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.66
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.72)",
+        "incumbent": "zoominfo:812990 (0.76)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.66)",
+        "incumbent": "zoominfo:812990 (0.76)",
+        "conf_diff": 0.1,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_003",
+    "entity_name": "Meridian Capital Holdings #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "812990",
+      "uk_sic_code": "64205",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.74
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.69
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.74)",
+        "incumbent": "zoominfo:812990 (0.80)",
+        "conf_diff": 0.06,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.69)",
+        "incumbent": "zoominfo:812990 (0.80)",
+        "conf_diff": 0.11,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_004",
+    "entity_name": "Meridian Capital Holdings #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "551112",
+      "uk_sic_code": "64205",
+      "mcc_code": "6159",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "812990",
+          "conf": 0.68
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.67
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.82)",
+        "incumbent": "zoominfo:812990 (0.68)",
+        "conf_diff": 0.14,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.67)",
+        "incumbent": "equifax:551112 (0.82)",
+        "conf_diff": 0.15,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_005",
+    "entity_name": "Meridian Capital Holdings #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "812990",
+      "uk_sic_code": "64205",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.71
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.61
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.71)",
+        "incumbent": "zoominfo:812990 (0.78)",
+        "conf_diff": 0.07,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.61)",
+        "incumbent": "zoominfo:812990 (0.78)",
+        "conf_diff": 0.17,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_006",
+    "entity_name": "Meridian Capital Holdings #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "551112",
+      "uk_sic_code": "64205",
+      "mcc_code": "6159",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "812990",
+          "conf": 0.71
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.66
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.81)",
+        "incumbent": "zoominfo:812990 (0.71)",
+        "conf_diff": 0.1,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.66)",
+        "incumbent": "equifax:551112 (0.81)",
+        "conf_diff": 0.15,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_007",
+    "entity_name": "Meridian Capital Holdings #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "812990",
+      "uk_sic_code": "64205",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "551112",
+          "conf": 0.76
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.67
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.76)",
+        "incumbent": "zoominfo:812990 (0.78)",
+        "conf_diff": 0.02,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.67)",
+        "incumbent": "zoominfo:812990 (0.78)",
+        "conf_diff": 0.11,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_008",
+    "entity_name": "Meridian Capital Holdings #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "551112",
+      "uk_sic_code": "64205",
+      "mcc_code": "6159",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "812990",
+          "conf": 0.75
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.62
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.81)",
+        "incumbent": "zoominfo:812990 (0.75)",
+        "conf_diff": 0.06,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.62)",
+        "incumbent": "equifax:551112 (0.81)",
+        "conf_diff": 0.19,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_shell_holding_009",
+    "entity_name": "Meridian Capital Holdings #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "551112",
+      "uk_sic_code": "64205",
+      "mcc_code": "6159",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [
+        {
+          "source": "opencorporates",
+          "code": "47910",
+          "label": "Retail sale via mail order houses or via Internet"
+        }
+      ],
+      "naics_losers": [
+        {
+          "source": "zoominfo",
+          "code": "812990",
+          "conf": 0.71
+        },
+        {
+          "source": "trulioo",
+          "code": "6719",
+          "conf": 0.59
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": true
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:551112 (0.76)",
+        "incumbent": "zoominfo:812990 (0.71)",
+        "conf_diff": 0.05,
+        "outcome": "CHALLENGER_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:6719 (0.59)",
+        "incumbent": "equifax:551112 (0.76)",
+        "conf_diff": 0.17,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_000",
+    "entity_name": "Nexus Tech Solutions #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "7372",
+      "uk_sic_code": "62020",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.57
+        },
+        {
+          "source": "zoominfo",
+          "code": "541512",
+          "conf": 0.74
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.57)",
+        "incumbent": "zoominfo:541512 (0.74)",
+        "conf_diff": 0.17,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.73)",
+        "incumbent": "zoominfo:541512 (0.74)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_001",
+    "entity_name": "Nexus Tech Solutions #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "541512",
+      "uk_sic_code": "62020",
+      "mcc_code": "7372",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.56
+        },
+        {
+          "source": "trulioo",
+          "code": "7372",
+          "conf": 0.65
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.56)",
+        "incumbent": "zoominfo:541512 (0.71)",
+        "conf_diff": 0.15,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.65)",
+        "incumbent": "zoominfo:541512 (0.71)",
+        "conf_diff": 0.06,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_002",
+    "entity_name": "Nexus Tech Solutions #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "7372",
+      "uk_sic_code": "62020",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.68
+        },
+        {
+          "source": "zoominfo",
+          "code": "541512",
+          "conf": 0.77
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.68)",
+        "incumbent": "zoominfo:541512 (0.77)",
+        "conf_diff": 0.09,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.73)",
+        "incumbent": "zoominfo:541512 (0.77)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_003",
+    "entity_name": "Nexus Tech Solutions #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "7372",
+      "uk_sic_code": "62020",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.67
+        },
+        {
+          "source": "zoominfo",
+          "code": "541512",
+          "conf": 0.7
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.67)",
+        "incumbent": "zoominfo:541512 (0.70)",
+        "conf_diff": 0.03,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.65)",
+        "incumbent": "zoominfo:541512 (0.70)",
+        "conf_diff": 0.05,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_004",
+    "entity_name": "Nexus Tech Solutions #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "541512",
+      "uk_sic_code": "62020",
+      "mcc_code": "7372",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.64
+        },
+        {
+          "source": "trulioo",
+          "code": "7372",
+          "conf": 0.61
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.64)",
+        "incumbent": "zoominfo:541512 (0.78)",
+        "conf_diff": 0.14,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.61)",
+        "incumbent": "zoominfo:541512 (0.78)",
+        "conf_diff": 0.17,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_005",
+    "entity_name": "Nexus Tech Solutions #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "7372",
+      "uk_sic_code": "62020",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.71
+        },
+        {
+          "source": "zoominfo",
+          "code": "541512",
+          "conf": 0.7
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.71)",
+        "incumbent": "zoominfo:541512 (0.70)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.71)",
+        "incumbent": "zoominfo:541512 (0.70)",
+        "conf_diff": 0.01,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_006",
+    "entity_name": "Nexus Tech Solutions #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "541512",
+      "uk_sic_code": "62020",
+      "mcc_code": "7372",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.7
+        },
+        {
+          "source": "trulioo",
+          "code": "7372",
+          "conf": 0.73
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.70)",
+        "incumbent": "zoominfo:541512 (0.82)",
+        "conf_diff": 0.12,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.73)",
+        "incumbent": "zoominfo:541512 (0.82)",
+        "conf_diff": 0.09,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_007",
+    "entity_name": "Nexus Tech Solutions #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "7372",
+      "uk_sic_code": "62020",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.61
+        },
+        {
+          "source": "zoominfo",
+          "code": "541512",
+          "conf": 0.73
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.61)",
+        "incumbent": "zoominfo:541512 (0.73)",
+        "conf_diff": 0.12,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.71)",
+        "incumbent": "zoominfo:541512 (0.73)",
+        "conf_diff": 0.02,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_008",
+    "entity_name": "Nexus Tech Solutions #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "7372",
+      "uk_sic_code": "62020",
+      "mcc_code": null,
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.6
+        },
+        {
+          "source": "zoominfo",
+          "code": "541512",
+          "conf": 0.75
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.60)",
+        "incumbent": "zoominfo:541512 (0.75)",
+        "conf_diff": 0.15,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.71)",
+        "incumbent": "zoominfo:541512 (0.75)",
+        "conf_diff": 0.04,
+        "outcome": "WEIGHT_TIEBREAK"
+      }
+    ]
+  },
+  {
+    "business_id": "biz_sector_pivot_009",
+    "entity_name": "Nexus Tech Solutions #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "PIPELINE_OUTPUT": {
+      "naics_code": "541512",
+      "uk_sic_code": "62020",
+      "mcc_code": "7372",
+      "aml_flags_generated": 0,
+      "requires_manual_review": false
+    },
+    "WHAT_WAS_DISCARDED": {
+      "secondary_codes_lost": [],
+      "naics_losers": [
+        {
+          "source": "equifax",
+          "code": "722511",
+          "conf": 0.64
+        },
+        {
+          "source": "trulioo",
+          "code": "7372",
+          "conf": 0.67
+        }
+      ],
+      "trulioo_pollution_passed_unchallenged": true,
+      "equifax_secondary_naics_extracted": false,
+      "ai_enrichment_suppressed": true,
+      "holding_company_signal_in_discards": false
+    },
+    "RESOLUTION_TRACE": [
+      {
+        "step": 1,
+        "challenger": "equifax:722511 (0.64)",
+        "incumbent": "zoominfo:541512 (0.78)",
+        "conf_diff": 0.14,
+        "outcome": "INCUMBENT_WINS"
+      },
+      {
+        "step": 2,
+        "challenger": "trulioo:7372 (0.67)",
+        "incumbent": "zoominfo:541512 (0.78)",
+        "conf_diff": 0.11,
+        "outcome": "INCUMBENT_WINS"
+      }
+    ]
+  }
+]

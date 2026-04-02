@@ -1,0 +1,5522 @@
+[
+  {
+    "business_id": "biz_us_restaurant_000",
+    "entity_name": "Mario's Kitchen #1",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.71,
+      "min_staleness_days": 0,
+      "max_staleness_days": 53,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8074
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0946
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0501
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0479
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8074,
+      "overall_confidence": 0.807,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_001",
+    "entity_name": "Mario's Kitchen #2",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.665,
+      "min_staleness_days": 0,
+      "max_staleness_days": 49,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8074
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0946
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0501
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0479
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8074,
+      "overall_confidence": 0.807,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_002",
+    "entity_name": "Mario's Kitchen #3",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.735,
+      "min_staleness_days": 0,
+      "max_staleness_days": 30,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8078
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0932
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.05
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.049
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8078,
+      "overall_confidence": 0.808,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_003",
+    "entity_name": "Mario's Kitchen #4",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.68,
+      "min_staleness_days": 0,
+      "max_staleness_days": 42,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8086
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0938
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0499
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0477
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8086,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_004",
+    "entity_name": "Mario's Kitchen #5",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.7,
+      "min_staleness_days": 8,
+      "max_staleness_days": 47,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8074
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0946
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0501
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0479
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8074,
+      "overall_confidence": 0.807,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_005",
+    "entity_name": "Mario's Kitchen #6",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.732,
+      "min_staleness_days": 0,
+      "max_staleness_days": 54,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8072
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0946
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0502
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.048
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8072,
+      "overall_confidence": 0.807,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_006",
+    "entity_name": "Mario's Kitchen #7",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.675,
+      "min_staleness_days": 9,
+      "max_staleness_days": 41,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8086
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0938
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0499
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0477
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8086,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_007",
+    "entity_name": "Mario's Kitchen #8",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.682,
+      "min_staleness_days": 0,
+      "max_staleness_days": 37,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8086
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0938
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0499
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0477
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8086,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_008",
+    "entity_name": "Mario's Kitchen #9",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.728,
+      "min_staleness_days": 0,
+      "max_staleness_days": 31,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.808
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0931
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.05
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0489
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.808,
+      "overall_confidence": 0.808,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_us_restaurant_009",
+    "entity_name": "Mario's Kitchen #10",
+    "entity_country": "US",
+    "archetype": "A1_stable_us_restaurant",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 44,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 0,
+      "avg_confidence": 0.715,
+      "min_staleness_days": 3,
+      "max_staleness_days": 40,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 0,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8086
+      },
+      {
+        "rank": 2,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0938
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0499
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0477
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8086,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_000",
+    "entity_name": "The Ploughman's Arms #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.72,
+      "min_staleness_days": 0,
+      "max_staleness_days": 33,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8762
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0466
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0313
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8762,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_001",
+    "entity_name": "The Ploughman's Arms #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.716,
+      "min_staleness_days": 0,
+      "max_staleness_days": 35,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8762
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0466
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0313
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8762,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_002",
+    "entity_name": "The Ploughman's Arms #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.77,
+      "min_staleness_days": 0,
+      "max_staleness_days": 18,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8751
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0469
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0465
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0315
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8751,
+      "overall_confidence": 0.875,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_003",
+    "entity_name": "The Ploughman's Arms #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.738,
+      "min_staleness_days": 0,
+      "max_staleness_days": 38,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8764
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0467
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0456
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0313
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8764,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_004",
+    "entity_name": "The Ploughman's Arms #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.766,
+      "min_staleness_days": 3,
+      "max_staleness_days": 20,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8751
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0469
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0465
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0315
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8751,
+      "overall_confidence": 0.875,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_005",
+    "entity_name": "The Ploughman's Arms #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.746,
+      "min_staleness_days": 0,
+      "max_staleness_days": 40,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8759
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0469
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0457
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0315
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8759,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_006",
+    "entity_name": "The Ploughman's Arms #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.74,
+      "min_staleness_days": 0,
+      "max_staleness_days": 23,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8759
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0467
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0461
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0313
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8759,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_007",
+    "entity_name": "The Ploughman's Arms #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.758,
+      "min_staleness_days": 0,
+      "max_staleness_days": 37,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8757
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.047
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0315
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8757,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_008",
+    "entity_name": "The Ploughman's Arms #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.692,
+      "min_staleness_days": 0,
+      "max_staleness_days": 22,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8761
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0466
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.046
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0313
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8761,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_restaurant_clean_009",
+    "entity_name": "The Ploughman's Arms #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A2_uk_restaurant_clean",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.714,
+      "min_staleness_days": 4,
+      "max_staleness_days": 36,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8765
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0466
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0456
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0313
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8765,
+      "overall_confidence": 0.876,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_000",
+    "entity_name": "Singh & Sons Retailers #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.74,
+      "min_staleness_days": 0,
+      "max_staleness_days": 26,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7893
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1199
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0539
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0368
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7893,
+      "overall_confidence": 0.789,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_001",
+    "entity_name": "Singh & Sons Retailers #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.782,
+      "min_staleness_days": 0,
+      "max_staleness_days": 30,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7937
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.116
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0537
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0366
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7937,
+      "overall_confidence": 0.794,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_002",
+    "entity_name": "Singh & Sons Retailers #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.745,
+      "min_staleness_days": 0,
+      "max_staleness_days": 13,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7925
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1175
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0534
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0365
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7925,
+      "overall_confidence": 0.792,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_003",
+    "entity_name": "Singh & Sons Retailers #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.755,
+      "min_staleness_days": 0,
+      "max_staleness_days": 32,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7937
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.116
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0537
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0366
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7937,
+      "overall_confidence": 0.794,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_004",
+    "entity_name": "Singh & Sons Retailers #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.72,
+      "min_staleness_days": 0,
+      "max_staleness_days": 17,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7901
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1198
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0534
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0366
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7901,
+      "overall_confidence": 0.79,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_005",
+    "entity_name": "Singh & Sons Retailers #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.768,
+      "min_staleness_days": 0,
+      "max_staleness_days": 27,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7937
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.116
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0537
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0366
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7937,
+      "overall_confidence": 0.794,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_006",
+    "entity_name": "Singh & Sons Retailers #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.722,
+      "min_staleness_days": 0,
+      "max_staleness_days": 23,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.788
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1212
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0539
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0369
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.788,
+      "overall_confidence": 0.788,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_007",
+    "entity_name": "Singh & Sons Retailers #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.715,
+      "min_staleness_days": 0,
+      "max_staleness_days": 7,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7901
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1198
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0534
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0366
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7901,
+      "overall_confidence": 0.79,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_008",
+    "entity_name": "Singh & Sons Retailers #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.775,
+      "min_staleness_days": 0,
+      "max_staleness_days": 23,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7958
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1138
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0538
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0366
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7958,
+      "overall_confidence": 0.796,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_uk_trulioo_pollution_009",
+    "entity_name": "Singh & Sons Retailers #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A3_trulioo_pollution",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 5,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 35,
+      "efx_naics_primary_idx": 44,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 37,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.75,
+      "min_staleness_days": 0,
+      "max_staleness_days": 15,
+      "holding_company_signal": 0,
+      "multi_sector_span": 1,
+      "source_agreement_rate": 1.0,
+      "entity_is_gb": 1,
+      "n_sources": 4
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.7969
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1131
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0535
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0365
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5411). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "445110",
+      "recommended_label": "Supermarkets and Other Grocery Retailers",
+      "recommended_probability": 0.7969,
+      "overall_confidence": 0.797,
+      "combined_aml_multiplier": 1.2,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_000",
+    "entity_name": "Joes Pizza Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.782,
+      "min_staleness_days": 0,
+      "max_staleness_days": 393,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8585
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0483
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 393 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.54,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8585,
+      "overall_confidence": 0.858,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_001",
+    "entity_name": "Bella Notte Foods #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.768,
+      "min_staleness_days": 0,
+      "max_staleness_days": 393,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8585
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0483
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 393 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.54,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8585,
+      "overall_confidence": 0.858,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_002",
+    "entity_name": "Bella Notte Foods #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.726,
+      "min_staleness_days": 0,
+      "max_staleness_days": 366,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8628
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0472
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0455
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0444
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 366 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.5,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8628,
+      "overall_confidence": 0.863,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_003",
+    "entity_name": "Bella Notte Foods #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.774,
+      "min_staleness_days": 11,
+      "max_staleness_days": 369,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8591
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0476
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 369 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.51,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8591,
+      "overall_confidence": 0.859,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_004",
+    "entity_name": "Bella Notte Foods #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.756,
+      "min_staleness_days": 13,
+      "max_staleness_days": 394,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8578
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.049
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 394 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.54,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8578,
+      "overall_confidence": 0.858,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_005",
+    "entity_name": "Bella Notte Foods #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.782,
+      "min_staleness_days": 0,
+      "max_staleness_days": 377,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.859
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0477
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 377 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.52,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.859,
+      "overall_confidence": 0.859,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_006",
+    "entity_name": "Bella Notte Foods #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.77,
+      "min_staleness_days": 0,
+      "max_staleness_days": 376,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8591
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0476
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 376 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.52,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8591,
+      "overall_confidence": 0.859,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_007",
+    "entity_name": "Bella Notte Foods #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.772,
+      "min_staleness_days": 0,
+      "max_staleness_days": 378,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.859
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0477
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 378 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.52,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.859,
+      "overall_confidence": 0.859,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_008",
+    "entity_name": "Bella Notte Foods #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.758,
+      "min_staleness_days": 1,
+      "max_staleness_days": 388,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8589
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0478
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0474
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0459
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 388 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.53,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8589,
+      "overall_confidence": 0.859,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_joes_pizza_009",
+    "entity_name": "Bella Notte Foods #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A4_restaurant_holding_aml",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 0,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 15,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 15,
+      "tru_sic_raw_idx": 36,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.74,
+      "min_staleness_days": 0,
+      "max_staleness_days": 374,
+      "holding_company_signal": 1,
+      "multi_sector_span": 4,
+      "source_agreement_rate": 0.167,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.8597
+      },
+      {
+        "rank": 2,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0475
+      },
+      {
+        "rank": 3,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0472
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0456
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (5812). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "HOLDING_COMPANY_DISCREPANCY",
+        "severity": "HIGH",
+        "description": "A holding company code (NAICS 551112 / UK SIC 64205 family) is present alongside active consumer-facing industry signals. Pattern consistent with a shell or layering structure.",
+        "triggering_sources": [
+          "equifax",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 3.1,
+        "recommended_action": "Trigger UBO verification workflow. Cross-reference Companies House PSC register. Do not approve until beneficial ownership chain is resolved."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 374 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.51,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      },
+      {
+        "flag_type": "MULTI_SECTOR_SPAN_ANOMALY",
+        "severity": "MEDIUM",
+        "description": "Sources collectively span 4 distinct NAICS 2-digit sectors. High sector span indicates either legitimate multi-sector operations or a complex corporate structure requiring clarification.",
+        "triggering_sources": [
+          "opencorporates",
+          "zoominfo",
+          "equifax",
+          "trulioo",
+          "ai_enrichment"
+        ],
+        "discrepancy_score": 0.8,
+        "aml_risk_multiplier": 1.5,
+        "recommended_action": "Request explanation of multi-sector operations. Verify each business line is reflected in Companies House SIC registrations."
+      },
+      {
+        "flag_type": "AML_ENHANCED_DUE_DILIGENCE_TRIGGERED",
+        "severity": "CRITICAL",
+        "description": "Combined AML risk multiplier: 7.6\u00d7. 1 HIGH/CRITICAL flags triggered simultaneously. Entity crosses automated EDD threshold.",
+        "triggering_sources": [
+          "trulioo",
+          "opencorporates",
+          "ai_enrichment",
+          "zoominfo",
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 7.6,
+        "recommended_action": "Block automated approval. Route to Senior Compliance Analyst. Collect: audited accounts, UBO declaration, source of funds declaration."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "56101",
+      "recommended_label": "Licensed restaurants and cafes",
+      "recommended_probability": 0.8597,
+      "overall_confidence": 0.86,
+      "combined_aml_multiplier": 7.6,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_000",
+    "entity_name": "Meridian Capital Holdings #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.714,
+      "min_staleness_days": 0,
+      "max_staleness_days": 69,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.7063
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1548
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0714
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0674
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.7063,
+      "overall_confidence": 0.706,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_001",
+    "entity_name": "Meridian Capital Holdings #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.692,
+      "min_staleness_days": 0,
+      "max_staleness_days": 63,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.7068
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1548
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.071
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0674
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.7068,
+      "overall_confidence": 0.707,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_002",
+    "entity_name": "Meridian Capital Holdings #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.708,
+      "min_staleness_days": 0,
+      "max_staleness_days": 75,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.703
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1552
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0742
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0677
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.703,
+      "overall_confidence": 0.703,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_003",
+    "entity_name": "Meridian Capital Holdings #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.756,
+      "min_staleness_days": 8,
+      "max_staleness_days": 69,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.7091
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1485
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0738
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0686
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.7091,
+      "overall_confidence": 0.709,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_004",
+    "entity_name": "Meridian Capital Holdings #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.74,
+      "min_staleness_days": 0,
+      "max_staleness_days": 53,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.7051
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1562
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0713
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0675
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.7051,
+      "overall_confidence": 0.705,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_005",
+    "entity_name": "Meridian Capital Holdings #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.732,
+      "min_staleness_days": 0,
+      "max_staleness_days": 52,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.7049
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1564
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0712
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0675
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.7049,
+      "overall_confidence": 0.705,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_006",
+    "entity_name": "Meridian Capital Holdings #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.754,
+      "min_staleness_days": 3,
+      "max_staleness_days": 75,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.705
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1489
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0772
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0689
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.705,
+      "overall_confidence": 0.705,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_007",
+    "entity_name": "Meridian Capital Holdings #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.756,
+      "min_staleness_days": 0,
+      "max_staleness_days": 68,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.7091
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1485
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0738
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0686
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.7091,
+      "overall_confidence": 0.709,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_008",
+    "entity_name": "Meridian Capital Holdings #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.756,
+      "min_staleness_days": 0,
+      "max_staleness_days": 71,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.708
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1486
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0747
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0687
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.708,
+      "overall_confidence": 0.708,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_shell_holding_009",
+    "entity_name": "Meridian Capital Holdings #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A5_shell_holding_company",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 8,
+      "oc_secondary_count": 1,
+      "zi_naics_idx": 33,
+      "efx_naics_primary_idx": 29,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 39,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.69,
+      "min_staleness_days": 0,
+      "max_staleness_days": 46,
+      "holding_company_signal": 1,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.333,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.7047
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1571
+      },
+      {
+        "rank": 3,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.0708
+      },
+      {
+        "rank": 4,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0673
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (6719). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_CONFLICT_REGISTRY_VS_WEB",
+        "severity": "HIGH",
+        "description": "Registry sources (equifax, opencorporates) and web/firmographic sources (zoominfo, ai_enrichment) return codes from different economic sectors. Registry sectors: {'holding_company'}. Web sectors: {'personal_services'}.",
+        "triggering_sources": [
+          "zoominfo",
+          "equifax",
+          "ai_enrichment",
+          "opencorporates"
+        ],
+        "discrepancy_score": 0.67,
+        "aml_risk_multiplier": 2.5,
+        "recommended_action": "Escalate to Enhanced Due Diligence. Request beneficial ownership documentation. Verify operating entity relationship to any identified holding structure."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "naics_2022",
+      "recommended_code": "551112",
+      "recommended_label": "Offices of Other Holding Companies",
+      "recommended_probability": 0.7047,
+      "overall_confidence": 0.705,
+      "combined_aml_multiplier": 3.7,
+      "requires_manual_review": true,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_000",
+    "entity_name": "Nexus Tech Solutions #1 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.782,
+      "min_staleness_days": 0,
+      "max_staleness_days": 535,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.6694
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.2432
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0523
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.035
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 535 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.73,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.6694,
+      "overall_confidence": 0.669,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_001",
+    "entity_name": "Nexus Tech Solutions #2 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.744,
+      "min_staleness_days": 3,
+      "max_staleness_days": 539,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.7967
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1153
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0519
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0361
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 539 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.74,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.7967,
+      "overall_confidence": 0.797,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_002",
+    "entity_name": "Nexus Tech Solutions #3 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.808,
+      "min_staleness_days": 0,
+      "max_staleness_days": 538,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.8089
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1032
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0521
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0358
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 538 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.74,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.8089,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_003",
+    "entity_name": "Nexus Tech Solutions #4 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.756,
+      "min_staleness_days": 10,
+      "max_staleness_days": 555,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.8089
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1032
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0521
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0358
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 555 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.76,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.8089,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_004",
+    "entity_name": "Nexus Tech Solutions #5 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.76,
+      "min_staleness_days": 0,
+      "max_staleness_days": 545,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.8089
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1032
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0521
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0358
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 545 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.8089,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_005",
+    "entity_name": "Nexus Tech Solutions #6 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.778,
+      "min_staleness_days": 1,
+      "max_staleness_days": 543,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.8089
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1032
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0521
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0358
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 543 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.74,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.8089,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_006",
+    "entity_name": "Nexus Tech Solutions #7 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.812,
+      "min_staleness_days": 0,
+      "max_staleness_days": 542,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.8089
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1032
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0521
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0358
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 542 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.74,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.8089,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_007",
+    "entity_name": "Nexus Tech Solutions #8 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.738,
+      "min_staleness_days": 0,
+      "max_staleness_days": 563,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.7967
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1153
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0519
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0361
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 563 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.77,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.7967,
+      "overall_confidence": 0.797,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_008",
+    "entity_name": "Nexus Tech Solutions #9 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.748,
+      "min_staleness_days": 0,
+      "max_staleness_days": 550,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.8008
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1109
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0522
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0362
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 550 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.8008,
+      "overall_confidence": 0.801,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  },
+  {
+    "business_id": "biz_sector_pivot_009",
+    "entity_name": "Nexus Tech Solutions #10 Ltd",
+    "entity_country": "GB",
+    "archetype": "A6_sector_pivot_tech",
+    "MODEL_INPUT_FEATURES": {
+      "oc_uk_sic_primary_idx": 6,
+      "oc_secondary_count": 0,
+      "zi_naics_idx": 26,
+      "efx_naics_primary_idx": 15,
+      "efx_naics_secondary_idx": 44,
+      "tru_sic_raw_idx": 38,
+      "trulioo_pollution_flag": 1,
+      "avg_confidence": 0.772,
+      "min_staleness_days": 0,
+      "max_staleness_days": 551,
+      "holding_company_signal": 0,
+      "multi_sector_span": 2,
+      "source_agreement_rate": 0.5,
+      "entity_is_gb": 1,
+      "n_sources": 5
+    },
+    "MODEL_OUTPUT_TOP5": [
+      {
+        "rank": 1,
+        "class_label": "it_services",
+        "taxonomy": "uk_sic_2007",
+        "code": "62020",
+        "label": "Information technology consultancy activities",
+        "probability": 0.8089
+      },
+      {
+        "rank": 2,
+        "class_label": "food_service_restaurant",
+        "taxonomy": "uk_sic_2007",
+        "code": "56101",
+        "label": "Licensed restaurants and cafes",
+        "probability": 0.1032
+      },
+      {
+        "rank": 3,
+        "class_label": "retail_grocery",
+        "taxonomy": "naics_2022",
+        "code": "445110",
+        "label": "Supermarkets and Other Grocery Retailers",
+        "probability": 0.0521
+      },
+      {
+        "rank": 4,
+        "class_label": "holding_company",
+        "taxonomy": "naics_2022",
+        "code": "551112",
+        "label": "Offices of Other Holding Companies",
+        "probability": 0.0358
+      }
+    ],
+    "SHAP_ATTRIBUTION": null,
+    "RISK_FLAGS": [
+      {
+        "flag_type": "TAXONOMY_POLLUTION_US_SIC_FOR_UK_ENTITY",
+        "severity": "LOW",
+        "description": "Trulioo returned a 4-digit US SIC code for a GB-registered entity (7372). UK SIC 2007 requires 5 digits. Signal down-weighted; flagged for data quality monitoring.",
+        "triggering_sources": [
+          "trulioo"
+        ],
+        "discrepancy_score": 1.0,
+        "aml_risk_multiplier": 1.2,
+        "recommended_action": "Log for Trulioo source quality monitoring. No immediate underwriting action."
+      },
+      {
+        "flag_type": "SECTOR_PIVOT_UNCONFIRMED",
+        "severity": "MEDIUM",
+        "description": "Oldest source data is 551 days old. Combined with low source agreement rate, this suggests a potential unconfirmed sector pivot. Registry filings may not reflect current operations.",
+        "triggering_sources": [
+          "equifax"
+        ],
+        "discrepancy_score": 0.75,
+        "aml_risk_multiplier": 1.8,
+        "recommended_action": "Request updated business information. Verify whether business model changes are reflected in Companies House SIC filings."
+      }
+    ],
+    "PIPELINE_OUTPUT": {
+      "recommended_taxonomy": "uk_sic_2007",
+      "recommended_code": "62020",
+      "recommended_label": "Information technology consultancy activities",
+      "recommended_probability": 0.8089,
+      "overall_confidence": 0.809,
+      "combined_aml_multiplier": 3.0,
+      "requires_manual_review": false,
+      "model_version": "consensus-engine-v0.1-demo"
+    }
+  }
+]
